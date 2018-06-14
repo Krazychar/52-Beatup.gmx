@@ -204,11 +204,10 @@ timeEnd++
 room_speed=10
 }
 
-if(timeEnd&gt;=20 &amp;&amp; timeEnd&lt;=80 &amp;&amp; !instance_exists(ftb))
+if(timeEnd == 20 &amp;&amp; !instance_exists(ftb))
 {
 instance_create(x,y,ftb)
 room_speed=60
-ftb.image_alpha=(timeEnd/100)
 }
 
 if(timeEnd&gt;=40)
@@ -219,6 +218,9 @@ if(global.pickturn=1) {draw_set_color(c_yellow); draw_text(view_xview[0]+view_wv
 if(timeEnd=40)instance_create(view_xview[0]+150,view_yview[0]+150 ,card1)
 if(timeEnd=45)instance_create(view_xview[0]+320,view_yview[0]+150 ,card1)
 if(timeEnd=50)instance_create(view_xview[0]+500,view_yview[0]+150 ,card1)
+
+if timeEnd == 60
+    card1.cardsSpawned = true;
 </string>
           </argument>
         </arguments>
