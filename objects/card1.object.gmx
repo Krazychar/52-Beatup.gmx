@@ -33,6 +33,7 @@ gal.cardpick=true
 image_alpha=0
 soloCheck=false
 global.pickturn=0
+cardsSpawned = 0;
 </string>
           </argument>
         </arguments>
@@ -168,7 +169,10 @@ image_yscale=1.5
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.pickturn=0)
+            <string>if cardsSpawned
+{
+
+if(global.pickturn=0)
 {
 if(p1.hp&lt;=0)playerBuff=p1
 if(p2.hp&lt;=0)playerBuff=p2
@@ -195,6 +199,8 @@ if(image_index=12) playerBuff.mhp+=3; playerBuff.abi+=1; playerBuff.atk+=1; play
 
 
 instance_destroy()
+
+}
 </string>
           </argument>
         </arguments>
