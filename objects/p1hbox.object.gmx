@@ -88,9 +88,8 @@ camera.shakeIntensity=p1.damage*p1.image_xscale
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 room_speed=50
 p2.hsp+=1*p1.image_xscale
-if(p1.rage=false) p2.hp-=p1.damage+p1.atk
-else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
-p2.hitstun+=p1.hstun-(round(global.p1combo*2.5))
+p2.hp-=p1.damage+p1.atk
+p2.hitstun+=p1.hstun-(round(global.p1combo*1.5))
 instance_create(x,y,obj_hiteffect)
 if(p1.freakingslickdash=1 &amp;&amp; p1.launch=false)
 {
@@ -114,7 +113,7 @@ p2.vsp=13
 ////////
 if(place_meeting(x,y,p2) &amp;&amp; p2.block=true)
 {
-p2.image_blend=c_aqua
+instance_create(x,y,obj_blockeffect)
 p2.hsp-=4*p2.image_xscale
 }
 
