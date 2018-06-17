@@ -28,18 +28,6 @@
             <string>image_speed=0
 image_index=0
 global.p1char=""
-if(global.p1char="Alan")
-{
-image_index=0
-}
-if(global.p1char="Rey")
-{
-image_index=1
-}
-if(global.p1char="Ace")
-{
-image_index=2
-}
 
 
 </string>
@@ -66,6 +54,23 @@ image_index=2
             <kind>1</kind>
             <string>x=view_xview[0]+130
 y=view_yview[0]+55
+if(global.p1char="Alan")
+{
+image_index=0
+}
+if(global.p1char="Rey")
+{
+image_index=1
+}
+if(global.p1char="Ace")
+{
+image_index=2
+}
+if(global.p1char="Alta")
+{
+image_index=3
+}
+
 </string>
           </argument>
         </arguments>

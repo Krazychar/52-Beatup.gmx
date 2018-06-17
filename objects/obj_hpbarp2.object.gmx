@@ -39,6 +39,10 @@ if(global.p2char="Ace")
 {
 image_index=2
 }
+if(global.p2char="Alta")
+{
+image_index=2
+}
 
 </string>
           </argument>
@@ -64,6 +68,23 @@ image_index=2
             <kind>1</kind>
             <string>x=view_xview[0]+490
 y=view_yview[0]+55
+if(global.p2char="Alan")
+{
+image_index=0
+}
+if(global.p2char="Rey")
+{
+image_index=1
+}
+if(global.p2char="Ace")
+{
+image_index=2
+}
+if(global.p2char="Alta")
+{
+image_index=2
+}
+
 </string>
           </argument>
         </arguments>
