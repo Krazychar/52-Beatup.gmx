@@ -30,7 +30,7 @@ image_index=0
 room_speed=60
 attacking=0
 image_yscale=4  
-global.p2char="Rey"
+global.p2char="Alta"
 hsp=0
 vsp=0
 grav=0.3
@@ -335,7 +335,7 @@ if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=3 &amp;&amp; hit=5)
 
 
 
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;12)
+if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;19)
 {
 sprite_index=spr_alta_jump
 attacking=0
@@ -351,7 +351,7 @@ hit=3
 damage=20
 xscal=5
 yscal=12
-hstun=50
+hstun=25
 xpos=hsp+40
 ypos=-20
 launchh=false
@@ -565,7 +565,8 @@ block=0
 sprite_index=spr_alta_idle
 }
 if(attacking=false)
-{block=0}
+{block=0
+image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
 {block=0
 attacking=0}

@@ -38,7 +38,7 @@ deckactives = ds_list_create();
 decksupers = ds_list_create();
 deckdebuffs = ds_list_create();
 
-ds_list_add(deckbuffs,1,2,3,4,5,6,7,8,9,10,11,12,13)
+ds_list_add(deckbuffs,0,1,2,3,4,5,6,7,8,9,10,11,12)
 ds_list_add(deckactives,1,2,3,4,5,6,7,8,9,10,11,12,13)
 ds_list_add(decksupers,1,2,3,4,5,6,7,8,9,10,11,12,13)
 ds_list_add(deckdebuffs,1,2,3,4,5,6,7,8,9,10,11,12,13)
@@ -133,6 +133,7 @@ if(setPicker==1 &amp;&amp; ds_list_size(deckbuffs) &gt;= 1)//Buffs
 {rancrap=irandom_range(0,ds_list_size(deckbuffs))
 cardPicker=ds_list_find_value(deckbuffs,rancrap)
 ds_list_delete(deckbuffs,rancrap)
+ds_list_shuffle(deckbuffs)
 } else setPicker=2
 
 if(setPicker==2 &amp;&amp; ds_list_size(deckactives) &gt;= 1)//Buffs
