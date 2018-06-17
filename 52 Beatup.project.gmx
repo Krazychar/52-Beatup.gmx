@@ -8,8 +8,6 @@
   <sprites name="sprites">
     <sprites name="Alan">
       <sprite>sprites\spr_alan_idle</sprite>
-      <sprite>sprites\spr_alan_shieldbreak</sprite>
-      <sprite>sprites\spr_alan_fireball</sprite>
       <sprite>sprites\spr_alan_hit</sprite>
       <sprite>sprites\spr_alan_jump</sprite>
       <sprite>sprites\spr_alan_win</sprite>
@@ -24,8 +22,6 @@
       <sprite>sprites\spr_alan_light</sprite>
       <sprite>sprites\spr_alan_heavydash</sprite>
       <sprite>sprites\spr_alan_dash</sprite>
-      <sprite>sprites\spr_alan_proj1</sprite>
-      <sprite>sprites\spr_alan_proj1eff</sprite>
     </sprites>
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
@@ -60,8 +56,7 @@
       <sprite>sprites\spr_ace_heavyair</sprite>
       <sprite>sprites\spr_ace_bullet</sprite>
     </sprites>
-    <sprites name="Alta">
-      <sprite>sprites\spr_alta_Fidle</sprite>
+    <sprites name="Blade">
       <sprite>sprites\spr_alta_tools</sprite>
       <sprite>sprites\spr_alta_idle</sprite>
       <sprite>sprites\spr_alta_hit</sprite>
@@ -78,14 +73,6 @@
       <sprite>sprites\spr_alta_light</sprite>
       <sprite>sprites\spr_alta_light2</sprite>
     </sprites>
-    <sprites name="Jackson">
-      <sprite>sprites\spr_jack_idle</sprite>
-      <sprite>sprites\spr_jack_launch</sprite>
-      <sprite>sprites\spr_jack_flurry</sprite>
-      <sprite>sprites\spr_jack_forlight</sprite>
-      <sprite>sprites\spr_jack_heavy</sprite>
-      <sprite>sprites\spr_jack_light</sprite>
-    </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
     <sprite>sprites\spr_buffcards</sprite>
@@ -101,6 +88,7 @@
     <sprite>sprites\blockeffect</sprite>
     <sprite>sprites\pictureedit</sprite>
     <sprite>sprites\pickacard</sprite>
+    <sprite>sprites\sprite61</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_alan</background>
@@ -111,7 +99,6 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_alan</object>
-    <object>objects\obj_jack</object>
     <object>objects\obj_rey</object>
     <object>objects\obj_ace</object>
     <object>objects\obj_alta</object>
@@ -130,9 +117,6 @@
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>
-    <object>objects\obj_alanfireball</object>
-    <object>objects\alanfireballeff</object>
-    <object>objects\dasdsadas</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>

@@ -61,8 +61,7 @@
     <instance objName="obj_alta" x="64" y="208" name="inst_2D37966C" locked="0" code="" scaleX="4" scaleY="4" colour="4294967295" rotation="0"/>
     <instance objName="obj_hpbarp2" x="272" y="192" name="inst_5CC1207E" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_hpbarp1" x="128" y="64" name="inst_BC64E68F" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
-    <instance objName="dasdsadas" x="496" y="736" name="inst_93A974E3" locked="0" code="" scaleX="-4" scaleY="4" colour="4294967295" rotation="0"/>
-    <instance objName="obj_jack" x="256" y="304" name="inst_E284B57D" locked="0" code="" scaleX="4" scaleY="4" colour="4294967295" rotation="0"/>
+    <instance objName="obj_alan" x="240" y="352" name="inst_6EB4BE44" locked="0" code="" scaleX="4" scaleY="4" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -383,7 +383,7 @@ hit=3
 damage=10
 xscal=2
 yscal=3
-hstun=15
+hstun=30
 xpos=hsp+28
 ypos=69
 launchh=false
@@ -641,8 +641,7 @@ block=0
 sprite_index=spr_ace_idle
 }
 if(attacking=false)
-{block=0
-image_blend=c_white}
+{block=0}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
 {block=0
 attacking=0}
@@ -709,7 +708,7 @@ if(rage=true) atk=atk+round((mhp-hp)/5)
 if(global.p2combo=0 &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
-draw_set_color(c_black)
+draw_set_color(c_gray)
 draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,4,0,c_blue,0.4)
 }
 if(place_meeting(x,y+1,ground))

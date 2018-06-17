@@ -40,15 +40,6 @@ grounded=0
 hboxhit=0
 dashtime=0
 angle=0
-//special move variables
-link=false
-linktime=0
-linkdir=keyboard_check_direct(vk_up)
-linkatk=keyboard_check_direct(vk_up)
-linkspr=0
-Fireball=true
-Dragonpunch=true
-Shieldbreak=true
 //battle variables
 agi=5
 dashing=0
@@ -360,7 +351,7 @@ hit=4
 damage=17
 xscal=2
 yscal=8
-hstun=25
+hstun=50
 xpos=hsp+26
 ypos=53
 launchh=false
@@ -470,10 +461,18 @@ if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
 {sprite_index=spr_alan_jump}
 if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
 {sprite_index=spr_alan_idle}
-if(attacking=0 &amp;&amp; grounded=1)
+if(attacking=0 or grounded=0)
 {
-if(dashing=0 &amp;&amp; grounded=1)
+if(dashing=0)
 {
+
+if(coward=true)
+{
+if(left &amp;&amp; image_index&gt;0 or right &amp;&amp; image_index&lt;0)
+{pH=agi;agi=pH+2}
+else
+{agi=pH}
+}
 if(hitstun&lt;=0)
 {
 if (left)
@@ -481,8 +480,7 @@ if (left)
 {
 if(hsp&lt;-agi){}
 else
-{hsp=-agi
-if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
+{hsp=-agi}
 
 }
 
@@ -490,8 +488,7 @@ if (right)
 {
 if(hsp&gt;agi){}
 else
-{hsp=agi
-if(coward=true &amp;&amp; image_xscale&lt;0) hsp=agi +2}
+{hsp=agi}
 }
 }
 }
@@ -579,11 +576,9 @@ if(sprite_index=spr_alan_block &amp;&amp; p2.attacking=false)
 attacking=0
 block=0
 sprite_index=spr_alan_idle
-image_blend=c_white
 }
 if(attacking=false)
-{block=0
-image_blend=c_white}
+{block=0}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
 {block=0
 attacking=0}
@@ -607,46 +602,8 @@ attacking=0}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Special Moves (Holy Heck)
-down=keyboard_check_direct(ord("S"))
-if(image_xscale&gt;0) 
-{
-forward=keyboard_check_direct(ord("D"))
-backward=keyboard_check_direct(ord("A"))
-}
-else
-{
-forward=keyboard_check_direct(ord("A"))
-backward=keyboard_check_direct(ord("D"))
-}
-//Input Checker
-if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
-if(link!=0) linktime--
-if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
-if(link=1 &amp;&amp; linktime&gt;0 &amp;&amp; linkdir) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;0 &amp;&amp; linkatk) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
-//FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0)
-{
-link=1
-linkatk=keyboard_check_direct(ord("J"))
-linkdir=forward
-linkspr=spr_alan_fireball
-}
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,obj_alanfireball)}
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
-//Shieldbreaker
-if(backward &amp;&amp; grounded=1 &amp;&amp; link=0)
-{
-link=1
-linkatk=light
-linkdir=forward
-linkspr=spr_alan_shieldbreak
-}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,p1hbox)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
-
-
+            <string>///Some Special Buffs and Stuffs
+if(rage=true) atk=atk+round((mhp-hp)/5)
 </string>
           </argument>
         </arguments>
@@ -729,8 +686,6 @@ draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscal
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
 draw_self()
-draw_text(x,y-90,linktime)
-draw_text(x,y-120,link)
 </string>
           </argument>
         </arguments>
