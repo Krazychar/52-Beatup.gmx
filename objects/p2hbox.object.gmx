@@ -86,7 +86,7 @@ camera.x+=p2.damage*p2.image_xscale
 global.p2combo++
 camera.shakeIntensity=p2.damage*p2.image_xscale
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
-room_speed=50
+room_speed=30
 p1.hsp+=1*p2.image_xscale
 if(p2.rage=false) p1.hp-=p2.damage+p2.atk
 else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/25)

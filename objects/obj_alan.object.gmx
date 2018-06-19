@@ -470,9 +470,7 @@ if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
 {sprite_index=spr_alan_jump}
 if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
 {sprite_index=spr_alan_idle}
-if(attacking=0 &amp;&amp; grounded=1)
-{
-if(dashing=0 &amp;&amp; grounded=1)
+if(dashing=0 &amp;&amp; attacking=0 &amp;&amp; grounded=1)
 {
 if(hitstun&lt;=0)
 {
@@ -494,7 +492,7 @@ else
 if(coward=true &amp;&amp; image_xscale&lt;0) hsp=agi +2}
 }
 }
-}
+
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
 {
@@ -506,6 +504,8 @@ hsp=0
 //jumping
 if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1 &amp;&amp; sprite_index=spr_alan_launch))
 {
+if(left) hsp=-agi
+if(right) hsp=agi
 grounded=0
 if(sprite_index=spr_alan_launch)
 {vsp=-14}
@@ -538,7 +538,7 @@ if place_meeting(x+hsp,y,ground)
     hsp = 0;
 }    
  
-//commit to movement
+//commit to movement 
 x += hsp;
 y += vsp;
 

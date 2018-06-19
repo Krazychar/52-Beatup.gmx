@@ -158,11 +158,11 @@ else
 //if(attacking=1 &amp;&amp; place_meeting(x,y+1,ground) &amp;&amp; dashing=0) hsp=0
 if((sprite_index=spr_jack_light or sprite_index=spr_jack_heavy or sprite_index=spr_jack_launch) &amp;&amp; !place_meeting(x,y+1,ground)) 
 {
-sprite_index=spr_alan_jump
+sprite_index=spr_jack_jump
 attacking=0
 }
 
-if((sprite_index=spr_alan_heavyair or sprite_index=spr_alan_lightair or sprite_index=spr_alan_launch) &amp;&amp; place_meeting(x,y+1,ground)) 
+if((sprite_index=spr_jack_heavyair or sprite_index=spr_jack_lightair or sprite_index=spr_alan_launch) &amp;&amp; place_meeting(x,y+1,ground)) 
 {
 sprite_index=spr_jack_idle
 freakingslickdash=0
@@ -253,7 +253,7 @@ image_index=0
 if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_launch)
 {hboxhit=0
 cancel=0
-hit=7
+hit=5
 damage=12
 hstun=40
 xscal=2
@@ -279,35 +279,35 @@ image_index=0
 else
 
 {
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_heavyair &amp;&amp; sprite_index!=spr_alan_launch  &amp;&amp; sprite_index!=spr_alan_lightair &amp;&amp; sprite_index!=spr_jack_lightupair)
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_heavyair &amp;&amp; sprite_index!=spr_alan_launch  &amp;&amp; sprite_index!=spr_jack_lightair)
 {cancel=0
 hboxhit=0
 hit=2
-damage=8
+damage=6
 xscal=3
 yscal=2
 hstun=30
 xpos=hsp+30
 ypos=+30
 launchh=false
-sprite_index=spr_alan_lightair
+sprite_index=spr_jack_lightair
 image_index=0
 image_speed=0.2
 attacking=1
 angle=15
 }
-if(sprite_index=spr_alan_lightair &amp;&amp; image_index&gt;8)
+if(sprite_index=spr_jack_lightair &amp;&amp; image_index&gt;5)
 {
-sprite_index=spr_alan_jump
+sprite_index=spr_jack_jump
 attacking=0
 image_index=0
 }
 
 
-if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_jack_lightupair)
+if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch)
 {cancel=0
 hboxhit=0
-hit=3
+hit=6
 damage=14
 xscal=6
 yscal=2
@@ -316,15 +316,15 @@ xpos=hsp+20
 ypos=+40
 vsp=-2
 launchh=false
-sprite_index=spr_alan_heavyair
+sprite_index=spr_jack_heavyair
 image_index=0
 image_speed=0.2
 attacking=1
 angle=10
 }
-if(sprite_index=spr_alan_heavyair &amp;&amp; image_index&gt;9)
+if(sprite_index=spr_jack_heavyair &amp;&amp; image_index&gt;10)
 {
-sprite_index=spr_alan_jump
+sprite_index=spr_jack_jump
 attacking=0
 image_index=0
 }
@@ -348,7 +348,7 @@ attacking=1
 }
 if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;19)
 {
-sprite_index=spr_alan_jump
+sprite_index=spr_jack_jump
 attacking=0
 image_index=0
 }
@@ -443,12 +443,12 @@ dashing=0
 dashtime=0}
 
 if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
-{sprite_index=spr_alan_jump}
+{sprite_index=spr_jack_jump}
 if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
 {sprite_index=spr_jack_idle}
-if(attacking=0 &amp;&amp; grounded=1)
+if(attacking=0)// &amp;&amp; grounded=1)
 {
-if(dashing=0 &amp;&amp; grounded=1)
+if(dashing=0)// &amp;&amp; grounded=1)
 {
 if(hitstun&lt;=0)
 {
@@ -480,10 +480,10 @@ hsp=0
 
 }
 //jumping
-if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1 &amp;&amp; sprite_index=spr_alan_launch))
+if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1 &amp;&amp; sprite_index=spr_jack_launch))
 {
 grounded=0
-if(sprite_index=spr_alan_launch)
+if(sprite_index=spr_jack_launch)
 {vsp=-14}
 else
 {vsp=-9}

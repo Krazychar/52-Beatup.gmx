@@ -70,6 +70,10 @@ if(global.p1char="Alta")
 {
 image_index=3
 }
+if(global.p1char="Jackson")
+{
+image_index=4
+}
 
 </string>
           </argument>
@@ -106,6 +110,7 @@ draw_self()
 draw_healthbar(view_xview[0]+50,view_yview[0]+30,view_xview[0]+260,view_yview[0]+70,(p1.hp/p1.mhp)*100,c_red,c_green,c_green,1,true,true)
 draw_text(x-20,y,p1.hp)
 draw_text(x,y-40,"P1 Wins: "+string(gal.p1win))
+draw_text(x,y+100,"Damage: "+string(p1.mhp-p1.hp))
 </string>
           </argument>
         </arguments>

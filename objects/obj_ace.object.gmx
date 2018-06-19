@@ -667,7 +667,7 @@ attacking=0}
           <argument>
             <kind>1</kind>
             <string>///Some Special Buffs and Stuffs
-if(rage=true) atk=atk+round((mhp-hp)/5)
+
 </string>
           </argument>
         </arguments>

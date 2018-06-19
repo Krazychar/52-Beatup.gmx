@@ -81,7 +81,7 @@ timeEnd=0
 if(keyboard_check_pressed(ord("1")))
 {
 if(instance_exists(obj_alan)) {}
-if(instance_exists(obj_ace)) {instance_destroy(obj_ace);instance_create(x+300,y+200,obj_alan)}
+if(instance_exists(obj_jack)) {instance_destroy(obj_jack);instance_create(x+300,y+200,obj_alan)}
 }
 
 if(keyboard_check_pressed(ord("2")))
@@ -100,6 +100,11 @@ if(keyboard_check_pressed(ord("4")))
 {
 if(instance_exists(obj_alta)) {}
 if(instance_exists(obj_rey)) {instance_destroy(obj_rey);instance_create(x+300,y+200,obj_alta)}
+}
+if(keyboard_check_pressed(ord("5")))
+{
+if(instance_exists(obj_jack)) {}
+if(instance_exists(obj_ace) or instance_exists(obj_alan)) {instance_destroy(obj_ace);instance_create(x+300,y+200,obj_jack)}
 }
 </string>
           </argument>

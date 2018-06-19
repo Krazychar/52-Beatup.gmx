@@ -61,14 +61,14 @@
       <sprite>sprites\spr_ace_bullet</sprite>
     </sprites>
     <sprites name="Alta">
-      <sprite>sprites\spr_alta_Fidle</sprite>
-      <sprite>sprites\spr_alta_tools</sprite>
       <sprite>sprites\spr_alta_idle</sprite>
+      <sprite>sprites\spr_alta_Fidle</sprite>
+      <sprite>sprites\spr_alta_block</sprite>
+      <sprite>sprites\spr_alta_tools</sprite>
       <sprite>sprites\spr_alta_hit</sprite>
       <sprite>sprites\spr_alta_backdash</sprite>
       <sprite>sprites\spr_alta_dash</sprite>
       <sprite>sprites\spr_alta_forheavy</sprite>
-      <sprite>sprites\spr_alta_block</sprite>
       <sprite>sprites\spr_alta_launch</sprite>
       <sprite>sprites\spr_alta_jump</sprite>
       <sprite>sprites\spr_alta_launchair</sprite>
@@ -80,6 +80,9 @@
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_jump</sprite>
+      <sprite>sprites\spr_jack_heavyair</sprite>
+      <sprite>sprites\spr_jack_lightair</sprite>
       <sprite>sprites\spr_jack_launch</sprite>
       <sprite>sprites\spr_jack_flurry</sprite>
       <sprite>sprites\spr_jack_forlight</sprite>
