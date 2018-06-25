@@ -98,13 +98,7 @@ image_index=4
             <kind>1</kind>
             <string>
 
-if(global.p2combo&gt;1)
-{
-draw_set_font(font1)
-draw_set_color(c_yellow)
-draw_text(x-10,y+40,string(global.p2combo)+" Hit")
-draw_set_font(font0)
-}
+
 draw_set_color(c_white)
 draw_self()
 draw_healthbar(view_xview[0]+350,view_yview[0]+30,view_xview[0]+570,view_yview[0]+44,(p2.hp/p2.mhp)*100,c_black,c_lime,c_lime,90,true,false)
@@ -113,6 +107,27 @@ draw_sprite_ext(spr_wongames,gal.p2win,view_xview[0]+410,view_yview[0]+65,-2,2,0
 //draw_text(x-20,y,p2.hp)
 //draw_text(x,y-40,"P2 Wins: "+string(gal.p2win))
 //draw_text(x,y+100,"Damage: "+string(p2.mhp-p2.hp))
+
+if(global.p2combo&gt;1)
+{
+draw_set_font(font1)
+
+//outline code (gross)
+draw_set_color(c_black)
+draw_text(x-12,y+42,string(global.p2combo)+" Hit")
+draw_text(x-9,y+42,string(global.p2combo)+" Hit")
+draw_text(x-10,y+42,string(global.p2combo)+" Hit")
+draw_text(x-12,y+40,string(global.p2combo)+" Hit")
+draw_text(x-9,y+40,string(global.p2combo)+" Hit")
+draw_text(x-12,y+38,string(global.p2combo)+" Hit")
+draw_text(x-9,y+38,string(global.p2combo)+" Hit")
+draw_text(x-10,y+38,string(global.p2combo)+" Hit")
+
+draw_set_color(c_white)
+draw_text(x-8,y+40,string(global.p2combo)+" Hit")
+
+draw_set_font(font0)
+}
 </string>
           </argument>
         </arguments>

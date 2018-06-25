@@ -203,11 +203,11 @@ if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sp
 {cancel=0
 hboxhit=0
 hit=3
-damage=17
+damage=16
 xscal=2
-ysca1=1
+yscal=1
 hstun=36
-xpos=hsp+18
+xpos=hsp+27
 ypos=-14
 launchh=false
 sprite_index=spr_alan_heavy
@@ -515,6 +515,7 @@ instance_create(x,y+64,obj_jumpeffect)}
 else
 {vsp=-10}
 }
+if(p2.launch=true &amp;&amp; hitstun&gt;0) airMovementDir = p2.airMovementDir
 
 
 //vertical collision
@@ -639,7 +640,7 @@ linkdir=forward
 linkspr=spr_alan_fireball
 }
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,obj_alanfireball)}
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
+if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=14) {attacking=0;sprite_index=spr_alan_idle}
 //Shieldbreaker
 if( keyboard_check_pressed(ord(backward)) &amp;&amp; grounded=1 &amp;&amp; link=0)
 {
@@ -649,7 +650,7 @@ linkdir=forward
 linkspr=spr_alan_shieldbreak
 }
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,p1hbox)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3) {hsp+=4}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3) {hsp+=4 * image_xscale/4}
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
 
 

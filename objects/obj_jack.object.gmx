@@ -231,7 +231,7 @@ hboxhit=0
 hit=3
 damage=15
 xscal=3
-ysca1=3
+yscal=3
 hstun=42
 xpos=hsp+24
 ypos=-14
@@ -269,7 +269,7 @@ hsp+=1*image_xscale
 angle=90
 attacking=1
 }
-if(sprite_index=spr_jack_launch &amp;&amp; image_index&gt;11)
+if(sprite_index=spr_jack_launch &amp;&amp; image_index&gt;9)
 {
 sprite_index=spr_jack_idle
 attacking=0
@@ -280,7 +280,7 @@ image_index=0
 else
 
 {
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_heavyair &amp;&amp; sprite_index!=spr_alan_launch  &amp;&amp; sprite_index!=spr_jack_lightair)
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_heavyair &amp;&amp; sprite_index!=spr_jack_launchair  &amp;&amp; sprite_index!=spr_jack_lightair)
 {cancel=0
 hboxhit=0
 hit=2
@@ -288,8 +288,8 @@ damage=8
 xscal=3
 yscal=2
 hstun=35
-xpos=hsp+30
-ypos=+30
+xpos=hsp+35
+ypos=+35
 launchh=false
 sprite_index=spr_jack_lightair
 image_index=0
@@ -305,13 +305,13 @@ image_index=0
 }
 
 
-if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_jack_heavyair)
+if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_launchair &amp;&amp; sprite_index!=spr_jack_heavyair)
 {cancel=0
 hboxhit=0
 hit=4
 damage=19
 xscal=6
-yscal=2
+yscal=6
 hstun=40
 xpos=hsp+20
 ypos=+40
@@ -338,8 +338,8 @@ damage=16
 xscal=2
 yscal=8
 hstun=25
-xpos=hsp+26
-ypos=53
+xpos=hsp+40
+ypos=20
 launchh=false
 sprite_index=spr_jack_launchair
 image_index=0
@@ -347,7 +347,7 @@ image_speed=0.2
 angle=270
 attacking=1
 }
-if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;9)
+if(sprite_index=spr_jack_launchair &amp;&amp; image_index&gt;9)
 {
 sprite_index=spr_jack_jump
 attacking=0

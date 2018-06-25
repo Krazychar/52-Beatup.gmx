@@ -31,5 +31,9 @@
     <frame index="8">images\spr_alan_fireball_8.png</frame>
     <frame index="9">images\spr_alan_fireball_9.png</frame>
     <frame index="10">images\spr_alan_fireball_10.png</frame>
+    <frame index="11">images\spr_alan_fireball_11.png</frame>
+    <frame index="12">images\spr_alan_fireball_12.png</frame>
+    <frame index="13">images\spr_alan_fireball_13.png</frame>
+    <frame index="14">images\spr_alan_fireball_14.png</frame>
   </frames>
 </sprite>

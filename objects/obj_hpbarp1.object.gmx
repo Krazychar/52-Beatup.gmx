@@ -121,7 +121,7 @@ draw_text(x-98,y+38,string(global.p1combo)+" Hit")
 draw_text(x-100,y+38,string(global.p1combo)+" Hit")
 
 draw_set_color(c_white)
-draw_text(x-100,y+40,string(global.p1combo)+" Hit")
+draw_text(x-97,y+40,string(global.p1combo)+" Hit")
 
 draw_set_font(font0)
 }

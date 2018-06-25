@@ -193,11 +193,11 @@ if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; spr
 {cancel=0
 hboxhit=0
 hit=3
-damage=17
+damage=18
 xscal=5
-ysca1=3
+yscal=3
 hstun=35
-xpos=hsp+18
+xpos=hsp+17
 ypos=0
 launchh=false
 sprite_index=spr_rey_heavy

@@ -713,14 +713,14 @@ if(FBlv=2)linkspr=spr_ace_fireball2
 if(FBlv=3)linkspr=spr_ace_fireball3
 }
 //FB1
-if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=7 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
-if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
+if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
+if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_ace_idle}
 //FB2
-if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_acefireball);obj_acefireball.vspeed=-1;obj_acefireball.angle=5*image_xscale}
-if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_ace_idle}
+if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_acefireball);obj_acefireball.vspeed=-1;obj_acefireball.angle=5*image_xscale}
+if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_ace_idle}
 //FB3
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=8 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_ace_idle}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
 
 
 </string>
