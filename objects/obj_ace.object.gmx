@@ -75,6 +75,7 @@ ypos=0
 xscal=1
 yscal=1
 launchh=false
+airMovementDir = 0;
 </string>
           </argument>
         </arguments>
@@ -439,6 +440,8 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
             <string>///hit
 if(hitstun&gt;0)
 {
+if grounded == 0
+    hsp = 0;
 hitstun--
 sprite_index=spr_ace_hit
 attacking=1
@@ -575,6 +578,9 @@ hsp=0
 //jumping
 if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1  &amp;&amp; sprite_index=spr_ace_launch))
 {
+if(left) airMovementDir = -1;
+else if(right) airMovementDir = 1;
+else airMovementDir = 0;
 grounded=0
 if(sprite_index=spr_alan_launch or sprite_index=spr_ace_launch)
 {vsp=-14
@@ -609,6 +615,8 @@ if place_meeting(x+hsp,y,ground)
 }    
  
 //commit to movement
+if grounded == 0 &amp;&amp; hitstun == 0
+    hsp = airMovementDir * agi;
 x += hsp;
 y += vsp;
 
