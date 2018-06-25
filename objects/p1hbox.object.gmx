@@ -84,9 +84,9 @@ camera.x+=p1.damage*p1.image_xscale
 p1.depth=-1
 p2.image_index=0
 global.p1combo++
-camera.shakeIntensity=p1.damage*p1.image_xscale
+camera.shakeIntensity=p1.damage*p1.image_xscale/8
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
-room_speed=30
+room_speed=60-p1.hstun/2
 p2.hsp+=1*p1.image_xscale
 if(p1.rage=false) p2.hp-=p1.damage+p1.atk
 else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
@@ -105,7 +105,7 @@ p2.vsp=-14
 p2.grounded=0
 }
 
-if(p1.sprite_index=spr_alan_launchair or p1.sprite_index=spr_ace_launchair)
+if(p1.sprite_index=spr_alan_launchair or p1.sprite_index=spr_ace_launchair or p1.sprite_index=spr_jack_launchair)
 {
 p2.vsp=13
 }

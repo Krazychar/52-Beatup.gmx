@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>image_speed=0.2
 image_xscale=p1.image_xscale
-image_yscale=4
+image_yscale=3
 hspeed=2*image_xscale
 </string>
           </argument>

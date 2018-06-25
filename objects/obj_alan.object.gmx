@@ -46,9 +46,9 @@ linktime=0
 linkdir=keyboard_check_direct(vk_up)
 linkatk=keyboard_check_direct(vk_up)
 linkspr=0
-Fireball=true
-Dragonpunch=true
-Shieldbreak=true
+FBlv=0
+RDlv=0
+GBlv=0
 //battle variables
 agi=5
 dashing=0
@@ -180,7 +180,7 @@ hit=1
 damage=8
 xscal=2
 yscal=1
-hstun=29
+hstun=30
 xpos=hsp+26
 ypos=-13
 launchh=false
@@ -205,7 +205,7 @@ hit=3
 damage=17
 xscal=2
 ysca1=1
-hstun=34
+hstun=36
 xpos=hsp+18
 ypos=-14
 launchh=false
@@ -232,7 +232,7 @@ damage=30
 xscal=4
 dashtime=20
 ysca1=1
-hstun=55
+hstun=60
 xpos=hsp+53
 ypos=-14
 launchh=false
@@ -255,7 +255,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan
 cancel=0
 hit=3
 damage=12
-hstun=40
+hstun=50
 xscal=2
 yscal=3
 xpos=hsp+30
@@ -286,7 +286,7 @@ hit=2
 damage=8
 xscal=3
 yscal=2
-hstun=30
+hstun=35
 xpos=hsp+30
 ypos=+30
 launchh=false
@@ -335,7 +335,7 @@ hit=3
 damage=14
 xscal=6
 yscal=2
-hstun=35
+hstun=40
 xpos=hsp+20
 ypos=+40
 vsp=-2
@@ -360,7 +360,7 @@ hit=4
 damage=17
 xscal=2
 yscal=8
-hstun=25
+hstun=30
 xpos=hsp+26
 ypos=53
 launchh=false
@@ -413,7 +413,7 @@ pright=keyboard_check_pressed(ord("D"))
 jump=keyboard_check_direct(ord("W"))
 //move left and right
 //if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
 if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
 {attacking=2
@@ -508,9 +508,10 @@ if(left) hsp=-agi
 if(right) hsp=agi
 grounded=0
 if(sprite_index=spr_alan_launch)
-{vsp=-14}
+{vsp=-14
+instance_create(x,y+64,obj_jumpeffect)}
 else
-{vsp=-9}
+{vsp=-10}
 }
 
 
@@ -608,42 +609,43 @@ attacking=0}
           <argument>
             <kind>1</kind>
             <string>///Special Moves (Holy Heck)
-down=keyboard_check_direct(ord("S"))
+down=keyboard_check_pressed(ord("S"))
 if(image_xscale&gt;0) 
 {
-forward=keyboard_check_direct(ord("D"))
-backward=keyboard_check_direct(ord("A"))
+forward="D"
+backward="A"
 }
 else
 {
-forward=keyboard_check_direct(ord("A"))
-backward=keyboard_check_direct(ord("D"))
+forward="A"
+backward="D"
 }
 //Input Checker
 if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
-if(link=1 &amp;&amp; linktime&gt;0 &amp;&amp; linkdir) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;0 &amp;&amp; linkatk) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
 if(down &amp;&amp; grounded=1 &amp;&amp; link=0)
 {
 link=1
-linkatk=keyboard_check_direct(ord("J"))
+linkatk="J"
 linkdir=forward
 linkspr=spr_alan_fireball
 }
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,obj_alanfireball)}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
 //Shieldbreaker
-if(backward &amp;&amp; grounded=1 &amp;&amp; link=0)
+if( keyboard_check_pressed(ord(backward)) &amp;&amp; grounded=1 &amp;&amp; link=0)
 {
 link=1
-linkatk=light
+linkatk="J"
 linkdir=forward
 linkspr=spr_alan_shieldbreak
 }
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,p1hbox)}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3) {hsp+=4}
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
 
 

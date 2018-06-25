@@ -97,20 +97,34 @@ image_index=4
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(font0)
+            <string>draw_self()
+draw_set_color(c_white)
+draw_healthbar(view_xview[0]+50,view_yview[0]+30,view_xview[0]+260,view_yview[0]+44,(p1.hp/p1.mhp)*100,c_black,c_lime,c_lime,1,true,false)
+draw_healthbar(view_xview[0]+50,view_yview[0]+45,view_xview[0]+260,view_yview[0]+50,(p1.hp/p1.mhp)*100,c_black,c_green,c_green,1,true,false)
+draw_sprite_ext(spr_wongames,gal.p1win,view_xview[0]+200,view_yview[0]+65,2,2,0,c_white,1)
+//draw_text(x,y-40,"P1 Wins: "+string(gal.p1win))
+//draw_text(x,y+100,"Damage: "+string(p1.mhp-p1.hp))
 
 if(global.p1combo&gt;1)
 {
-draw_set_color(c_red)
-draw_text(x-10,y+40,string(global.p1combo)+" Hit!")
-}
+draw_set_font(font1)
+
+//outline code (gross)
+draw_set_color(c_black)
+draw_text(x-102,y+42,string(global.p1combo)+" Hit")
+draw_text(x-98,y+42,string(global.p1combo)+" Hit")
+draw_text(x-100,y+42,string(global.p1combo)+" Hit")
+draw_text(x-102,y+40,string(global.p1combo)+" Hit")
+draw_text(x-98,y+40,string(global.p1combo)+" Hit")
+draw_text(x-102,y+38,string(global.p1combo)+" Hit")
+draw_text(x-98,y+38,string(global.p1combo)+" Hit")
+draw_text(x-100,y+38,string(global.p1combo)+" Hit")
 
 draw_set_color(c_white)
-draw_self()
-draw_healthbar(view_xview[0]+50,view_yview[0]+30,view_xview[0]+260,view_yview[0]+70,(p1.hp/p1.mhp)*100,c_red,c_green,c_green,1,true,true)
-draw_text(x-20,y,p1.hp)
-draw_text(x,y-40,"P1 Wins: "+string(gal.p1win))
-draw_text(x,y+100,"Damage: "+string(p1.mhp-p1.hp))
+draw_text(x-100,y+40,string(global.p1combo)+" Hit")
+
+draw_set_font(font0)
+}
 </string>
           </argument>
         </arguments>

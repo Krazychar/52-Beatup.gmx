@@ -171,7 +171,7 @@ hit=3
 damage=4
 xscal=3
 yscal=3
-hstun=30
+hstun=40
 xpos=hsp+35
 ypos=-13
 launchh=false
@@ -218,7 +218,7 @@ hit=3
 damage=18
 xscal=7
 ysca1=3
-hstun=60
+hstun=75
 xpos=hsp+50
 ypos=0
 launchh=false
@@ -243,7 +243,7 @@ damage=35
 xscal=12
 ysca1=3
 hstun=60
-xpos=hsp+70
+xpos=hsp+90
 ypos=0
 launchh=false
 sprite_index=spr_alta_forheavy
@@ -264,7 +264,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta
 cancel=0
 hit=6
 damage=18
-hstun=50
+hstun=55
 xscal=2
 yscal=12
 xpos=hsp+45
@@ -318,7 +318,7 @@ hit=3
 damage=3
 xscal=10
 yscal=10
-hstun=20
+hstun=25
 xpos=hsp
 ypos=0
 launchh=false
@@ -403,7 +403,7 @@ pright=keyboard_check_pressed(vk_right)
 jump=keyboard_check_direct(vk_up)
 //move left and right
 //if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
 if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alta_dash &amp;&amp; sprite_index!=spr_alta_backdash)
 {attacking=2
@@ -492,9 +492,10 @@ if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or c
 {
 grounded=0
 if(sprite_index=spr_alta_launch)
-{vsp=-14}
+{vsp=-14
+instance_create(x,y+64,obj_jumpeffect)}
 else
-{vsp=-9}
+{vsp=-10}
 }
 
 

@@ -369,7 +369,7 @@ pright=keyboard_check_pressed(vk_right)
 jump=keyboard_check_direct(vk_up)
 //move left and right
 //if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
 if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
 {attacking=2
@@ -458,9 +458,10 @@ if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or c
 {
 grounded=0
 if(sprite_index=spr_rey_launch)
-{vsp=-14}
+{vsp=-14
+instance_create(x,y+64,obj_jumpeffect)}
 else
-{vsp=-9}
+{vsp=-10}
 }
 
 

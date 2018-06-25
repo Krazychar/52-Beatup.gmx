@@ -8,7 +8,7 @@
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>10</bbox_left>
-  <bbox_right>57</bbox_right>
+  <bbox_right>56</bbox_right>
   <bbox_top>10</bbox_top>
   <bbox_bottom>63</bbox_bottom>
   <HTile>0</HTile>
@@ -57,6 +57,5 @@
     <frame index="34">images\spr_jack_flurry_34.png</frame>
     <frame index="35">images\spr_jack_flurry_35.png</frame>
     <frame index="36">images\spr_jack_flurry_36.png</frame>
-    <frame index="37">images\spr_jack_flurry_37.png</frame>
   </frames>
 </sprite>

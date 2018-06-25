@@ -61,7 +61,7 @@ mhp=hp
 atk=1
 abi=5
 projdef=0
-dashlng=23
+dashlng=15
 rage=false
 nKb=false
 coward=false
@@ -162,7 +162,7 @@ sprite_index=spr_jack_jump
 attacking=0
 }
 
-if((sprite_index=spr_jack_heavyair or sprite_index=spr_jack_lightair or sprite_index=spr_alan_launch) &amp;&amp; place_meeting(x,y+1,ground)) 
+if((sprite_index=spr_jack_heavyair or sprite_index=spr_jack_lightair or sprite_index=spr_jack_launchair) &amp;&amp; place_meeting(x,y+1,ground)) 
 {
 sprite_index=spr_jack_idle
 freakingslickdash=0
@@ -173,16 +173,16 @@ if(hitstun&lt;=0)
 if(place_meeting(x,y+1,ground))
 {
 
-if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
+if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_light &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
 {cancel=0
 hboxhit=0
 hit=2
-damage=8
-xscal=2
+damage=6
+xscal=4
 yscal=1
 hstun=29
-xpos=hsp+26
-ypos=-13
+xpos=hsp+30
+ypos=-16
 launchh=false
 sprite_index=spr_jack_light
 image_index=0
@@ -198,15 +198,15 @@ attacking=0
 image_index=0
 }
 //jabby
-if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
+if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_forlight &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
 {cancel=0
 hboxhit=0
 hit=2
-damage=8
-xscal=2
+damage=7
+xscal=5
 yscal=1
-hstun=29
-xpos=hsp+26
+hstun=26
+xpos=hsp+43
 ypos=-13
 launchh=false
 sprite_index=spr_jack_forlight
@@ -228,11 +228,11 @@ if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sp
 {cancel=0
 hboxhit=0
 hit=3
-damage=17
-xscal=2
-ysca1=1
-hstun=34
-xpos=hsp+18
+damage=15
+xscal=3
+ysca1=3
+hstun=42
+xpos=hsp+24
 ypos=-14
 launchh=false
 sprite_index=spr_jack_heavy
@@ -255,11 +255,11 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack
 cancel=0
 hit=5
 damage=12
-hstun=40
+hstun=90
 xscal=2
-yscal=3
+yscal=12
 xpos=hsp+30
-ypos=-40
+ypos=-20
 launchh=true
 sprite_index=spr_jack_launch
 image_index=0
@@ -283,10 +283,10 @@ if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_
 {cancel=0
 hboxhit=0
 hit=2
-damage=6
+damage=8
 xscal=3
 yscal=2
-hstun=30
+hstun=35
 xpos=hsp+30
 ypos=+30
 launchh=false
@@ -304,17 +304,17 @@ image_index=0
 }
 
 
-if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch)
+if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_jack_heavyair)
 {cancel=0
 hboxhit=0
-hit=6
-damage=14
+hit=4
+damage=19
 xscal=6
 yscal=2
-hstun=35
+hstun=40
 xpos=hsp+20
 ypos=+40
-vsp=-2
+vsp-=2
 launchh=false
 sprite_index=spr_jack_heavyair
 image_index=0
@@ -329,24 +329,24 @@ attacking=0
 image_index=0
 }
 
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch)
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_launchair)
 {cancel=0
 hboxhit=0
-hit=4
-damage=17
+hit=3
+damage=16
 xscal=2
 yscal=8
 hstun=25
 xpos=hsp+26
 ypos=53
 launchh=false
-sprite_index=spr_alan_launch
+sprite_index=spr_jack_launchair
 image_index=0
 image_speed=0.2
 angle=270
 attacking=1
 }
-if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;19)
+if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;9)
 {
 sprite_index=spr_jack_jump
 attacking=0
@@ -389,34 +389,34 @@ pright=keyboard_check_pressed(ord("D"))
 jump=keyboard_check_direct(ord("W"))
 //move left and right
 //if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
-if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)
 {attacking=2
-if(image_xscale=4) sprite_index=spr_alan_backdash
-else sprite_index=spr_alan_dash
+if(image_xscale=4) sprite_index=spr_jack_backdash
+else sprite_index=spr_jack_dash
 image_index=0
-hsp=-14
+hsp=-17
 dashtime=dashlng
 dashing=1}
-if(pleft &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+if(pleft &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)
 {dashtime=17
 dashcheck=1}
 
-if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash )
+if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash )
 {attacking=2
-if(image_xscale=4) sprite_index=spr_alan_dash
-else sprite_index=spr_alan_backdash
+if(image_xscale=4) sprite_index=spr_jack_dash
+else sprite_index=spr_jack_backdash
 image_index=0
-hsp=14
+hsp=17
 dashtime=dashlng
 dashing=1}
-if(pright &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+if(pright &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)
 {dashtime=17
 
 dashcheck=1}
 }
-if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_alan_dash or sprite_index==spr_alan_backdash))
+if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_jack_dash or sprite_index==spr_jack_backdash))
 {attacking=0
 dashcheck=0
 dashing=0
@@ -484,9 +484,10 @@ if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or c
 {
 grounded=0
 if(sprite_index=spr_jack_launch)
-{vsp=-14}
+{vsp=-14
+instance_create(x,y+64,obj_jumpeffect)}
 else
-{vsp=-9}
+{vsp=-10}
 }
 
 
@@ -548,13 +549,13 @@ if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &am
 attacking=1
 hsp=0
 block=1
-sprite_index=spr_alan_block
+sprite_index=spr_jack_block
 }
-if(sprite_index=spr_alan_block &amp;&amp; p2.attacking=false)
+if(sprite_index=spr_jack_block &amp;&amp; p2.attacking=false)
 {
 attacking=0
 block=0
-sprite_index=spr_alan_idle
+sprite_index=spr_jack_idle
 image_blend=c_white
 }
 if(attacking=false)
@@ -587,14 +588,14 @@ attacking=0}
 if(hitstun&gt;0)
 {
 hitstun--
-sprite_index=spr_alan_hit
+sprite_index=spr_jack_hit
 attacking=1
 hsp=0
 }
-if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_alan_hit)
+if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_jack_hit)
 {
 hitstun=0
-sprite_index=spr_alan_idle
+sprite_index=spr_jack_idle
 attacking=0
 global.p2combo=0
 }

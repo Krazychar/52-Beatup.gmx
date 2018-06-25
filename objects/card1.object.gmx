@@ -58,7 +58,7 @@ global.pickturn=0
             <kind>1</kind>
             <string>global.pickturn++
 if(global.pickturn=2)
-{global.roundEnd=0
+{instance_create(x,y,obj_start)
 global.pickturn=0}
 </string>
           </argument>

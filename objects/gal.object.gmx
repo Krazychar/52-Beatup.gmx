@@ -196,7 +196,7 @@ global.roundEnd=1
 }
 
 
-if(global.roundEnd=1)
+if(global.roundEnd=1 &amp;&amp; !instance_exists(obj_start))
 {
 
 if(p1.hp&lt;=0)
@@ -247,7 +247,7 @@ if(timeEnd=50)instance_create(view_xview[0]+500,view_yview[0]+150 ,card1)
             <kind>1</kind>
             <string>///Round Resume?D!??!?!?
 
-if(global.roundEnd=0 &amp;&amp; instance_exists(ftb))
+if(global.pickturn=2 &amp;&amp; instance_exists(ftb))
 {
 instance_destroy(ftb)
 p1.hp=p1.mhp
