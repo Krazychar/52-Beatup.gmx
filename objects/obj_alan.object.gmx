@@ -46,9 +46,9 @@ linktime=0
 linkdir=keyboard_check_direct(vk_up)
 linkatk=keyboard_check_direct(vk_up)
 linkspr=0
-FBlv=0
-RDlv=0
-GBlv=0
+FBlv=1
+RDlv=1
+GBlv=1
 //battle variables
 agi=5
 dashing=0
@@ -174,7 +174,7 @@ if(hitstun&lt;=0)
 if(place_meeting(x,y+1,ground))
 {
 
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_light &amp;&amp; sprite_index!=spr_alan_heavy &amp;&amp; sprite_index!=spr_alan_launch)
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_light &amp;&amp; sprite_index!=spr_alan_heavy &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_alan_forheavy)
 {cancel=0
 hboxhit=0
 hit=1
@@ -198,8 +198,32 @@ sprite_index=spr_alan_idle
 attacking=0
 image_index=0
 }
-
-if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_alan_heavy)
+//Roundhouse
+if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_alan_forheavy)
+{cancel=0
+hboxhit=0
+hit=3
+damage=20
+xscal=2
+yscal=1
+hstun=40
+xpos=hsp+27
+ypos=-14
+launchh=false
+sprite_index=spr_alan_forheavy
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+angle=0
+}
+if(sprite_index=spr_alan_forheavy &amp;&amp; image_index&gt;8)
+{hsp+=3*image_xscale
+sprite_index=spr_alan_idle
+attacking=0
+image_index=0
+}
+if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_alan_heavy &amp;&amp; sprite_index!=spr_alan_forheavy)
 {cancel=0
 hboxhit=0
 hit=3
@@ -632,26 +656,26 @@ if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
 if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0)
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
 {
 link=1
 linkatk="J"
 linkdir=forward
-linkspr=spr_alan_fireball
+if(FBlv=1)linkspr=spr_alan_shieldbreak
+if(FBlv=2)linkspr=spr_alan_fireball
+if(FBlv=3)linkspr=spr_alan_fireball2
 }
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,obj_alanfireball)}
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=14) {attacking=0;sprite_index=spr_alan_idle}
-//Shieldbreaker
-if( keyboard_check_pressed(ord(backward)) &amp;&amp; grounded=1 &amp;&amp; link=0)
-{
-link=1
-linkatk="J"
-linkdir=forward
-linkspr=spr_alan_shieldbreak
-}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y,p1hbox)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3) {hsp+=4 * image_xscale/4}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_idle}
+//FB1
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball0)}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_alan_idle}
+//FB2
+if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
+if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
+//FB3
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
+
 
 
 </string>

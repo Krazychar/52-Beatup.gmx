@@ -4,11 +4,14 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\medpunch1</sound>
+    <sound>sound\harpunch1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="Alan">
       <sprite>sprites\spr_alan_idle</sprite>
-      <sprite>sprites\spr_alan_shieldbreak</sprite>
+      <sprite>sprites\spr_alan_forheavy</sprite>
       <sprite>sprites\spr_alan_hit</sprite>
       <sprite>sprites\spr_alan_jump</sprite>
       <sprite>sprites\spr_alan_win</sprite>
@@ -24,8 +27,11 @@
       <sprite>sprites\spr_alan_heavydash</sprite>
       <sprite>sprites\spr_alan_dash</sprite>
       <sprites name="alanspecials">
+        <sprite>sprites\spr_alan_shieldbreak</sprite>
         <sprite>sprites\spr_alan_fireball</sprite>
+        <sprite>sprites\spr_alan_fireball2</sprite>
         <sprite>sprites\spr_alan_proj1</sprite>
+        <sprite>sprites\spr_alan_proj</sprite>
         <sprite>sprites\spr_alan_proj1eff</sprite>
       </sprites>
     </sprites>
@@ -66,6 +72,7 @@
         <sprite>sprites\spr_ace_fireball2</sprite>
         <sprite>sprites\spr_ace_fireball3</sprite>
       </sprites>
+      <sprite>sprites\spr_ace_grenade</sprite>
     </sprites>
     <sprites name="Alta">
       <sprite>sprites\spr_alta_idle</sprite>
@@ -100,6 +107,21 @@
       <sprite>sprites\spr_jack_forlight</sprite>
       <sprite>sprites\spr_jack_heavy</sprite>
       <sprite>sprites\spr_jack_light</sprite>
+      <sprites name="jackspecials">
+        <sprite>sprites\spr_jackitems</sprite>
+        <sprite>sprites\spr_jackitemeff</sprite>
+        <sprite>sprites\spr_jack_specsuper1</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="Magnus">
+      <sprite>sprites\spr_magnus_idle</sprite>
+      <sprite>sprites\spr_magnus_jump</sprite>
+      <sprite>sprites\spr_magnus_launch</sprite>
+      <sprite>sprites\spr_magnus_heavy</sprite>
+      <sprite>sprites\spr_magnus_forheavy</sprite>
+      <sprite>sprites\spr_magnus_light</sprite>
+      <sprite>sprites\spr_magnus_forlight</sprite>
+      <sprite>sprites\spr_magnus_guit</sprite>
     </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
@@ -117,11 +139,14 @@
       <sprite>sprites\spr_jumpeffectlight</sprite>
       <sprite>sprites\hiteffect2</sprite>
       <sprite>sprites\spr_combo</sprite>
+      <sprite>sprites\slasheffect1</sprite>
     </sprites>
     <sprite>sprites\pictureedit</sprite>
     <sprite>sprites\pickacard</sprite>
     <sprite>sprites\readysetgo</sprite>
+    <sprite>sprites\spr_ko</sprite>
     <sprite>sprites\spr_wongames</sprite>
+    <sprite>sprites\spr_aceexplosion</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_alan</background>
@@ -139,6 +164,7 @@
     <object>objects\obj_ace</object>
     <object>objects\obj_jack</object>
     <object>objects\obj_rey</object>
+    <object>objects\obj_magnus</object>
     <object>objects\obj_alta</object>
     <object>objects\obj_hpbarp2</object>
     <object>objects\obj_hpbarp1</object>
@@ -156,11 +182,19 @@
     <object>objects\camera</object>
     <object>objects\ftb</object>
     <object>objects\obj_alanfireball</object>
+    <object>objects\obj_alanfireball0</object>
     <object>objects\alanfireballeff</object>
-    <object>objects\dasdsadas</object>
     <object>objects\obj_jumpeffect</object>
     <object>objects\obj_start</object>
     <object>objects\obj_acefireball</object>
+    <object>objects\obj_ko</object>
+    <object>objects\obj_ace_grenade</object>
+    <object>objects\obj_aceexplosion</object>
+    <object>objects\obj_jackslasheff1</object>
+    <object>objects\obj_jackitems</object>
+    <object>objects\jackitemeffect</object>
+    <object>objects\superbkg</object>
+    <object>objects\dasdasd</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>

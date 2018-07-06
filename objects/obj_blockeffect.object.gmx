@@ -25,10 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed=0.4
-image_alpha=0
-image_xscale=2
+            <string>image_speed=0.6
+image_alpha=1
+image_xscale=4
 image_yscale=6
+if(instance_exists(p1hbox))instance_destroy(p1hbox)
+if(instance_exists(p2hbox))instance_destroy(p2hbox)
+
 </string>
           </argument>
         </arguments>

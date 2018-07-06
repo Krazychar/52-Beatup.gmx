@@ -329,10 +329,10 @@ image_index=0
 image_speed=0.3
 attacking=1
 }
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=3 &amp;&amp; hit=3)
+if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=5 &amp;&amp; hit=3)
 {hit=5;instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)}
 
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=3 &amp;&amp; hit=5)
+if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=7 &amp;&amp; hit=5)
 {hit=8;instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)}
 
 

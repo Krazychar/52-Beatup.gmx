@@ -79,6 +79,8 @@ p2.hsp=0
             <string>time++
 if(place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; p1.block=false)
 {
+sound_play(harpunch1)
+
 p2.depth=-1
 p1.depth=0
 p1.image_index=0
@@ -113,8 +115,8 @@ p1.vsp=13
 ////////
 if(place_meeting(x,y,p1) &amp;&amp; p1.block=true)
 {
-p1.image_blend=c_aqua
-p1.hsp-=4*p1.image_xscale
+instance_create(p1.x,p1.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p1.image_xscale
 }
 
 if(time&gt;=4) instance_destroy()

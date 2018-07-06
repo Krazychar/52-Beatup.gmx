@@ -719,7 +719,8 @@ if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=11) {attacking=0;spr
 if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_acefireball);obj_acefireball.vspeed=-1;obj_acefireball.angle=5*image_xscale}
 if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_ace_idle}
 //FB3
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_ace_grenade)}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2;instance_create(x+12*image_xscale,y-16,obj_acefireball)}
 if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
 
 
@@ -743,21 +744,7 @@ if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sp
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///level up moves for testing
-if(keyboard_check_pressed(ord("T")))
-{
-FBlv++
-RDlv++
-GBlv++
-}
-
-if(keyboard_check_pressed(ord("Y")))
-{
-FBlv--
-RDlv--
-GBlv--
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
