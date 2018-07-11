@@ -79,7 +79,6 @@ p2.hsp=0
             <string>time++
 if(place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; p1.block=false)
 {
-sound_play(harpunch1)
 
 p2.depth=-1
 p1.depth=0
@@ -107,7 +106,7 @@ p1.vsp=-14
 p1.grounded=0
 }
 
-if(p2.sprite_index=spr_rey_launchair or p2.sprite_index=spr_alta_launchair)
+if(p2.sprite_index=spr_rey_launchair or p2.sprite_index=spr_magnus_launchair or p2.sprite_index=spr_alta_launchair or p2.sprite_index=spr_magnus_forheavy)
 {
 p1.vsp=13
 }
