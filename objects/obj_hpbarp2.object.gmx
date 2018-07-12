@@ -71,6 +71,10 @@ if(global.p2char="Jackson")
 {
 head=4
 }
+if(global.p2char="Magnus")
+{
+head=5
+}
 
 
 </string>
@@ -115,7 +119,7 @@ draw_sprite_ext(spr_wongames,gal.p2win,view_xview[0]+410+kek,view_yview[0]+65+ke
 draw_sprite_ext(spr_healthbar,head,view_xview[0]+490+kek,view_yview[0]+55+kek,-2,2,0,c_white,1)
 //draw_text(view_xview[0]+xx-20,y,p2.hp)
 //draw_text(x,y-40,"P2 Wins: "+string(gal.p2win))
-//draw_text(x,view_yview[0]+yy+100,"Damage: "+string(p2.mhp-p2.hp))
+draw_text(view_xview[0]+50,view_yview[0]+130,"Damage: "+string(p2.mhp-p2.hp))
 xx=490
 yy=55
 if(global.p2combo&gt;1)

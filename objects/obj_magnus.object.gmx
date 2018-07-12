@@ -30,7 +30,7 @@ image_index=0
 room_speed=60
 attacking=0
 image_yscale=4  
-global.p2char="Rey"
+global.p2char="Magnus"
 hsp=0
 vsp=0
 grav=0.3
@@ -192,7 +192,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=3
-damage=6
+damage=5
 xscal=4
 yscal=2
 hstun=25
@@ -217,7 +217,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=6
-damage=30
+damage=25
 xscal=13
 yscal=13
 hstun=45
@@ -241,7 +241,7 @@ if(!(left &amp;&amp; image_xscale&lt;0 &amp;&amp; !right &amp;&amp; image_xscale
 {cancel=0
 hboxhit=0
 hit=4
-damage=19
+damage=20
 xscal=7
 yscal=4
 hstun=45
@@ -317,7 +317,7 @@ if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or
 {cancel=0
 hboxhit=0
 hit=3
-damage=15
+damage=14
 xscal=6
 yscal=6
 hstun=35
@@ -341,7 +341,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magn
 {cancel=0
 hboxhit=0
 hit=4
-damage=16
+damage=15
 xscal=3
 yscal=6
 hstun=30
@@ -597,10 +597,11 @@ if(hitstun&gt;0)
 if grounded == 0
     hsp = 0;
 hitstun--
-sprite_index=spr_rey_hit
+if(!place_meeting(x,y+1,ground)) sprite_index=spr_magnus_hit2
+else sprite_index=spr_magnus_hit
 attacking=1
 }
-if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_rey_hit)
+if(hitstun&lt;=0 &amp;&amp; (sprite_index=spr_magnus_hit or sprite_index=spr_magnus_hit2))
 {
 attacking=0
 hitstun=0
