@@ -204,6 +204,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>
+    <room>rooms\character_select</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
