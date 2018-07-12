@@ -154,7 +154,7 @@ sprite_index=spr_magnus_jump
 attacking=0
 }
 
-if((sprite_index=spr_rey_heavyair or sprite_index=spr_magnus_lightair or sprite_index=spr_magnus_launchair or sprite_index=spr_rey_heavyforair) &amp;&amp; place_meeting(x,y+1,ground)) 
+if((sprite_index=spr_magnus_heavyair or sprite_index=spr_magnus_lightair or sprite_index=spr_magnus_launchair) &amp;&amp; place_meeting(x,y+1,ground)) 
 {
 sprite_index=spr_magnus_idle
 freakingslickdash=0
@@ -165,7 +165,7 @@ if(hitstun&lt;=0)
 if(place_meeting(x,y+1,ground))
 {
 
-if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_magnus_light &amp;&amp; sprite_index!=spr_magnus_heavy &amp;&amp; sprite_index!=spr_magnus_launch)
+if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_light &amp;&amp; sprite_index!=spr_magnus_forlight &amp;&amp; sprite_index!=spr_magnus_heavy &amp;&amp; sprite_index!=spr_magnus_launch)
 {cancel=0
 hboxhit=0
 hit=3
@@ -195,7 +195,7 @@ hit=3
 damage=6
 xscal=4
 yscal=2
-hstun=20
+hstun=25
 xpos=hsp+22
 ypos=+55
 launchh=false
@@ -244,7 +244,7 @@ hit=4
 damage=19
 xscal=7
 yscal=4
-hstun=35
+hstun=45
 xpos=hsp+26
 ypos=0
 launchh=false
@@ -266,7 +266,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magn
 cancel=0
 hit=5
 damage=19
-hstun=50
+hstun=70
 xscal=5
 yscal=8
 xpos=hsp+45
@@ -289,14 +289,14 @@ image_index=0
 else
 
 {
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_alan_launchair  &amp;&amp; sprite_index!=spr_magnus_lightair)
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_heavyair &amp;&amp; sprite_index!=spr_alan_launchair  &amp;&amp; sprite_index!=spr_magnus_lightair)
 {cancel=0
 hboxhit=0
 hit=3
 damage=8
 xscal=3
 yscal=2
-hstun=27
+hstun=32
 xpos=hsp+45
 ypos=+65
 launchh=false
@@ -313,51 +313,29 @@ image_index=0
 }
 
 
-if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_magnus_launchair &amp;&amp; sprite_index!=spr_rey_heavyforair)
+if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_heavyair &amp;&amp; sprite_index!=spr_magnus_launchair)
 {cancel=0
 hboxhit=0
 hit=3
 damage=15
-xscal=10
+xscal=6
 yscal=4
-hstun=40
+hstun=35
 xpos=hsp+20
 ypos=+20
 launchh=false
-sprite_index=spr_rey_heavyair
+sprite_index=spr_magnus_heavyair
 image_index=0
 image_speed=0.2
 attacking=1
 }
-if(sprite_index=spr_rey_heavyair &amp;&amp; image_index&gt;12)
+if(sprite_index=spr_magnus_heavyair &amp;&amp; image_index&gt;10)
 {
 sprite_index=spr_magnus_jump
 attacking=0
 image_index=0
 }
 
-if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_launchair  &amp;&amp; sprite_index!=spr_rey_heavyforair)
-{cancel=0
-hboxhit=0
-hit=4
-damage=20
-xscal=10
-yscal=4
-hstun=36
-xpos=hsp+20
-ypos=+20
-launchh=false
-sprite_index=spr_rey_heavyforair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_rey_heavyforair &amp;&amp; image_index&gt;8)
-{
-sprite_index=spr_magnus_jump
-attacking=0
-image_index=0
-}
 
 if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_launchair)
 {cancel=0
@@ -420,31 +398,31 @@ jump=keyboard_check_direct(vk_up)
 //if(left or right) hsp=round(hsp)
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
-if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_magnus_dash &amp;&amp; sprite_index!=spr_magnus_backdash)
 {attacking=2
-if(image_xscale=4) sprite_index=spr_rey_backdash
-else sprite_index=spr_rey_dash
+if(image_xscale=4) sprite_index=spr_magnus_backdash
+else sprite_index=spr_magnus_dash
 image_index=0
 hsp=-13
-dashtime=20
+dashtime=15
 dashing=1}
-if(pleft &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+if(pleft &amp;&amp; sprite_index!=spr_magnus_dash &amp;&amp; sprite_index!=spr_magnus_backdash)
 {dashtime=17
 dashcheck=1}
 
-if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash )
+if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_magnus_dash &amp;&amp; sprite_index!=spr_magnus_backdash )
 {attacking=2
-if(image_xscale=4) sprite_index=spr_rey_dash
-else sprite_index=spr_rey_backdash
+if(image_xscale=4) sprite_index=spr_magnus_dash
+else sprite_index=spr_magnus_backdash
 image_index=0
 hsp=13
-dashtime=20
+dashtime=15
 dashing=1}
-if(pright &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+if(pright &amp;&amp; sprite_index!=spr_magnus_dash &amp;&amp; sprite_index!=spr_magnus_backdash)
 {dashtime=17
 dashcheck=1}
 }
-if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_rey_dash or sprite_index==spr_rey_backdash))
+if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_magnus_dash or sprite_index==spr_magnus_backdash))
 {attacking=0
 dashcheck=0
 dashing=0
@@ -579,9 +557,9 @@ if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &am
 attacking=1
 hsp=0
 block=1
-sprite_index=spr_rey_block
+sprite_index=spr_magnus_block
 }
-if(sprite_index=spr_rey_block &amp;&amp; p1.attacking=false)
+if(sprite_index=spr_magnus_block &amp;&amp; p1.attacking=false)
 {
 attacking=0
 block=0
@@ -671,7 +649,7 @@ if(global.p1combo=0 &amp;&amp; (sprite_index=spr_rey_dash or sprite_index=spr_re
 {
 freakingslickdash=1
 draw_set_color(c_blue)
-draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,4,0,c_green,0.4)
+draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,4,0,c_aqua,0.4)
 
 }
 if(place_meeting(x,y+1,ground))

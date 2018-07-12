@@ -115,7 +115,11 @@
     </sprites>
     <sprites name="Magnus">
       <sprite>sprites\spr_magnus_idle</sprite>
+      <sprite>sprites\spr_magnus_block</sprite>
+      <sprite>sprites\spr_magnus_backdash</sprite>
+      <sprite>sprites\spr_magnus_dash</sprite>
       <sprite>sprites\spr_magnus_jump</sprite>
+      <sprite>sprites\spr_magnus_heavyair</sprite>
       <sprite>sprites\spr_magnus_launchair</sprite>
       <sprite>sprites\spr_magnus_lightair</sprite>
       <sprite>sprites\spr_magnus_launch</sprite>

@@ -61,7 +61,7 @@ mhp=hp
 atk=1
 abi=5
 projdef=0
-dashlng=15
+dashlng=13
 rage=false
 nKb=false
 coward=false
@@ -174,7 +174,7 @@ if(hitstun&lt;=0)
 if(place_meeting(x,y+1,ground))
 {
 
-if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_light &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
+if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_jack_light  &amp;&amp; sprite_index!=spr_jack_forlight &amp;&amp; sprite_index!=spr_jack_heavy &amp;&amp; sprite_index!=spr_jack_launch)
 {cancel=0
 hboxhit=0
 hit=2
@@ -397,7 +397,7 @@ if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp
 if(image_xscale=4) sprite_index=spr_jack_backdash
 else sprite_index=spr_jack_dash
 image_index=0
-hsp=-17
+hsp=-18
 dashtime=dashlng
 dashing=1}
 if(pleft &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)
@@ -409,7 +409,7 @@ if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_jack_dash &amp;&am
 if(image_xscale=4) sprite_index=spr_jack_dash
 else sprite_index=spr_jack_backdash
 image_index=0
-hsp=17
+hsp=18
 dashtime=dashlng
 dashing=1}
 if(pright &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)

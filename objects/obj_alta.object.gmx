@@ -40,7 +40,7 @@ hboxhit=0
 dashtime=0
 angle=0
 //battle variables
-agi=3
+agi=4
 dashing=0
 dashcheck=0
 block=0
@@ -412,8 +412,8 @@ if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alta_dash &amp;&amp
 if(image_xscale=4) sprite_index=spr_alta_backdash
 else sprite_index=spr_alta_dash
 image_index=0
-hsp=-13
-dashtime=20
+hsp=-15
+dashtime=10
 dashing=1}
 if(pleft &amp;&amp; sprite_index!=spr_alta_dash &amp;&amp; sprite_index!=spr_alta_backdash)
 {dashtime=17
@@ -424,8 +424,8 @@ if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alta_dash &amp;&am
 if(image_xscale=4) sprite_index=spr_alta_dash
 else sprite_index=spr_alta_backdash
 image_index=0
-hsp=13
-dashtime=20
+hsp=15
+dashtime=10
 dashing=1}
 if(pright &amp;&amp; sprite_index!=spr_alta_dash &amp;&amp; sprite_index!=spr_alta_backdash)
 {dashtime=17
