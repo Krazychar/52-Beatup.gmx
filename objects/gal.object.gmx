@@ -100,7 +100,7 @@ if(instance_exists(obj_alan)) {instance_destroy(obj_alan);instance_create(x+300,
 if(keyboard_check_pressed(ord("3")))
 {
 if(instance_exists(obj_rey)) {}
-if(instance_exists(obj_alta)) {instance_destroy(obj_alta);instance_create(x+300,y+200,obj_rey)}
+if(instance_exists(obj_magnus)) {instance_destroy(obj_magnus);instance_create(x+300,y+200,obj_rey)}
 }
 
 if(keyboard_check_pressed(ord("4")))

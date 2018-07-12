@@ -178,7 +178,7 @@ if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_l
 {cancel=0
 hboxhit=0
 hit=1
-damage=8
+damage=7
 xscal=4
 yscal=2
 hstun=29
@@ -276,7 +276,7 @@ if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sp
 {cancel=0
 hboxhit=0
 hit=2
-damage=10
+damage=12
 hstun=45
 xscal=4
 yscal=2
@@ -305,7 +305,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_
 {hboxhit=0
 cancel=0
 hit=5
-damage=16
+damage=19
 hstun=80
 xscal=4
 yscal=10
@@ -359,7 +359,7 @@ if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_h
 {cancel=0
 hboxhit=0
 hit=2
-damage=4
+damage=5
 xscal=5
 yscal=4
 hstun=25
@@ -390,7 +390,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_
 {cancel=0
 hboxhit=0
 hit=3
-damage=10
+damage=12
 xscal=2
 yscal=3
 hstun=22
@@ -443,10 +443,11 @@ if(hitstun&gt;0)
 if grounded == 0
     hsp = 0;
 hitstun--
-sprite_index=spr_ace_hit
+if(!place_meeting(x,y+1,ground)) sprite_index=spr_ace_hit2
+else sprite_index=spr_ace_hit
 attacking=1
 }
-if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_ace_hit)
+if(hitstun&lt;=0 &amp;&amp; (sprite_index=spr_ace_hit or sprite_index=spr_ace_hit2))
 {
 hitstun=0
 sprite_index=spr_ace_idle

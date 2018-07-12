@@ -73,6 +73,10 @@ if(global.p1char="Jackson")
 {
 head=4
 }
+if(global.p1char="Magnus")
+{
+head=5
+}
 
 </string>
           </argument>
@@ -112,7 +116,7 @@ draw_healthbar(view_xview[0]+50+kek,view_yview[0]+45+kek,view_xview[0]+260+kek,v
 draw_sprite_ext(spr_wongames,gal.p1win,view_xview[0]+200+kek,view_yview[0]+65+kek,2,2,0,c_white,1)
 draw_sprite_ext(spr_healthbar,head,view_xview[0]+130+kek,view_yview[0]+55+kek,2,2,0,c_white,1)
 //draw_text(x,y-40,"P1 Wins: "+string(gal.p1win))
-//draw_text(x,view_yview[0]+yy+100,"Damage: "+string(p1.mhp-p1.hp))
+draw_text(view_xview[0]+50,view_yview[0]+100,"Damage: "+string(p1.mhp-p1.hp))
 xx=130
 yy=55
 if(global.p1combo&gt;1)

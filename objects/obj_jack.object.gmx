@@ -596,11 +596,12 @@ if(hitstun&gt;0)
 if grounded == 0
     hsp = 0;
 hitstun--
-sprite_index=spr_jack_hit
+if(!place_meeting(x,y+1,ground)) sprite_index=spr_jack_hit2
+else sprite_index=spr_jack_hit
 attacking=1
 hsp=0
 }
-if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_jack_hit)
+if(hitstun&lt;=0 &amp;&amp; (sprite_index=spr_jack_hit or sprite_index=spr_jack_hit2))
 {
 hitstun=0
 sprite_index=spr_jack_idle

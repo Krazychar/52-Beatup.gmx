@@ -79,9 +79,11 @@ p1.hsp=0
             <string>time++
 if(place_meeting(x,y,p2) &amp;&amp; room_speed==60 &amp;&amp; p2.block=0)
 {
-if(instance_exists(obj_jack))
+if(instance_exists(obj_jack) &amp;&amp; p1.sprite_index!=spr_jack_light)
 {instance_create(x,y,obj_jackslasheff1)}
 if(instance_exists(obj_alan))
+{instance_create(x,y,obj_hiteffect)}
+if(instance_exists(obj_ace))
 {instance_create(x,y,obj_hiteffect)}
 
 p2.depth=0

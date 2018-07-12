@@ -7,10 +7,10 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>11</bbox_left>
-  <bbox_right>27</bbox_right>
-  <bbox_top>2</bbox_top>
-  <bbox_bottom>19</bbox_bottom>
+  <bbox_left>3</bbox_left>
+  <bbox_right>30</bbox_right>
+  <bbox_top>1</bbox_top>
+  <bbox_bottom>28</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -25,6 +25,5 @@
     <frame index="2">images\slasheffect1_2.png</frame>
     <frame index="3">images\slasheffect1_3.png</frame>
     <frame index="4">images\slasheffect1_4.png</frame>
-    <frame index="5">images\slasheffect1_5.png</frame>
   </frames>
 </sprite>

@@ -11,6 +11,7 @@
   <sprites name="sprites">
     <sprites name="Alan">
       <sprite>sprites\spr_alan_idle</sprite>
+      <sprite>sprites\spr_alan_hit2</sprite>
       <sprite>sprites\spr_alan_forheavy</sprite>
       <sprite>sprites\spr_alan_hit</sprite>
       <sprite>sprites\spr_alan_jump</sprite>
@@ -38,6 +39,7 @@
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
       <sprite>sprites\spr_rey_hit</sprite>
+      <sprite>sprites\spr_rey_hit2</sprite>
       <sprite>sprites\spr_rey_jump</sprite>
       <sprite>sprites\spr_rey_block</sprite>
       <sprite>sprites\spr_rey_heavyforair</sprite>
@@ -49,9 +51,14 @@
       <sprite>sprites\spr_rey_light</sprite>
       <sprite>sprites\spr_rey_dash</sprite>
       <sprite>sprites\spr_rey_backdash</sprite>
+      <sprites name="ElreySpecials">
+        <sprite>sprites\spr_rey_proj</sprite>
+        <sprite>sprites\spr_rey_fireball1</sprite>
+      </sprites>
     </sprites>
     <sprites name="Ace">
       <sprite>sprites\spr_ace_idle</sprite>
+      <sprite>sprites\spr_ace_hit2</sprite>
       <sprite>sprites\spr_ace_backdash</sprite>
       <sprite>sprites\spr_ace_dash</sprite>
       <sprite>sprites\spr_ace_hit</sprite>
@@ -76,6 +83,7 @@
     </sprites>
     <sprites name="Alta">
       <sprite>sprites\spr_alta_idle</sprite>
+      <sprite>sprites\spr_alta_hit2</sprite>
       <sprite>sprites\spr_alta_Fidle</sprite>
       <sprite>sprites\spr_alta_block</sprite>
       <sprite>sprites\spr_alta_tools</sprite>
@@ -91,9 +99,14 @@
       <sprite>sprites\spr_alta_heavy</sprite>
       <sprite>sprites\spr_alta_light</sprite>
       <sprite>sprites\spr_alta_light2</sprite>
+      <sprites name="AltaSpecials">
+        <sprite>sprites\spr_alta_fireball1</sprite>
+        <sprite>sprites\spr_alta_proj</sprite>
+      </sprites>
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_hit2</sprite>
       <sprite>sprites\spr_jack_hit</sprite>
       <sprite>sprites\spr_jack_backdash</sprite>
       <sprite>sprites\spr_jack_dash</sprite>
@@ -103,7 +116,6 @@
       <sprite>sprites\spr_jack_heavyair</sprite>
       <sprite>sprites\spr_jack_lightair</sprite>
       <sprite>sprites\spr_jack_launch</sprite>
-      <sprite>sprites\spr_jack_flurry</sprite>
       <sprite>sprites\spr_jack_forlight</sprite>
       <sprite>sprites\spr_jack_heavy</sprite>
       <sprite>sprites\spr_jack_light</sprite>
@@ -111,10 +123,14 @@
         <sprite>sprites\spr_jackitems</sprite>
         <sprite>sprites\spr_jackitemeff</sprite>
         <sprite>sprites\spr_jack_specsuper1</sprite>
+        <sprite>sprites\spr_jack_flurry</sprite>
       </sprites>
     </sprites>
     <sprites name="Magnus">
       <sprite>sprites\spr_magnus_idle</sprite>
+      <sprite>sprites\spr_magnus_hit2</sprite>
+      <sprite>sprites\spr_magnus_down</sprite>
+      <sprite>sprites\spr_magnus_hit</sprite>
       <sprite>sprites\spr_magnus_block</sprite>
       <sprite>sprites\spr_magnus_backdash</sprite>
       <sprite>sprites\spr_magnus_dash</sprite>
@@ -143,9 +159,10 @@
       <sprite>sprites\hiteffect1</sprite>
       <sprite>sprites\blockeffect</sprite>
       <sprite>sprites\spr_jumpeffectlight</sprite>
-      <sprite>sprites\hiteffect2</sprite>
       <sprite>sprites\spr_combo</sprite>
       <sprite>sprites\slasheffect1</sprite>
+      <sprite>sprites\hiteffect2</sprite>
+      <sprite>sprites\hiteffect3</sprite>
     </sprites>
     <sprite>sprites\pictureedit</sprite>
     <sprite>sprites\pickacard</sprite>
@@ -153,8 +170,11 @@
     <sprite>sprites\spr_ko</sprite>
     <sprite>sprites\spr_wongames</sprite>
     <sprite>sprites\spr_aceexplosion</sprite>
+    <sprite>sprites\p1mouse</sprite>
+    <sprite>sprites\p2mouse</sprite>
   </sprites>
   <backgrounds name="background">
+    <background>background\bkg_charselect</background>
     <background>background\bkg_alan</background>
   </backgrounds>
   <paths name="paths"/>
@@ -164,6 +184,7 @@
   <fonts name="fonts">
     <font>fonts\font0</font>
     <font>fonts\font1</font>
+    <font>fonts\font2</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_alan</object>
@@ -187,24 +208,35 @@
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>
-    <object>objects\obj_alanfireball</object>
-    <object>objects\obj_alanfireball0</object>
-    <object>objects\alanfireballeff</object>
-    <object>objects\obj_jumpeffect</object>
-    <object>objects\obj_start</object>
-    <object>objects\obj_acefireball</object>
-    <object>objects\obj_ko</object>
-    <object>objects\obj_ace_grenade</object>
-    <object>objects\obj_aceexplosion</object>
-    <object>objects\obj_jackslasheff1</object>
-    <object>objects\obj_jackitems</object>
-    <object>objects\jackitemeffect</object>
+    <objects name="effects">
+      <object>objects\obj_alanfireball0</object>
+      <object>objects\obj_start</object>
+      <object>objects\obj_jumpeffect</object>
+      <object>objects\obj_ko</object>
+      <object>objects\obj_acefireball</object>
+      <object>objects\obj_ace_grenade</object>
+      <object>objects\obj_jackslasheff1</object>
+      <object>objects\obj_jackitems</object>
+      <object>objects\obj_reyfireball</object>
+      <object>objects\obj_altafireball</object>
+      <object>objects\obj_aceexplosion</object>
+      <object>objects\jackitemeffect</object>
+      <object>objects\alanfireballeff</object>
+      <object>objects\obj_alanfireball</object>
+    </objects>
+    <objects name="CharacterSelect">
+      <object>objects\charselect</object>
+      <object>objects\obj_p1display</object>
+      <object>objects\obj_p2display</object>
+      <object>objects\obj_p1mouse</object>
+      <object>objects\obj_p2mouse</object>
+    </objects>
     <object>objects\superbkg</object>
-    <object>objects\dasdasd</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>
     <room>rooms\character_select</room>
+    <room>rooms\char_select</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

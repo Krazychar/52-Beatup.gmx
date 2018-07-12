@@ -35,6 +35,15 @@ image_xscale=p1.image_xscale
 if(image_xscale&lt;0 &amp;&amp; p1.angle&gt;0)
 {image_angle*=-1}
 }
+
+if(instance_exists(p1hbox) &amp;&amp; instance_exists(obj_ace))
+{image_angle=p1.angle
+image_xscale=p1.image_xscale
+sprite_index=hiteffect3
+if(image_xscale&lt;0 &amp;&amp; p1.angle&gt;0)
+{image_angle*=-1}
+}
+
 if(instance_exists(p2hbox) &amp;&amp; instance_exists(obj_alta))
 {image_angle=p2.angle
 sprite_index=hiteffect2

@@ -203,7 +203,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=3
-damage=18
+damage=16
 xscal=4
 yscal=4
 hstun=45
@@ -227,7 +227,7 @@ if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &
 {cancel=0
 hboxhit=0
 hit=3
-damage=16
+damage=15
 xscal=2
 yscal=1
 hstun=36
@@ -279,7 +279,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan
 {hboxhit=0
 cancel=0
 hit=3
-damage=12
+damage=13
 hstun=50
 xscal=2
 yscal=3
@@ -382,7 +382,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alan
 {cancel=0
 hboxhit=0
 hit=4
-damage=17
+damage=15
 xscal=2
 yscal=8
 hstun=30
@@ -704,11 +704,12 @@ if(hitstun&gt;0)
 if grounded == 0
     hsp = 0;
 hitstun--
-sprite_index=spr_alan_hit
+if(!place_meeting(x,y+1,ground)) sprite_index=spr_alan_hit2
+else sprite_index=spr_alan_hit
 attacking=1
 hsp=0
 }
-if(hitstun&lt;=0 &amp;&amp; sprite_index=spr_alan_hit)
+if(hitstun&lt;=0 &amp;&amp; (sprite_index=spr_alan_hit or sprite_index=spr_alan_hit2))
 {
 hitstun=0
 sprite_index=spr_alan_idle
