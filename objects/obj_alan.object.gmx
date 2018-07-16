@@ -404,7 +404,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0)
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
@@ -534,7 +534,7 @@ else if(right) airMovementDir = 1;
 else airMovementDir = 0;
 grounded=0
 if(sprite_index=spr_alan_launch)
-{vsp=-14
+{vsp=-10
 instance_create(x,y+64,obj_jumpeffect)}
 else
 {vsp=-10}
@@ -559,6 +559,12 @@ else
 {
 grounded = 0
 }
+
+if grounded == 0// &amp;&amp; hitstun == 0
+    hsp = agi * airMovementDir;
+    
+//light player collision
+if(place_meeting(x+hsp,y,p2)) hsp=0
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -567,8 +573,6 @@ if place_meeting(x+hsp,y,ground)
 }    
  
 //commit to movement 
-if grounded == 0 &amp;&amp; hitstun == 0
-    hsp = agi * airMovementDir;
 x += hsp;
 y += vsp;
 
@@ -672,8 +676,11 @@ if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=11) {attacking=0
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
 //FB3
-if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;}
-if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=0) {xscal=40;yscal=4;damage=5;hstun=15;hit=1;instance_create(x+90*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {xscal=40;yscal=4;damage=5;hstun=15;hit=2;instance_create(x+90*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=8 &amp;&amp; hit=2) {xscal=40;yscal=4;damage=5;hstun=15;hit=3;instance_create(x+90*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=9 &amp;&amp; hit=3) {xscal=40;yscal=4;damage=5;hstun=15;hit=4;instance_create(x+90*image_xscale,y-16,p1hbox)}
+
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
 
 

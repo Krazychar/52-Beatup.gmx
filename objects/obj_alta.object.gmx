@@ -298,7 +298,7 @@ image_index=0
 else
 
 {
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alan_launchair  &amp;&amp; sprite_index!=spr_alta_lightair)
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair  &amp;&amp; sprite_index!=spr_alta_lightair)
 {cancel=0
 hboxhit=0
 hit=2
@@ -380,7 +380,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0)
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
 }
@@ -506,7 +506,7 @@ else if(right) airMovementDir = 1;
 else airMovementDir = 0;
 grounded=0
 if(sprite_index=spr_alta_launch)
-{vsp=-14
+{vsp=-10
 instance_create(x,y+64,obj_jumpeffect)}
 else
 {vsp=-10}
@@ -530,6 +530,12 @@ else
 {
 grounded = 0
 }
+if grounded == 0// &amp;&amp; hitstun == 0
+    hsp = agi * airMovementDir;
+    
+//light player collision
+if(place_meeting(x+hsp,y,p1)) hsp=0
+
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -538,8 +544,6 @@ if place_meeting(x+hsp,y,ground)
 }    
  
 //commit to movement
-if grounded == 0 &amp;&amp; hitstun == 0
-    hsp = agi * airMovementDir;
 x += hsp;
 y += vsp;
 
