@@ -241,7 +241,6 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>
-    <room>rooms\character_select</room>
     <room>rooms\char_select</room>
   </rooms>
   <help>
