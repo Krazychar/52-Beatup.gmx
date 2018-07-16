@@ -77,7 +77,7 @@ instance_destroy()
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_sprite_ext(sprite_index,image_index,x-hspeed*image_xscale,y,2,2,0,c_yellow,0.5)
+draw_sprite_ext(sprite_index,image_index,x-(hspeed/2),y,image_xscale,2,0,c_yellow,0.5)
 </string>
           </argument>
         </arguments>
