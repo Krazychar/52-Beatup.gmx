@@ -124,6 +124,7 @@
         <sprite>sprites\spr_jackitemeff</sprite>
         <sprite>sprites\spr_jack_specsuper1</sprite>
         <sprite>sprites\spr_jack_flurry</sprite>
+        <sprite>sprites\spr_jack_fireball1</sprite>
       </sprites>
     </sprites>
     <sprites name="Magnus">
@@ -144,6 +145,10 @@
       <sprite>sprites\spr_magnus_light</sprite>
       <sprite>sprites\spr_magnus_forlight</sprite>
       <sprite>sprites\spr_magnus_guit</sprite>
+      <sprites name="magnusspecials">
+        <sprite>sprites\spr_magnus_proj1</sprite>
+        <sprite>sprites\spr_magnus_fireball1</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
@@ -218,6 +223,7 @@
       <object>objects\obj_jackslasheff1</object>
       <object>objects\obj_jackitems</object>
       <object>objects\obj_reyfireball</object>
+      <object>objects\obj_magnusfireball</object>
       <object>objects\obj_altafireball</object>
       <object>objects\obj_aceexplosion</object>
       <object>objects\jackitemeffect</object>

@@ -46,6 +46,15 @@ linktime=0
 linkdir=keyboard_check_direct(vk_up)
 linkatk=keyboard_check_direct(vk_up)
 linkspr=0
+FBlv=1
+RDlv=1
+GBlv=1
+//special move variables
+link=false
+linktime=0
+linkdir=keyboard_check_direct(vk_up)
+linkatk=keyboard_check_direct(vk_up)
+linkspr=0
 Fireball=true
 Dragonpunch=true
 Shieldbreak=true
@@ -233,7 +242,7 @@ damage=15
 xscal=3
 yscal=3
 hstun=38
-xpos=hsp+24
+xpos=hsp+27
 ypos=-14
 launchh=false
 sprite_index=spr_jack_heavy
@@ -313,7 +322,7 @@ damage=19
 xscal=6
 yscal=6
 hstun=40
-xpos=hsp+20
+xpos=hsp+24
 ypos=+40
 vsp-=2
 launchh=false
@@ -356,7 +365,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; global.super=0)
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_jack_specsuper1 &amp;&amp; sprite_index!=spr_jack_fireball1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
@@ -488,7 +497,7 @@ else if(right) airMovementDir = 1;
 else airMovementDir = 0;
 grounded=0
 if(sprite_index=spr_jack_launch)
-{vsp=-14
+{vsp=-10
 instance_create(x,y+64,obj_jumpeffect)}
 else
 {vsp=-10}
@@ -512,6 +521,12 @@ else
 {
 grounded = 0
 }
+if grounded == 0// &amp;&amp; hitstun == 0
+    hsp = agi * airMovementDir;
+    
+//light player collision
+if(place_meeting(x+hsp,y,p2)) hsp=0
+
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -520,8 +535,6 @@ if place_meeting(x+hsp,y,ground)
 }    
  
 //commit to movement
-if grounded == 0 &amp;&amp; hitstun == 0
-    hsp = airMovementDir * agi;
 x += hsp;
 y += vsp;
 
@@ -570,6 +583,67 @@ image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
 {block=0
 attacking=0}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Special Moves (Holy Heck)
+down=keyboard_check_pressed(ord("S"))
+if(image_xscale&gt;0) 
+{
+forward="D"
+backward="A"
+}
+else
+{
+forward="A"
+backward="D"
+}
+//Input Checker
+if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
+if(link!=0) linktime--
+if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
+if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+//FireBall
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
+{
+link=1
+linkatk="J"
+linkdir=forward
+if(FBlv=1)linkspr=spr_jack_fireball1
+if(FBlv=2)linkspr=spr_alan_fireball
+if(FBlv=3)linkspr=spr_alan_fireball2
+}
+//FB1
+if(sprite_index=spr_jack_fireball1 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {xscal=25;yscal=2;damage=15;hstun=30;hit=1;instance_create(x+20*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_jack_fireball1 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_jack_idle}
+//FB2
+if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
+if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
+//FB3
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
+if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
+
+
+
 </string>
           </argument>
         </arguments>
@@ -726,7 +800,7 @@ draw_sprite_ext(sprite_index,image_index-2,x-5-hsp*3,y-vsp*3,image_xscale,4,0,c_
 draw_sprite_ext(sprite_index,image_index-3,x-5-hsp*3,y-vsp*3,image_xscale,4,0,c_red,0.2)
 }
 if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0)
-{instance_create(x+xpos,y+ypos,p1hbox);hit=0.1}
+{instance_create(x+xpos*image_xscale,y+ypos,p1hbox);hit=0.1}
 if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=13 &amp;&amp; hit=0.1)
 {instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);hit=1}
 
