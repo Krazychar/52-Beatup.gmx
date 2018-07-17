@@ -787,17 +787,17 @@ hboxhit=0
 damage=5
 xscal=4
 yscal=5
-hstun=60
+hstun=90
 xpos=hsp+30
-ypos=+40
+ypos=+20
 launchh=true
 global.super=1
 }
 if(sprite_index=spr_jack_specsuper1)
 {
-draw_sprite_ext(sprite_index,image_index-1,x-5-hsp*3,y-vsp*3,image_xscale,4,0,c_red,0.6)
-draw_sprite_ext(sprite_index,image_index-2,x-5-hsp*3,y-vsp*3,image_xscale,4,0,c_red,0.4)
-draw_sprite_ext(sprite_index,image_index-3,x-5-hsp*3,y-vsp*3,image_xscale,4,0,c_red,0.2)
+draw_sprite_ext(sprite_index,image_index-1,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,4,0,c_black,0.6)
+draw_sprite_ext(sprite_index,image_index-2,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,4,0,c_black,0.4)
+draw_sprite_ext(sprite_index,image_index-3,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,4,0,c_black,0.2)
 }
 if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0)
 {instance_create(x+xpos*image_xscale,y+ypos,p1hbox);hit=0.1}

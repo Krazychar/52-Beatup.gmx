@@ -270,7 +270,7 @@ attacking=0
 image_index=0
 }
 
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_launch)
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magnus_launch &amp;&amp; sprite_index!=spr_magnus_forheavy)
 {hboxhit=0
 cancel=0
 hit=5

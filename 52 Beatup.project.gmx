@@ -31,7 +31,9 @@
         <sprite>sprites\spr_alan_shieldbreak</sprite>
         <sprite>sprites\spr_alan_fireball</sprite>
         <sprite>sprites\spr_alan_fireball2</sprite>
+        <sprite>sprites\spr_alan_specsuper1</sprite>
         <sprite>sprites\spr_alan_proj1</sprite>
+        <sprite>sprites\spr_alan_superproj1</sprite>
         <sprite>sprites\spr_alan_proj</sprite>
         <sprite>sprites\spr_alan_proj1eff</sprite>
       </sprites>
@@ -177,6 +179,7 @@
     <sprite>sprites\spr_aceexplosion</sprite>
     <sprite>sprites\p1mouse</sprite>
     <sprite>sprites\p2mouse</sprite>
+    <sprite>sprites\spr_shooteffect</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -229,6 +232,7 @@
       <object>objects\jackitemeffect</object>
       <object>objects\alanfireballeff</object>
       <object>objects\obj_alanfireball</object>
+      <object>objects\obj_alansuper1</object>
     </objects>
     <objects name="CharacterSelect">
       <object>objects\charselect</object>
@@ -238,6 +242,7 @@
       <object>objects\obj_p2mouse</object>
     </objects>
     <object>objects\superbkg</object>
+    <object>objects\obj_shooteffect</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>
