@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed=0.4
-image_xscale=p2.image_xscale*-1
-image_yscale=4
+            <string>image_speed=0.6
+image_xscale=(p2.image_xscale*-1) 
+image_yscale=3
 </string>
           </argument>
         </arguments>

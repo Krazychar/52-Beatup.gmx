@@ -56,6 +56,7 @@
       <sprites name="ElreySpecials">
         <sprite>sprites\spr_rey_proj</sprite>
         <sprite>sprites\spr_rey_fireball1</sprite>
+        <sprite>sprites\spr_rey_specsuper1</sprite>
       </sprites>
     </sprites>
     <sprites name="Ace">
@@ -80,6 +81,8 @@
         <sprite>sprites\spr_ace_fireball</sprite>
         <sprite>sprites\spr_ace_fireball2</sprite>
         <sprite>sprites\spr_ace_fireball3</sprite>
+        <sprite>sprites\spr_ace_specsuper1</sprite>
+        <sprite>sprites\spr_ace_pan</sprite>
       </sprites>
       <sprite>sprites\spr_ace_grenade</sprite>
     </sprites>
@@ -149,8 +152,13 @@
       <sprite>sprites\spr_magnus_guit</sprite>
       <sprites name="magnusspecials">
         <sprite>sprites\spr_magnus_proj1</sprite>
+        <sprite>sprites\spr_magnus_specproj1</sprite>
         <sprite>sprites\spr_magnus_fireball1</sprite>
+        <sprite>sprites\spr_magnus_specsuper1</sprite>
       </sprites>
+    </sprites>
+    <sprites name="Skip">
+      <sprite>sprites\spr_skip_idle</sprite>
     </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
@@ -180,6 +188,8 @@
     <sprite>sprites\p1mouse</sprite>
     <sprite>sprites\p2mouse</sprite>
     <sprite>sprites\spr_shooteffect</sprite>
+    <sprite>sprites\spr_acereflect</sprite>
+    <sprite>sprites\spr_whiteflash</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -226,6 +236,8 @@
       <object>objects\obj_jackslasheff1</object>
       <object>objects\obj_jackitems</object>
       <object>objects\obj_reyfireball</object>
+      <object>objects\obj_reysuper1</object>
+      <object>objects\obj_magnussuper1</object>
       <object>objects\obj_magnusfireball</object>
       <object>objects\obj_altafireball</object>
       <object>objects\obj_aceexplosion</object>
@@ -243,6 +255,11 @@
     </objects>
     <object>objects\superbkg</object>
     <object>objects\obj_shooteffect</object>
+    <object>objects\obj_acepan</object>
+    <object>objects\obj_ace_specbullet</object>
+    <object>objects\obj_acereflect</object>
+    <object>objects\dadad</object>
+    <object>objects\obj_whiteflash</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>

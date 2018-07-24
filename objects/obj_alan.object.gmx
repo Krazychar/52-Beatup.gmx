@@ -404,7 +404,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2)
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2 &amp;&amp; sprite_index!=spr_alan_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
@@ -670,8 +670,8 @@ if(FBlv=2)linkspr=spr_alan_fireball
 if(FBlv=3)linkspr=spr_alan_fireball2
 }
 //FB1
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=5 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball0)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_alan_idle}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball0)}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_alan_idle}
 //FB2
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
