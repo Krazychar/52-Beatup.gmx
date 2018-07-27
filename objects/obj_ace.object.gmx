@@ -52,6 +52,7 @@ GBlv=1
 //battle variables
 agi=5
 dashing=0
+dashdirection=0
 dashcheck=0
 freakingslickdash=0
 dashtimerfinal=0
@@ -59,7 +60,8 @@ cancel=0
 hp=178
 mhp=hp
 atk=1
-abi=5
+abi=6
+mabi=abi
 projdef=0
 dashlng=23
 rage=false
@@ -123,6 +125,211 @@ airMovementDir = 0;
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///input
+left=keyboard_check_direct(ord("A"))
+right=keyboard_check_direct(ord("D"))
+pleft=keyboard_check_pressed(ord("A"))
+pright=keyboard_check_pressed(ord("D"))
+jump=keyboard_check_direct(ord("W"))
+//move left and right
+//if(left or right) hsp=round(hsp)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+    {
+    
+    if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_ace_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+        
+        else
+            {sprite_index=spr_ace_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+        
+        image_index=0
+        hsp=-14
+        dashtime=dashlng
+        dashing=1
+    }
+
+    if(pleft &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=1//1 = left; 2 = right
+        }
+
+    if(pright &amp;&amp; dashdirection=2 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash )
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_ace_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+            
+        else 
+            {sprite_index=spr_ace_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+            
+        image_index=0
+        hsp=14
+        dashtime=dashlng
+        dashing=1
+        }
+    
+    if(pright &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=2//2 = right; 1= left
+        }
+    
+}
+
+if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_ace_dash or sprite_index==spr_ace_backdash))
+    {
+    attacking=0
+    dashcheck=0
+    dashing=0
+    sprite_index=spr_ace_idle
+    freakingslickdash=0
+    dashdirection=0
+    }
+
+if(sprite_index=spr_ace_idle) freakingslickdash=0
+
+if(dashtime&gt;0) dashtime-=1
+
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+
+    {
+    dashing=0
+    dashtimerfinal=0
+    dashtime=0
+    dashcheck=0
+    hsp=0
+    }
+
+if(dashing=1) dashtimerfinal++
+
+if(grounded=0 &amp;&amp; dashing=0)
+
+    {
+    dashcheck=0
+    dashing=0
+    dashtime=0
+    }
+
+
+if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
+{sprite_index=spr_ace_jump}
+if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
+{sprite_index=spr_ace_idle}
+if(attacking=0 or grounded=0)
+{
+if(dashing=0 &amp;&amp; hitstun&lt;=0)
+{
+
+if(coward=true)
+{
+if(left &amp;&amp; image_index&gt;0 or right &amp;&amp; image_index&lt;0)
+{pH=agi+2;agi=pH}
+else
+{agi=pH-2}
+}
+
+if (left)
+
+{
+if(hsp&lt;-agi){}
+else
+{hsp=-agi}
+
+}
+
+if (right)
+{
+if(hsp&gt;agi){}
+else
+{hsp=agi}
+}
+}
+//neutral input = 0 movement
+if (((right &amp;&amp; left) or (!right &amp;&amp; !left)) &amp;&amp; attacking=0)
+{
+hsp=0
+
+}
+
+}
+//jumping
+if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1  &amp;&amp; sprite_index=spr_ace_launch))
+{
+if(left) airMovementDir = -1;
+else if(right) airMovementDir = 1;
+else airMovementDir = 0;
+grounded=0
+if(sprite_index=spr_ace_launch or sprite_index=spr_ace_launch)
+{vsp=-10
+instance_create(x,y+64,obj_jumpeffect)}
+else
+{vsp=-10}
+}
+
+
+//vertical collision
+if (place_meeting (x,y+vsp,ground))
+{
+    while(!place_meeting(x,y+sign(vsp),ground))
+    {
+    y+=sign(vsp);
+    }
+    vsp=0
+    grounded = 1;
+}
+
+
+
+else
+{
+grounded = 0
+}
+if grounded == 0// &amp;&amp; hitstun == 0
+    hsp = agi * airMovementDir;
+    
+//light player collision
+if(place_meeting(x+hsp,y,p2)) hsp=0
+
+//horizontal collision   
+if place_meeting(x+hsp,y,ground)
+{
+    if(!place_meeting(x+sign(hsp),y,ground)) hsp+=sign(hsp);
+    hsp = 0;
+}    
+ 
+//commit to movement
+x += hsp;
+y += vsp;
+
+vsp+=grav
+
+
+</string>
+          </argument>
+        </arguments>
       </action>
       <action>
         <libid>1</libid>
@@ -306,7 +513,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_
 cancel=0
 hit=5
 damage=19
-hstun=80
+hstun=55
 xscal=4
 yscal=10
 xpos=hsp+50
@@ -474,194 +681,20 @@ global.p2combo=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///input
-left=keyboard_check_direct(ord("A"))
-right=keyboard_check_direct(ord("D"))
-pleft=keyboard_check_pressed(ord("A"))
-pright=keyboard_check_pressed(ord("D"))
-jump=keyboard_check_direct(ord("W"))
-//move left and right
-//if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
-{
-if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
-{attacking=2
-if(image_xscale=4) sprite_index=spr_ace_backdash
-else sprite_index=spr_ace_dash
-image_index=0
-hsp=-14
-dashtime=dashlng
-dashing=1}
-if(pleft &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
-{dashtime=17
-dashcheck=1}
-
-if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash )
-{attacking=2
-if(image_xscale=4) sprite_index=spr_ace_dash
-else sprite_index=spr_ace_backdash
-image_index=0
-hsp=14
-dashtime=dashlng
-dashing=1}
-if(pright &amp;&amp; sprite_index!=spr_ace_dash &amp;&amp; sprite_index!=spr_ace_backdash)
-{dashtime=17
-
-dashcheck=1}
-}
-if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_ace_dash or sprite_index==spr_ace_backdash))
-{attacking=0
-dashcheck=0
-dashing=0
-sprite_index=spr_ace_idle
-freakingslickdash=0}
-
-if(sprite_index=spr_ace_idle) freakingslickdash=0
-
-if(dashtime&gt;0) dashtime-=1
-
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
-{dashing=0
-dashtimerfinal=0
-dashtime=0
-dashcheck=0
-hsp=0}
-
-if(dashing=1)
-{dashtimerfinal++}
-
-if(grounded=0 &amp;&amp; dashing=0)
-{dashcheck=0
-dashing=0
-dashtime=0}
-
-if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
-{sprite_index=spr_ace_jump}
-if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
-{sprite_index=spr_ace_idle}
-if(attacking=0 or grounded=0)
-{
-if(dashing=0 &amp;&amp; hitstun&lt;=0)
-{
-
-if(coward=true)
-{
-if(left &amp;&amp; image_index&gt;0 or right &amp;&amp; image_index&lt;0)
-{pH=agi+2;agi=pH}
-else
-{agi=pH-2}
-}
-
-if (left)
-
-{
-if(hsp&lt;-agi){}
-else
-{hsp=-agi}
-
-}
-
-if (right)
-{
-if(hsp&gt;agi){}
-else
-{hsp=agi}
-}
-}
-//neutral input = 0 movement
-if (((right &amp;&amp; left) or (!right &amp;&amp; !left)) &amp;&amp; attacking=0)
-{
-hsp=0
-
-}
-
-}
-//jumping
-if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1  &amp;&amp; sprite_index=spr_ace_launch))
-{
-if(left) airMovementDir = -1;
-else if(right) airMovementDir = 1;
-else airMovementDir = 0;
-grounded=0
-if(sprite_index=spr_alan_launch or sprite_index=spr_ace_launch)
-{vsp=-10
-instance_create(x,y+64,obj_jumpeffect)}
-else
-{vsp=-10}
-}
-
-
-//vertical collision
-if (place_meeting (x,y+vsp,ground))
-{
-    while(!place_meeting(x,y+sign(vsp),ground))
-    {
-    y+=sign(vsp);
-    }
-    vsp=0
-    grounded = 1;
-}
-
-
-
-else
-{
-grounded = 0
-}
-if grounded == 0// &amp;&amp; hitstun == 0
-    hsp = agi * airMovementDir;
-    
-//light player collision
-if(place_meeting(x+hsp,y,p2)) hsp=0
-
-//horizontal collision   
-if place_meeting(x+hsp,y,ground)
-{
-    if(!place_meeting(x+sign(hsp),y,ground)) hsp+=sign(hsp);
-    hsp = 0;
-}    
- 
-//commit to movement
-x += hsp;
-y += vsp;
-
-vsp+=grav
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///blocking
-
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; p2.attacking=true &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking=true or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
 {
 attacking=1
 hsp=0
 block=1
 sprite_index=spr_ace_block
 }
-if(sprite_index=spr_ace_block &amp;&amp; p2.attacking=false)
+if(sprite_index=spr_ace_block &amp;&amp; p2.attacking=false &amp;&amp; !instance_exists(p2proj))
 {
 attacking=0
 block=0
 sprite_index=spr_ace_idle
+image_blend=c_white
 }
 if(attacking=false)
 {block=0
@@ -706,7 +739,7 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
 if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
 {
@@ -787,7 +820,7 @@ if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sp
             <kind>1</kind>
             <string>draw_text(x,y-70,dashtime)
 
-if(global.p2combo=0 &amp;&amp; (sprite_index=spr_ace_dash or sprite_index=spr_ace_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_ace_dash or sprite_index=spr_ace_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_black)

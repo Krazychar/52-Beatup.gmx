@@ -34,6 +34,9 @@ global.roundEnd=1
 instance_destroy(card1)
 instance_destroy(ftb)
 room_speed=60
+p1.abi=p1.mabi
+p2.abi=p2.mabi
+
 </string>
           </argument>
         </arguments>

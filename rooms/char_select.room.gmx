@@ -56,6 +56,7 @@
     <instance objName="charselect" x="288" y="44" name="inst_5A0178D2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_p1mouse" x="187" y="118" name="inst_29F0AE90" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_p2mouse" x="304" y="118" name="inst_F220A566" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="meme" x="494" y="474" name="inst_4D2F633C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

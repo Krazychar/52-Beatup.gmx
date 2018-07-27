@@ -95,18 +95,22 @@
       <sprite>sprites\spr_alta_hit</sprite>
       <sprite>sprites\spr_alta_backdash</sprite>
       <sprite>sprites\spr_alta_dash</sprite>
-      <sprite>sprites\spr_alta_forheavy</sprite>
       <sprite>sprites\spr_alta_launch</sprite>
       <sprite>sprites\spr_alta_jump</sprite>
       <sprite>sprites\spr_alta_launchair</sprite>
       <sprite>sprites\spr_alta_lightair</sprite>
       <sprite>sprites\spr_alta_heavyair</sprite>
       <sprite>sprites\spr_alta_heavy</sprite>
+      <sprite>sprites\spr_alta_forheavy</sprite>
       <sprite>sprites\spr_alta_light</sprite>
       <sprite>sprites\spr_alta_light2</sprite>
       <sprites name="AltaSpecials">
         <sprite>sprites\spr_alta_fireball1</sprite>
         <sprite>sprites\spr_alta_proj</sprite>
+        <sprite>sprites\spr_alta_superproj1</sprite>
+        <sprite>sprites\spr_alta_superproj1b</sprite>
+        <sprite>sprites\spr_alta_superproj2</sprite>
+        <sprite>sprites\spr_alta_specsuper1</sprite>
       </sprites>
     </sprites>
     <sprites name="Jackson">
@@ -178,6 +182,7 @@
       <sprite>sprites\slasheffect1</sprite>
       <sprite>sprites\hiteffect2</sprite>
       <sprite>sprites\hiteffect3</sprite>
+      <sprite>sprites\dasheffect</sprite>
     </sprites>
     <sprite>sprites\pictureedit</sprite>
     <sprite>sprites\pickacard</sprite>
@@ -190,6 +195,7 @@
     <sprite>sprites\spr_shooteffect</sprite>
     <sprite>sprites\spr_acereflect</sprite>
     <sprite>sprites\spr_whiteflash</sprite>
+    <sprite>sprites\spr_abicount</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -203,6 +209,7 @@
     <font>fonts\font0</font>
     <font>fonts\font1</font>
     <font>fonts\font2</font>
+    <font>fonts\abicount</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_alan</object>
@@ -242,9 +249,17 @@
       <object>objects\obj_altafireball</object>
       <object>objects\obj_aceexplosion</object>
       <object>objects\jackitemeffect</object>
+      <object>objects\obj_whiteflash</object>
       <object>objects\alanfireballeff</object>
+      <object>objects\obj_acereflect</object>
       <object>objects\obj_alanfireball</object>
+      <object>objects\obj_ace_specbullet</object>
+      <object>objects\obj_altasuper1A</object>
+      <object>objects\obj_altasuper1B</object>
+      <object>objects\obj_dasheffect</object>
+      <object>objects\obj_bdasheffect</object>
       <object>objects\obj_alansuper1</object>
+      <object>objects\obj_shooteffect</object>
     </objects>
     <objects name="CharacterSelect">
       <object>objects\charselect</object>
@@ -254,16 +269,15 @@
       <object>objects\obj_p2mouse</object>
     </objects>
     <object>objects\superbkg</object>
-    <object>objects\obj_shooteffect</object>
     <object>objects\obj_acepan</object>
-    <object>objects\obj_ace_specbullet</object>
-    <object>objects\obj_acereflect</object>
-    <object>objects\dadad</object>
-    <object>objects\obj_whiteflash</object>
+    <object>objects\dab</object>
+    <object>objects\p1proj</object>
+    <object>objects\p2proj</object>
+    <object>objects\meme</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\fighting_room</room>
     <room>rooms\char_select</room>
+    <room>rooms\fighting_room</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

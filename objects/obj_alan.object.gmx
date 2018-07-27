@@ -55,11 +55,13 @@ dashing=0
 dashcheck=0
 freakingslickdash=0
 dashtimerfinal=0
+dashdirection=0
 cancel=0
 hp=200
 mhp=hp
 atk=1
-abi=5
+abi=4
+mabi=abi
 projdef=0
 dashlng=23
 rage=false
@@ -182,7 +184,7 @@ damage=8
 xscal=2
 yscal=1
 hstun=30
-xpos=hsp+26
+xpos=hsp+28
 ypos=-13
 launchh=false
 sprite_index=spr_alan_light
@@ -207,7 +209,7 @@ damage=16
 xscal=4
 yscal=4
 hstun=45
-xpos=hsp+29
+xpos=hsp+36
 ypos=14
 launchh=false
 sprite_index=spr_alan_forheavy
@@ -439,62 +441,90 @@ jump=keyboard_check_direct(ord("W"))
 //move left and right
 //if(left or right) hsp=round(hsp)
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
-{
-if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
-{attacking=2
-if(image_xscale=4) sprite_index=spr_alan_backdash
-else sprite_index=spr_alan_dash
-image_index=0
-hsp=-14
-dashtime=dashlng
-dashing=1}
-if(pleft &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
-{dashtime=17
-dashcheck=1}
+    {
+    
+    if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_alan_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+        
+        else
+            {sprite_index=spr_alan_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+        
+        image_index=0
+        hsp=-14
+        dashtime=dashlng
+        dashing=1
+    }
 
-if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash )
-{attacking=2
-if(image_xscale=4) sprite_index=spr_alan_dash
-else sprite_index=spr_alan_backdash
-image_index=0
-hsp=14
-dashtime=dashlng
-dashing=1}
-if(pright &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
-{dashtime=17
+    if(pleft &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=1//1 = left; 2 = right
+        }
 
-dashcheck=1}
+    if(pright &amp;&amp; dashdirection=2 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash )
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_alan_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+            
+        else 
+            {sprite_index=spr_alan_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+            
+        image_index=0
+        hsp=14
+        dashtime=dashlng
+        dashing=1
+        }
+    
+    if(pright &amp;&amp; sprite_index!=spr_alan_dash &amp;&amp; sprite_index!=spr_alan_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=2//2 = right; 1= left
+        }
+    
 }
+
 if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_alan_dash or sprite_index==spr_alan_backdash))
-{attacking=0
-dashcheck=0
-dashing=0
-sprite_index=spr_alan_idle
-freakingslickdash=0}
+    {
+    attacking=0
+    dashcheck=0
+    dashing=0
+    sprite_index=spr_alan_idle
+    freakingslickdash=0
+    dashdirection=0
+    }
 
 if(sprite_index=spr_alan_idle) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
 if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
-{dashing=0
-dashtimerfinal=0
-dashtime=0
-dashcheck=0
-hsp=0}
 
-if(dashing=1)
-{dashtimerfinal++}
+    {
+    dashing=0
+    dashtimerfinal=0
+    dashtime=0
+    dashcheck=0
+    hsp=0
+    }
+
+if(dashing=1) dashtimerfinal++
 
 if(grounded=0 &amp;&amp; dashing=0)
-{dashcheck=0
-dashing=0
-dashtime=0}
 
-if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
-{sprite_index=spr_alan_jump}
-if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
-{sprite_index=spr_alan_idle}
+    {
+    dashcheck=0
+    dashing=0
+    dashtime=0
+    }
+
+if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground)) sprite_index=spr_alan_jump
+if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1) sprite_index=spr_alan_idle
 if(dashing=0 &amp;&amp; attacking=0 &amp;&amp; grounded=1)
 {
 if(hitstun&lt;=0)
@@ -601,14 +631,14 @@ vsp+=grav
             <kind>1</kind>
             <string>///blocking
 
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; p2.attacking=true &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking=true or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
 {
 attacking=1
 hsp=0
 block=1
 sprite_index=spr_alan_block
 }
-if(sprite_index=spr_alan_block &amp;&amp; p2.attacking=false)
+if(sprite_index=spr_alan_block &amp;&amp; p2.attacking=false &amp;&amp; !instance_exists(p2proj))
 {
 attacking=0
 block=0
@@ -658,7 +688,7 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(abi&gt;0 &amp;&amp; link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {abi-=1;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
 if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
 {
@@ -761,17 +791,17 @@ global.p2combo=0
             <kind>1</kind>
             <string>draw_text(x,y-70,dashtime)
 
-if(global.p2combo=0 &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_blue)
 draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,4,0,c_blue,0.4)
 }
-if(place_meeting(x,y+1,ground))
+if(place_meeting(x,y+1,ground) or (place_meeting(x,y+1,ground) &amp;&amp; attacking=1))
 {freakingslickdash=0}
 
-draw_text(x,y-90,linktime)
-draw_text(x,y-120,link)
+draw_text(x,y-120,abi)
+draw_text(x,y-160,mabi)
 
 if(keyboard_check_pressed(ord("H")))
 {

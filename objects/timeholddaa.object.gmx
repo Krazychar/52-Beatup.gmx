@@ -29,6 +29,8 @@
 global.p2combo=0
 global.time=99
 global.matchover=false
+image_alpha=0
+ms=60
 </string>
           </argument>
         </arguments>
@@ -53,6 +55,15 @@ global.matchover=false
             <kind>1</kind>
             <string>x=view_xview[0]+300
 y=view_yview[0]+50
+
+ms-=2
+if(ms&lt;=0)
+{
+ms=60
+global.time--
+}
+if(global.roundEnd=1)
+{global.time=99}
 </string>
           </argument>
         </arguments>
@@ -75,7 +86,16 @@ y=view_yview[0]+50
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>draw_set_font(font2)
+draw_set_color(c_black)
+if(global.time&gt;9)draw_text(view_xview[0]+280,view_yview[0]+23,global.time)
+else draw_text(view_xview[0]+280,view_yview[0]+23,"0"+string(global.time))
+if(global.time&lt;=20 &amp;&amp; ms&gt;=50) draw_set_color(c_red)
+else draw_set_color(c_white)
+if(global.time&gt;9)draw_text(view_xview[0]+275,view_yview[0]+20,global.time)
+else draw_text(view_xview[0]+275,view_yview[0]+20,"0"+string(global.time))
+draw_set_font(font1)
+
 
 </string>
           </argument>

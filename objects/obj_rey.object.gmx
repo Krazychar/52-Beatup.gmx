@@ -39,6 +39,7 @@ hitstun=0
 hboxhit=0
 dashtime=0
 angle=0
+dashdirection=0
 //special move variables
 link=false
 linktime=0
@@ -59,7 +60,8 @@ cancel=0
 hp=240
 mhp=hp
 atk=1
-abi=5
+abi=3
+mabi=abi
 projdef=0
 dashlng=23
 rage=false
@@ -141,236 +143,6 @@ airMovementDir = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///attacking
-light=keyboard_check_pressed(ord("Z"))
-heavy=keyboard_check_pressed(ord("X"))
-launch=keyboard_check_pressed(ord("C"))
-//face direction
-if(grounded=1 &amp;&amp; attacking=0)
-{
-
-if(x &gt; p1.x)
-{image_xscale=-4}
-else
-{image_xscale=4}
-
-}
-
-//if(attacking=1 &amp;&amp; place_meeting(x,y+1,ground) &amp;&amp; dashing=0) hsp=0
-if((sprite_index=spr_rey_light or sprite_index=spr_rey_heavy or sprite_index=spr_rey_launch or sprite_index=spr_alan_heavydash) &amp;&amp; !place_meeting(x,y+1,ground)) 
-{
-sprite_index=spr_rey_jump
-attacking=0
-}
-
-if((sprite_index=spr_rey_heavyair or sprite_index=spr_rey_lightair or sprite_index=spr_rey_launchair or sprite_index=spr_rey_heavyforair) &amp;&amp; place_meeting(x,y+1,ground)) 
-{
-sprite_index=spr_rey_idle
-freakingslickdash=0
-attacking=0
-}
-if(hitstun&lt;=0)
-{
-if(place_meeting(x,y+1,ground))
-{
-
-if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_rey_light &amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
-{cancel=0
-hboxhit=0
-hit=2
-damage=12
-xscal=2
-yscal=3
-hstun=30
-xpos=hsp+26
-ypos=-13
-launchh=false
-sprite_index=spr_rey_light
-image_index=0
-image_speed=0.2
-hsp=1
-attacking=1
-}
-if(sprite_index=spr_rey_light &amp;&amp; image_index&gt;6)
-{
-sprite_index=spr_rey_idle
-attacking=0
-image_index=0
-}
-
-if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
-{cancel=0
-hboxhit=0
-hit=3
-damage=20
-xscal=5
-yscal=3
-hstun=35
-xpos=hsp+17
-ypos=0
-launchh=false
-sprite_index=spr_rey_heavy
-image_index=0
-image_speed=0.2
-hsp+=1*image_xscale
-attacking=1
-}
-if(sprite_index=spr_rey_heavy &amp;&amp; image_index&gt;10)
-{hsp+=3*image_xscale
-sprite_index=spr_rey_idle
-attacking=0
-image_index=0
-}
-
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launch)
-{hboxhit=0
-cancel=0
-hit=3
-damage=21
-hstun=50
-xscal=2
-yscal=3
-xpos=hsp+30
-ypos=-30
-launchh=true
-sprite_index=spr_rey_launch
-image_index=0
-image_speed=0.2
-hsp+=1*image_xscale
-attacking=1
-}
-if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;10)
-{
-sprite_index=spr_rey_idle
-attacking=0
-image_index=0
-}
-
-}
-else
-
-{
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_lightair)
-{cancel=0
-hboxhit=0
-hit=3
-damage=9
-xscal=3
-yscal=2
-hstun=28
-xpos=hsp+14
-ypos=+100
-launchh=false
-sprite_index=spr_rey_lightair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_rey_lightair &amp;&amp; image_index&gt;8)
-{
-sprite_index=spr_rey_jump
-attacking=0
-image_index=0
-}
-
-
-if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair &amp;&amp; sprite_index!=spr_rey_heavyforair)
-{cancel=0
-hboxhit=0
-hit=3
-damage=16
-xscal=10
-yscal=4
-hstun=40
-xpos=hsp+20
-ypos=+20
-launchh=false
-sprite_index=spr_rey_heavyair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_rey_heavyair &amp;&amp; image_index&gt;12)
-{
-sprite_index=spr_rey_jump
-attacking=0
-image_index=0
-}
-
-if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_heavyforair)
-{cancel=0
-hboxhit=0
-hit=4
-damage=20
-xscal=10
-yscal=4
-hstun=36
-xpos=hsp+20
-ypos=+20
-launchh=false
-sprite_index=spr_rey_heavyforair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_rey_heavyforair &amp;&amp; image_index&gt;8)
-{
-sprite_index=spr_rey_jump
-attacking=0
-image_index=0
-}
-
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair)
-{cancel=0
-hboxhit=0
-hit=4
-damage=18
-xscal=3
-yscal=6
-hstun=30
-xpos=hsp+19
-ypos=70
-launchh=false
-sprite_index=spr_rey_launchair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_rey_launchair &amp;&amp; image_index&gt;14)
-{
-sprite_index=spr_rey_jump
-attacking=0
-image_index=0
-}
-
-}
-
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_rey_fireball1 &amp;&amp; sprite_index!=spr_rey_specsuper1)
-{hboxhit=1
-instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
-}
-
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///input
 left=keyboard_check_direct(vk_left)
 right=keyboard_check_direct(vk_right)
@@ -378,58 +150,88 @@ pleft=keyboard_check_pressed(vk_left)
 pright=keyboard_check_pressed(vk_right)
 jump=keyboard_check_direct(vk_up)
 //move left and right
-//if(left or right) hsp=round(hsp)
-if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
-{
-if(pleft &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
-{attacking=2
-if(image_xscale=4) sprite_index=spr_rey_backdash
-else sprite_index=spr_rey_dash
-image_index=0
-hsp=-13
-dashtime=20
-dashing=1}
-if(pleft &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
-{dashtime=17
-dashcheck=1}
+//if(left or right) hsp=round(hsp)if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+    {
+    
+    if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_rey_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+        
+        else
+            {sprite_index=spr_rey_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+        
+        image_index=0
+        hsp=-14
+        dashtime=dashlng
+        dashing=1
+    }
 
-if(pright &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash )
-{attacking=2
-if(image_xscale=4) sprite_index=spr_rey_dash
-else sprite_index=spr_rey_backdash
-image_index=0
-hsp=13
-dashtime=20
-dashing=1}
-if(pright &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
-{dashtime=17
-dashcheck=1}
+    if(pleft &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=1//1 = left; 2 = right
+        }
+
+    if(pright &amp;&amp; dashdirection=2 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash )
+        {
+        attacking=2
+        if(image_xscale=4) 
+            {sprite_index=spr_rey_dash;instance_create(x-16*image_xscale,y,obj_dasheffect)}
+            
+        else 
+            {sprite_index=spr_rey_backdash;instance_create(x+16*image_xscale,y,obj_bdasheffect)}
+            
+        image_index=0
+        hsp=14
+        dashtime=dashlng
+        dashing=1
+        }
+    
+    if(pright &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
+        {
+        dashtime=17
+        dashcheck=1
+        dashdirection=2//2 = right; 1= left
+        }
+    
 }
+
 if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_rey_dash or sprite_index==spr_rey_backdash))
-{attacking=0
-dashcheck=0
-dashing=0
-sprite_index=spr_rey_idle
-freakingslickdash=0}
+    {
+    attacking=0
+    dashcheck=0
+    dashing=0
+    sprite_index=spr_rey_idle
+    freakingslickdash=0
+    dashdirection=0
+    }
 
 if(sprite_index=spr_rey_idle) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
 if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
-{dashing=0
-dashtimerfinal=0
-dashtime=0
-dashcheck=0
-hsp=0}
 
-if(dashing=1)
-{dashtimerfinal++}
+    {
+    dashing=0
+    dashtimerfinal=0
+    dashtime=0
+    dashcheck=0
+    hsp=0
+    }
+
+if(dashing=1) dashtimerfinal++
 
 if(grounded=0 &amp;&amp; dashing=0)
-{dashcheck=0
-dashing=0
-dashtime=0}
+
+    {
+    dashcheck=0
+    dashing=0
+    dashtime=0
+    }
 
 if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
 {sprite_index=spr_rey_jump}
@@ -534,16 +336,247 @@ vsp+=grav
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///attacking
+light=keyboard_check_pressed(ord("Z"))
+heavy=keyboard_check_pressed(ord("X"))
+launch=keyboard_check_pressed(ord("C"))
+//face direction
+if(grounded=1 &amp;&amp; attacking=0)
+{
+
+if(x &gt; p1.x)
+{image_xscale=-4}
+else
+{image_xscale=4}
+
+}
+
+//if(attacking=1 &amp;&amp; place_meeting(x,y+1,ground) &amp;&amp; dashing=0) hsp=0
+if((sprite_index=spr_rey_light or sprite_index=spr_rey_heavy or sprite_index=spr_rey_launch or sprite_index=spr_alan_heavydash) &amp;&amp; !place_meeting(x,y+1,ground)) 
+{
+sprite_index=spr_rey_jump
+attacking=0
+}
+
+if((sprite_index=spr_rey_heavyair or sprite_index=spr_rey_lightair or sprite_index=spr_rey_launchair or sprite_index=spr_rey_heavyforair) &amp;&amp; place_meeting(x,y+1,ground)) 
+{
+sprite_index=spr_rey_idle
+freakingslickdash=0
+attacking=0
+}
+if(hitstun&lt;=0)
+{
+if(place_meeting(x,y+1,ground))
+{
+
+if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_rey_light &amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
+{cancel=0
+hboxhit=0
+hit=2
+damage=12
+xscal=2
+yscal=3
+hstun=30
+xpos=hsp+29
+ypos=-13
+launchh=false
+sprite_index=spr_rey_light
+image_index=0
+image_speed=0.2
+hsp=1
+attacking=1
+}
+if(sprite_index=spr_rey_light &amp;&amp; image_index&gt;6)
+{
+sprite_index=spr_rey_idle
+attacking=0
+image_index=0
+}
+
+if(heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
+{cancel=0
+hboxhit=0
+hit=3
+damage=20
+xscal=5
+yscal=3
+hstun=35
+xpos=hsp+17
+ypos=0
+launchh=false
+sprite_index=spr_rey_heavy
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_rey_heavy &amp;&amp; image_index&gt;10)
+{hsp+=3*image_xscale
+sprite_index=spr_rey_idle
+attacking=0
+image_index=0
+}
+
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launch)
+{hboxhit=0
+cancel=0
+hit=3
+damage=21
+hstun=50
+xscal=2
+yscal=3
+xpos=hsp+30
+ypos=-30
+launchh=true
+sprite_index=spr_rey_launch
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;10)
+{
+sprite_index=spr_rey_idle
+attacking=0
+image_index=0
+}
+
+}
+else
+
+{
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_lightair)
+{cancel=0
+hboxhit=0
+hit=3
+damage=9
+xscal=3
+yscal=2
+hstun=28
+xpos=hsp+16
+ypos=+100
+launchh=false
+sprite_index=spr_rey_lightair
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_rey_lightair &amp;&amp; image_index&gt;8)
+{
+sprite_index=spr_rey_jump
+attacking=0
+image_index=0
+}
+
+
+if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair &amp;&amp; sprite_index!=spr_rey_heavyforair)
+{cancel=0
+hboxhit=0
+hit=3
+damage=16
+xscal=10
+yscal=4
+hstun=40
+xpos=hsp+20
+ypos=+20
+launchh=false
+sprite_index=spr_rey_heavyair
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_rey_heavyair &amp;&amp; image_index&gt;12)
+{
+sprite_index=spr_rey_jump
+attacking=0
+image_index=0
+}
+
+if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_heavyforair)
+{cancel=0
+hboxhit=0
+hit=4
+damage=20
+xscal=10
+yscal=4
+hstun=36
+xpos=hsp+20
+ypos=+20
+launchh=false
+sprite_index=spr_rey_heavyforair
+x+=5*image_xscale 
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_rey_heavyforair &amp;&amp; image_index&gt;8)
+{
+sprite_index=spr_rey_jump
+attacking=0
+image_index=0
+}
+
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair)
+{cancel=0
+hboxhit=0
+hit=4
+damage=18
+xscal=3
+yscal=6
+hstun=30
+xpos=hsp+19
+ypos=70
+launchh=false
+sprite_index=spr_rey_launchair
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_rey_launchair &amp;&amp; image_index&gt;14)
+{
+sprite_index=spr_rey_jump
+attacking=0
+image_index=0
+}
+
+}
+
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_rey_fireball1 &amp;&amp; sprite_index!=spr_rey_specsuper1)
+{hboxhit=1
+instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
+}
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///blocking
 
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; p1.attacking=true &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking=true or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
 {
 attacking=1
 hsp=0
 block=1
 sprite_index=spr_rey_block
 }
-if(sprite_index=spr_rey_block &amp;&amp; p1.attacking=false)
+if(sprite_index=spr_rey_block &amp;&amp; p1.attacking=false &amp;&amp; !instance_exists(p1proj))
 {
 attacking=0
 block=0
@@ -592,7 +625,7 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(linkdir)) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk))) {attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
 if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
 {
@@ -691,7 +724,7 @@ global.p1combo=0
             <kind>1</kind>
             <string>draw_text(x,y-70,dashtime)
 
-if(global.p1combo=0 &amp;&amp; (sprite_index=spr_rey_dash or sprite_index=spr_rey_backdash or hsp&lt;-3 or hsp&gt;3 or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (sprite_index=spr_rey_dash or sprite_index=spr_rey_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_blue)

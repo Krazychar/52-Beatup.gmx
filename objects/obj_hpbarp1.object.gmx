@@ -119,6 +119,16 @@ draw_sprite_ext(spr_healthbar,head,view_xview[0]+130+kek,view_yview[0]+55+kek,2,
 draw_text(view_xview[0]+50,view_yview[0]+100,"Damage: "+string(p1.mhp-p1.hp))
 xx=130
 yy=55
+//Ability
+abicheck=round((p1.abi/p1.mabi)*100)
+col=make_colour_rgb(255-abicheck*250,0,0)
+draw_set_color(col)
+//draw_sprite_ext(spr_abicount,0,view_xview[0]+xx-50+kek,view_yview[0]+yy+42+kek,3,3,0,c_white,1)
+draw_set_font(abicount)
+draw_text(view_xview[0]+xx-50+kek,view_yview[0]+yy+22+kek,string(abicheck)+"%")
+draw_set_font(font0)
+draw_set_color(c_white)
+//
 if(global.p1combo&gt;1)
 {
 draw_set_font(font1)

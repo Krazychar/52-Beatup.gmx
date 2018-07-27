@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>p1proj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -51,9 +51,16 @@ image_yscale=2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>p2.hp-=10
+            <string>if(p2.block=0)
+{
+p2.hp-=10
 p2.hitstun+=30
 instance_destroy()
+}
+if(p2.block=1)
+{
+instance_destroy()
+}
 </string>
           </argument>
         </arguments>

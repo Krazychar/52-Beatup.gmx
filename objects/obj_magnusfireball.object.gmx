@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-2</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>p2proj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -56,7 +56,7 @@ hitt=0
             <kind>1</kind>
             <string>if(place_meeting(x,y,ground)) instance_destroy()
 image_blend=c_white
-if(place_meeting(x,y,p1) &amp;&amp; hitt=0)
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=0)
 {
 hitt=1
 p2.damage=15
@@ -72,7 +72,10 @@ p1.vsp=-1
 instance_create(x,y,jackitemeffect)
 instance_destroy()
 }
-
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=1)
+{hitt=1
+instance_destroy()
+}
 if(image_xscale=4)
 {
 image_xscale=3

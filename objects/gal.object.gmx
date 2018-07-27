@@ -345,8 +345,11 @@ if(global.pickturn=2 &amp;&amp; instance_exists(ftb))
 {
 instance_destroy(ftb)
 p1.hp=p1.mhp
+p1.abi=p1.mabi
+p2.abi=p2.mabi
 p2.hp=p2.mhp
 room_speed=60
+global.time=99
 timeEnd=0
 instance_destroy(card1)
 }
@@ -425,6 +428,49 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
 
 
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="17">
+      <action>
+        <libid>1</libid>
+        <id>531</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_fullscreen</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>p1.abi=p1.mabi
 </string>
           </argument>
         </arguments>
