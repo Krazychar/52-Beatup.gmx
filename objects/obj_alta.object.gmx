@@ -31,6 +31,7 @@ room_speed=60
 attacking=0
 image_yscale=4  
 global.p2char="Alta"
+idle=spr_alta_idle//important for resuming round
 hsp=0
 vsp=0
 grav=0.3
@@ -126,271 +127,6 @@ airMovementDir = 0;
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///attacking
-light=keyboard_check_pressed(ord("Z"))
-heavy=keyboard_check_pressed(ord("X"))
-launch=keyboard_check_pressed(ord("C"))
-//face direction
-if(grounded=1 &amp;&amp; attacking=0)
-{
-
-if(x &gt; p1.x)
-{image_xscale=-4}
-else
-{image_xscale=4}
-
-}
-
-//if(attacking=1 &amp;&amp; place_meeting(x,y+1,ground) &amp;&amp; dashing=0) hsp=0
-if((sprite_index=spr_alta_light or sprite_index=spr_alta_heavy or sprite_index=spr_alta_launch or sprite_index=spr_alan_heavydash) &amp;&amp; !place_meeting(x,y+1,ground)) 
-{
-sprite_index=spr_alta_jump
-attacking=0
-}
-
-if((sprite_index=spr_alta_heavyair or sprite_index=spr_alta_lightair or sprite_index=spr_alta_launchair) &amp;&amp; place_meeting(x,y+1,ground)) 
-{
-sprite_index=spr_alta_idle
-freakingslickdash=0
-attacking=0
-}
-if(hitstun&lt;=0)
-{
-if(place_meeting(x,y+1,ground))
-{
-//light2
-if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index=spr_alta_light &amp;&amp; sprite_index!=spr_alta_forheavy)
-{cancel=0
-hboxhit=0
-hit=3
-damage=4
-xscal=6
-yscal=6
-hstun=60
-xpos=hsp+35
-ypos=-13
-launchh=false
-sprite_index=spr_alta_light2
-image_index=0
-image_speed=0.2
-hsp=1
-attacking=1
-}
-if(sprite_index=spr_alta_light2&amp;&amp; image_index&gt;9)
-{
-sprite_index=spr_alta_idle
-attacking=0
-image_index=0
-}
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_light2 &amp;&amp; sprite_index!=spr_alta_light&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
-{cancel=0
-hboxhit=0
-hit=3
-damage=8
-xscal=6
-yscal=6
-hstun=30
-xpos=hsp+35
-ypos=-13
-launchh=false
-sprite_index=spr_alta_light
-image_index=0
-image_speed=0.2
-hsp=1
-attacking=1
-}
-if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;9)
-{
-sprite_index=spr_alta_idle
-attacking=0
-image_index=0
-}
-
-//stab with hitbox bigger than 2 el reys side by side
-if(heavy &amp;&amp; !(left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_xscale=4) &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
-{cancel=0
-hboxhit=0
-hit=3
-damage=18
-xscal=7
-yscal=3
-hstun=45
-xpos=hsp+50
-ypos=0
-launchh=false
-sprite_index=spr_alta_heavy
-image_index=0
-image_speed=0.2
-hsp+=1*image_xscale
-attacking=1
-}
-if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;10)
-{hsp+=3*image_xscale
-sprite_index=spr_alta_idle
-attacking=0
-image_index=0
-}
-//eldrich stab
-if(heavy &amp;&amp; (left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_xscale=4) &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
-{cancel=0
-hboxhit=0
-hit=5
-damage=35
-xscal=12
-ysca1=3
-hstun=60
-xpos=hsp+105
-ypos=0
-launchh=false
-sprite_index=spr_alta_forheavy
-image_index=0
-image_speed=0.2
-hsp+=1*image_xscale
-attacking=1
-}
-if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;18)
-{hsp+=3*image_xscale
-sprite_index=spr_alta_idle
-attacking=0
-image_index=0
-}
-
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
-{hboxhit=0
-cancel=0
-hit=6
-damage=18
-hstun=55
-xscal=2
-yscal=12
-xpos=hsp+45
-ypos=-20
-launchh=true
-sprite_index=spr_alta_launch
-image_index=0
-image_speed=0.2
-hsp+=1*image_xscale
-attacking=1
-}
-if(sprite_index=spr_alta_launch &amp;&amp; image_index&gt;12)
-{
-sprite_index=spr_alta_idle
-attacking=0
-image_index=0
-}
-
-}
-else
-
-{
-if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair  &amp;&amp; sprite_index!=spr_alta_lightair)
-{cancel=0
-hboxhit=0
-hit=2
-damage=9
-xscal=5
-yscal=2
-hstun=28
-xpos=hsp+33
-ypos=-37
-launchh=false
-sprite_index=spr_alta_lightair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_alta_lightair &amp;&amp; image_index&gt;9)
-{
-sprite_index=spr_alta_jump
-attacking=0
-image_index=0
-}
-
-
-if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair)
-{cancel=0
-hboxhit=0
-hit=3
-damage=3
-xscal=10
-yscal=10
-hstun=25
-xpos=hsp
-ypos=0
-launchh=false
-sprite_index=spr_alta_heavyair
-image_index=0
-image_speed=0.3
-attacking=1
-}
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=5 &amp;&amp; hit=3)
-{hit=5;instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)}
-
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;=7 &amp;&amp; hit=5)
-{hit=8;instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)}
-
-
-
-if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;19)
-{
-sprite_index=spr_alta_jump
-attacking=0
-image_index=0
-}
-
-
-
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launchair)
-{cancel=0
-hboxhit=0
-hit=3
-damage=20
-xscal=5
-yscal=12
-hstun=25
-xpos=hsp+50
-ypos=-20
-launchh=false
-sprite_index=spr_alta_launchair
-image_index=0
-image_speed=0.2
-attacking=1
-}
-if(sprite_index=spr_alta_launchair &amp;&amp; image_index&gt;11)
-{
-sprite_index=spr_alta_jump
-attacking=0
-image_index=0
-}
-
-}
-
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
-{hboxhit=1
-instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
-}
-
-}
-</string>
-          </argument>
-        </arguments>
       </action>
       <action>
         <libid>1</libid>
@@ -568,7 +304,8 @@ if grounded == 0// &amp;&amp; hitstun == 0
     
 //light player collision
 if(place_meeting(x+hsp,y,p1)) hsp=0
-
+if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;=1 &amp;&amp; image_index&lt;=4)
+{hsp=4*image_xscale}
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -583,6 +320,265 @@ y += vsp;
 vsp+=grav
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///attacking
+light=keyboard_check_pressed(ord("Z"))
+heavy=keyboard_check_pressed(ord("X"))
+launch=keyboard_check_pressed(ord("C"))
+//face direction
+if(grounded=1 &amp;&amp; attacking=0)
+{
+
+if(x &gt; p1.x)
+{image_xscale=-4}
+else
+{image_xscale=4}
+
+}
+
+//if(attacking=1 &amp;&amp; place_meeting(x,y+1,ground) &amp;&amp; dashing=0) hsp=0
+if((sprite_index=spr_alta_light or sprite_index=spr_alta_heavy or sprite_index=spr_alta_launch or sprite_index=spr_alan_heavydash) &amp;&amp; !place_meeting(x,y+1,ground)) 
+{
+sprite_index=spr_alta_jump
+attacking=0
+}
+
+if((sprite_index=spr_alta_heavyair or sprite_index=spr_alta_lightair or sprite_index=spr_alta_launchair) &amp;&amp; place_meeting(x,y+1,ground)) 
+{
+sprite_index=spr_alta_idle
+freakingslickdash=0
+attacking=0
+}
+if(hitstun&lt;=0)
+{
+if(place_meeting(x,y+1,ground))
+{
+//light2
+if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index=spr_alta_light &amp;&amp; sprite_index!=spr_alta_forheavy)
+{cancel=0
+hboxhit=0
+hit=3
+damage=4
+xscal=6
+yscal=6
+hstun=60
+xpos=hsp+35
+ypos=-13
+launchh=false
+sprite_index=spr_alta_light2
+image_index=0
+image_speed=0.2
+hsp=1
+attacking=1
+}
+if(sprite_index=spr_alta_light2&amp;&amp; image_index&gt;9)
+{
+sprite_index=spr_alta_idle
+attacking=0
+image_index=0
+}
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_light2 &amp;&amp; sprite_index!=spr_alta_light&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
+{cancel=0
+hboxhit=0
+hit=3
+damage=8
+xscal=6
+yscal=6
+hstun=30
+xpos=hsp+35
+ypos=-13
+launchh=false
+sprite_index=spr_alta_light
+image_index=0
+image_speed=0.2
+hsp=1
+attacking=1
+}
+if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;9)
+{
+sprite_index=spr_alta_idle
+attacking=0
+image_index=0
+}
+
+//stab with hitbox bigger than 2 el reys side by side
+if(heavy &amp;&amp; !(left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_xscale=4) &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
+{cancel=0
+hboxhit=0
+hit=4
+damage=18
+xscal=7
+yscal=3
+hstun=45
+xpos=hsp+50
+ypos=0
+launchh=false
+sprite_index=spr_alta_heavy
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;10)
+{hsp+=3*image_xscale
+sprite_index=spr_alta_idle
+attacking=0
+image_index=0
+}
+//eldrich stab
+if(heavy &amp;&amp; (left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_xscale=4) &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
+{cancel=0
+hboxhit=0
+hit=4
+damage=35
+xscal=6
+yscal=10
+hstun=45
+xpos=hsp+25
+ypos=0
+launchh=false
+sprite_index=spr_alta_forheavy
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;14)
+{hsp+=3*image_xscale
+sprite_index=spr_alta_idle
+attacking=0
+image_index=0
+}
+
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
+{hboxhit=0
+cancel=0
+hit=6
+damage=18
+hstun=55
+xscal=2
+yscal=12
+xpos=hsp+45
+ypos=-20
+launchh=true
+sprite_index=spr_alta_launch
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_alta_launch &amp;&amp; image_index&gt;12)
+{
+sprite_index=spr_alta_idle
+attacking=0
+image_index=0
+}
+
+}
+else
+
+{
+if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair  &amp;&amp; sprite_index!=spr_alta_lightair)
+{cancel=0
+hboxhit=0
+hit=3
+damage=12
+xscal=5
+yscal=10
+hstun=28
+xpos=hsp+38
+ypos=-37
+launchh=false
+sprite_index=spr_alta_lightair
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_alta_lightair &amp;&amp; image_index&gt;9)
+{
+sprite_index=spr_alta_jump
+attacking=0
+image_index=0
+}
+
+
+if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair)
+{cancel=0
+hboxhit=0
+hit=2
+damage=15
+xscal=10
+yscal=10
+hstun=25
+xpos=hsp+5
+ypos=0
+launchh=false
+sprite_index=spr_alta_heavyair
+image_index=0
+image_speed=0.3
+attacking=1
+}
+
+
+if(sprite_index=spr_alta_heavyair &amp;&amp; image_index&gt;15)
+{
+sprite_index=spr_alta_jump
+attacking=0
+image_index=0
+}
+
+
+
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launchair)
+{cancel=0
+hboxhit=0
+hit=3
+damage=20
+xscal=5
+yscal=12
+hstun=25
+xpos=hsp+50
+ypos=-5
+launchh=false
+sprite_index=spr_alta_launchair
+image_index=0
+image_speed=0.2
+attacking=1
+}
+if(sprite_index=spr_alta_launchair &amp;&amp; image_index&gt;11)
+{
+sprite_index=spr_alta_jump
+attacking=0
+image_index=0
+}
+
+}
+
+if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
+{hboxhit=1
+instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
+}
+
+}
 </string>
           </argument>
         </arguments>

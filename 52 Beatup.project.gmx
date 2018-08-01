@@ -11,8 +11,11 @@
   <sprites name="sprites">
     <sprites name="Alan">
       <sprite>sprites\spr_alan_idle</sprite>
-      <sprite>sprites\spr_alan_hit2</sprite>
+      <sprite>sprites\spr_alan_light</sprite>
       <sprite>sprites\spr_alan_forheavy</sprite>
+      <sprite>sprites\spr_alan_heavy</sprite>
+      <sprite>sprites\spr_alan_launch</sprite>
+      <sprite>sprites\spr_alan_hit2</sprite>
       <sprite>sprites\spr_alan_hit</sprite>
       <sprite>sprites\spr_alan_jump</sprite>
       <sprite>sprites\spr_alan_win</sprite>
@@ -22,9 +25,6 @@
       <sprite>sprites\spr_alan_heavyair</sprite>
       <sprite>sprites\spr_alan_backdash</sprite>
       <sprite>sprites\spr_alan_block</sprite>
-      <sprite>sprites\spr_alan_launch</sprite>
-      <sprite>sprites\spr_alan_heavy</sprite>
-      <sprite>sprites\spr_alan_light</sprite>
       <sprite>sprites\spr_alan_heavydash</sprite>
       <sprite>sprites\spr_alan_dash</sprite>
       <sprites name="alanspecials">
@@ -40,17 +40,17 @@
     </sprites>
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
+      <sprite>sprites\spr_rey_light</sprite>
+      <sprite>sprites\spr_rey_heavy</sprite>
+      <sprite>sprites\spr_rey_launch</sprite>
+      <sprite>sprites\spr_rey_lightair</sprite>
+      <sprite>sprites\spr_rey_heavyair</sprite>
+      <sprite>sprites\spr_rey_heavyforair</sprite>
+      <sprite>sprites\spr_rey_launchair</sprite>
       <sprite>sprites\spr_rey_hit</sprite>
       <sprite>sprites\spr_rey_hit2</sprite>
       <sprite>sprites\spr_rey_jump</sprite>
       <sprite>sprites\spr_rey_block</sprite>
-      <sprite>sprites\spr_rey_heavyforair</sprite>
-      <sprite>sprites\spr_rey_launchair</sprite>
-      <sprite>sprites\spr_rey_heavyair</sprite>
-      <sprite>sprites\spr_rey_lightair</sprite>
-      <sprite>sprites\spr_rey_heavy</sprite>
-      <sprite>sprites\spr_rey_launch</sprite>
-      <sprite>sprites\spr_rey_light</sprite>
       <sprite>sprites\spr_rey_dash</sprite>
       <sprite>sprites\spr_rey_backdash</sprite>
       <sprites name="ElreySpecials">
@@ -88,22 +88,21 @@
     </sprites>
     <sprites name="Alta">
       <sprite>sprites\spr_alta_idle</sprite>
+      <sprite>sprites\spr_alta_light</sprite>
+      <sprite>sprites\spr_alta_light2</sprite>
+      <sprite>sprites\spr_alta_heavy</sprite>
+      <sprite>sprites\spr_alta_forheavy</sprite>
+      <sprite>sprites\spr_alta_launch</sprite>
+      <sprite>sprites\spr_alta_lightair</sprite>
+      <sprite>sprites\spr_alta_heavyair</sprite>
+      <sprite>sprites\spr_alta_launchair</sprite>
       <sprite>sprites\spr_alta_hit2</sprite>
-      <sprite>sprites\spr_alta_Fidle</sprite>
       <sprite>sprites\spr_alta_block</sprite>
       <sprite>sprites\spr_alta_tools</sprite>
       <sprite>sprites\spr_alta_hit</sprite>
       <sprite>sprites\spr_alta_backdash</sprite>
       <sprite>sprites\spr_alta_dash</sprite>
-      <sprite>sprites\spr_alta_launch</sprite>
       <sprite>sprites\spr_alta_jump</sprite>
-      <sprite>sprites\spr_alta_launchair</sprite>
-      <sprite>sprites\spr_alta_lightair</sprite>
-      <sprite>sprites\spr_alta_heavyair</sprite>
-      <sprite>sprites\spr_alta_heavy</sprite>
-      <sprite>sprites\spr_alta_forheavy</sprite>
-      <sprite>sprites\spr_alta_light</sprite>
-      <sprite>sprites\spr_alta_light2</sprite>
       <sprites name="AltaSpecials">
         <sprite>sprites\spr_alta_fireball1</sprite>
         <sprite>sprites\spr_alta_proj</sprite>
@@ -115,19 +114,19 @@
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_light</sprite>
+      <sprite>sprites\spr_jack_forlight</sprite>
+      <sprite>sprites\spr_jack_heavy</sprite>
+      <sprite>sprites\spr_jack_launch</sprite>
+      <sprite>sprites\spr_jack_lightair</sprite>
+      <sprite>sprites\spr_jack_heavyair</sprite>
+      <sprite>sprites\spr_jack_launchair</sprite>
       <sprite>sprites\spr_jack_hit2</sprite>
       <sprite>sprites\spr_jack_hit</sprite>
       <sprite>sprites\spr_jack_backdash</sprite>
       <sprite>sprites\spr_jack_dash</sprite>
       <sprite>sprites\spr_jack_block</sprite>
       <sprite>sprites\spr_jack_jump</sprite>
-      <sprite>sprites\spr_jack_launchair</sprite>
-      <sprite>sprites\spr_jack_heavyair</sprite>
-      <sprite>sprites\spr_jack_lightair</sprite>
-      <sprite>sprites\spr_jack_launch</sprite>
-      <sprite>sprites\spr_jack_forlight</sprite>
-      <sprite>sprites\spr_jack_heavy</sprite>
-      <sprite>sprites\spr_jack_light</sprite>
       <sprites name="jackspecials">
         <sprite>sprites\spr_jackitems</sprite>
         <sprite>sprites\spr_jackitemeff</sprite>
@@ -138,6 +137,11 @@
     </sprites>
     <sprites name="Magnus">
       <sprite>sprites\spr_magnus_idle</sprite>
+      <sprite>sprites\spr_magnus_light</sprite>
+      <sprite>sprites\spr_magnus_forlight</sprite>
+      <sprite>sprites\spr_magnus_heavy</sprite>
+      <sprite>sprites\spr_magnus_forheavy</sprite>
+      <sprite>sprites\spr_magnus_launch</sprite>
       <sprite>sprites\spr_magnus_hit2</sprite>
       <sprite>sprites\spr_magnus_down</sprite>
       <sprite>sprites\spr_magnus_hit</sprite>
@@ -148,11 +152,6 @@
       <sprite>sprites\spr_magnus_heavyair</sprite>
       <sprite>sprites\spr_magnus_launchair</sprite>
       <sprite>sprites\spr_magnus_lightair</sprite>
-      <sprite>sprites\spr_magnus_launch</sprite>
-      <sprite>sprites\spr_magnus_heavy</sprite>
-      <sprite>sprites\spr_magnus_forheavy</sprite>
-      <sprite>sprites\spr_magnus_light</sprite>
-      <sprite>sprites\spr_magnus_forlight</sprite>
       <sprite>sprites\spr_magnus_guit</sprite>
       <sprites name="magnusspecials">
         <sprite>sprites\spr_magnus_proj1</sprite>
@@ -233,6 +232,7 @@
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>
+    <object>objects\restart_match</object>
     <objects name="effects">
       <object>objects\obj_alanfireball0</object>
       <object>objects\obj_start</object>
@@ -250,6 +250,7 @@
       <object>objects\obj_aceexplosion</object>
       <object>objects\jackitemeffect</object>
       <object>objects\obj_whiteflash</object>
+      <object>objects\obj_winflash</object>
       <object>objects\alanfireballeff</object>
       <object>objects\obj_acereflect</object>
       <object>objects\obj_alanfireball</object>

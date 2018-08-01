@@ -30,7 +30,8 @@ image_index=0
 room_speed=60
 attacking=0
 image_yscale=4  
-global.p2char="Rey"
+global.p2char="El Rey"
+idle=spr_rey_idle//important for resuming round
 hsp=0
 vsp=0
 grav=0.3
@@ -434,7 +435,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;10)
+if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;13)
 {
 sprite_index=spr_rey_idle
 attacking=0

@@ -20,6 +20,10 @@
   <width>64</width>
   <height>64</height>
   <frames>
-    <frame index="0">images\spr_alta_Fidle_0.png</frame>
+    <frame index="0">images\spr_alta_qidle_0.png</frame>
+    <frame index="1">images\spr_alta_qidle_1.png</frame>
+    <frame index="2">images\spr_alta_qidle_2.png</frame>
+    <frame index="3">images\spr_alta_qidle_3.png</frame>
+    <frame index="4">images\spr_alta_qidle_4.png</frame>
   </frames>
 </sprite>

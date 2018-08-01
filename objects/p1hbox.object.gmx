@@ -99,6 +99,12 @@ else p1.x-=round(p1.damage/5)*p1.image_xscale
 if(p1.rage=false) p2.hp-=p1.damage+p1.atk
 else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
 p2.hitstun+=p1.hstun-(round(global.p1combo*2.5))
+//death effect
+if(p2.hp&lt;=0)
+{
+instance_create(x,y,obj_winflash)
+p1.launch=true
+}
 
 if(p1.freakingslickdash=1 &amp;&amp; p1.launch=false)
 {

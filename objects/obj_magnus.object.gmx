@@ -31,6 +31,7 @@ room_speed=60
 attacking=0
 image_yscale=4  
 global.p2char="Magnus"
+idle=spr_magnus_idle//important for resuming round
 hsp=0
 vsp=0
 grav=0.3
