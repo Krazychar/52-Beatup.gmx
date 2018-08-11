@@ -58,7 +58,7 @@ dashcheck=0
 freakingslickdash=0
 dashtimerfinal=0
 cancel=0
-hp=178
+hp=170
 mhp=hp
 atk=1
 abi=6
@@ -144,6 +144,9 @@ airMovementDir = 0;
           <argument>
             <kind>1</kind>
             <string>///input
+//keep the player out of the wall
+if(place_meeting(x,y,ground)){x+=2*image_xscale}
+
 left=keyboard_check_direct(ord("A"))
 right=keyboard_check_direct(ord("D"))
 pleft=keyboard_check_pressed(ord("A"))
@@ -241,32 +244,19 @@ if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
 {sprite_index=spr_ace_idle}
 if(attacking=0 or grounded=0)
 {
-if(dashing=0 &amp;&amp; hitstun&lt;=0)
-{
-
-if(coward=true)
-{
-if(left &amp;&amp; image_index&gt;0 or right &amp;&amp; image_index&lt;0)
-{pH=agi+2;agi=pH}
-else
-{agi=pH-2}
-}
-
 if (left)
-
 {
 if(hsp&lt;-agi){}
 else
 {hsp=-agi}
-
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
 {hsp=agi}
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=agi +2}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)) &amp;&amp; attacking=0)
@@ -275,7 +265,6 @@ hsp=0
 
 }
 
-}
 //jumping
 if(dashing=0 &amp;&amp; jump &amp;&amp; grounded=1 &amp;&amp; (attacking!=1 or cancel=1  &amp;&amp; sprite_index=spr_ace_launch))
 {
@@ -399,7 +388,7 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_ace_light &amp;&amp; image_index&gt;6)
+if(sprite_index=spr_ace_light &amp;&amp; image_index&gt;5)
 {
 sprite_index=spr_ace_idle
 attacking=0
@@ -424,7 +413,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_ace_heavy4 &amp;&amp; image_index&gt;10)
+if(sprite_index=spr_ace_heavy4 &amp;&amp; image_index&gt;7)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
 attacking=0
@@ -449,7 +438,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_ace_heavy3 &amp;&amp; image_index&gt;9)
+if(sprite_index=spr_ace_heavy3 &amp;&amp; image_index&gt;5)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
 attacking=0
@@ -473,7 +462,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_ace_heavy2 &amp;&amp; image_index&gt;8)
+if(sprite_index=spr_ace_heavy2 &amp;&amp; image_index&gt;5)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
 attacking=0
@@ -497,7 +486,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_ace_heavy &amp;&amp; image_index&gt;6)
+if(sprite_index=spr_ace_heavy &amp;&amp; image_index&gt;7)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
 attacking=0
@@ -527,7 +516,7 @@ hsp+=1*image_xscale
 attacking=1
 }
 if(sprite_index=spr_ace_launch) launchh=true
-if(sprite_index=spr_ace_launch &amp;&amp; image_index&gt;10)
+if(sprite_index=spr_ace_launch &amp;&amp; image_index&gt;9)
 {
 sprite_index=spr_ace_idle
 attacking=0
@@ -740,9 +729,9 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
 link=1
 linkatk="J"
@@ -764,26 +753,6 @@ if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sp
 
 
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>
@@ -819,7 +788,7 @@ if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sp
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y-70,dashtime)
+            <string>
 
 if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_ace_dash or sprite_index=spr_ace_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {

@@ -28,8 +28,7 @@
             <string>combohp=0
 global.p1char=""
 head=0
-
-
+abival=0
 </string>
           </argument>
         </arguments>
@@ -109,25 +108,27 @@ if(global.p2combo=0 &amp;&amp; combohp&gt;p1.hp)
 draw_set_color(c_white)
 kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
 //red hp
-draw_healthbar(view_xview[0]+50+kek,view_yview[0]+30+kek,view_xview[0]+260+kek,view_yview[0]+50+kek,(combohp/p1.mhp)*100,c_black,c_yellow,c_yellow,1,true,false)
+draw_healthbar(view_xview[0]+50+kek,view_yview[0]+30+kek,view_xview[0]+255+kek,view_yview[0]+50+kek,(combohp/p1.mhp)*100,c_black,c_red,c_red,1,true,false)
 //green hp
-draw_healthbar(view_xview[0]+50+kek,view_yview[0]+30+kek,view_xview[0]+260+kek,view_yview[0]+44+kek,(p1.hp/p1.mhp)*100,c_black,c_lime,c_lime,1,false,false)
-draw_healthbar(view_xview[0]+50+kek,view_yview[0]+45+kek,view_xview[0]+260+kek,view_yview[0]+50+kek,(p1.hp/p1.mhp)*100,c_black,c_green,c_green,1,false,false)
-draw_sprite_ext(spr_wongames,gal.p1win,view_xview[0]+200+kek,view_yview[0]+65+kek,2,2,0,c_white,1)
-draw_sprite_ext(spr_healthbar,head,view_xview[0]+130+kek,view_yview[0]+55+kek,2,2,0,c_white,1)
-//draw_text(x,y-40,"P1 Wins: "+string(gal.p1win))
-draw_text(view_xview[0]+50,view_yview[0]+100,"Damage: "+string(p1.mhp-p1.hp))
+draw_healthbar(view_xview[0]+50+kek,view_yview[0]+30+kek,view_xview[0]+255+kek,view_yview[0]+44+kek,(p1.hp/p1.mhp)*100,c_black,c_lime,c_lime,1,false,false)
+draw_healthbar(view_xview[0]+50+kek,view_yview[0]+45+kek,view_xview[0]+255+kek,view_yview[0]+50+kek,(p1.hp/p1.mhp)*100,c_black,c_green,c_green,1,false,false)
+draw_sprite_ext(spr_wongames,gal.p1win,view_xview[0]+215+kek,view_yview[0]+55+kek,2,2,0,c_white,1)
 xx=130
 yy=55
 //Ability
+if(abival&lt;round((p1.abi/p1.mabi)*100))
+{abival=round((p1.abi/p1.mabi)*100)}
+
+if(abival&gt;round((p1.abi/p1.mabi)*100))
+{abival-=2}
+
 abicheck=round((p1.abi/p1.mabi)*100)
-col=make_colour_rgb(255-abicheck*250,0,0)
+col=make_colour_rgb(0,255,255)
 draw_set_color(col)
 //draw_sprite_ext(spr_abicount,0,view_xview[0]+xx-50+kek,view_yview[0]+yy+42+kek,3,3,0,c_white,1)
-draw_set_font(abicount)
-draw_text(view_xview[0]+xx-50+kek,view_yview[0]+yy+22+kek,string(abicheck)+"%")
-draw_set_font(font0)
-draw_set_color(c_white)
+draw_healthbar(view_xview[0]+75+kek,view_yview[0]+55+kek,view_xview[0]+177+kek,view_yview[0]+74+kek,abival,c_white,col,col,0,true,false)
+//
+draw_sprite_ext(spr_healthbar,head,view_xview[0]+130+kek,view_yview[0]+55+kek,2,2,0,c_white,1)
 //
 if(global.p1combo&gt;1)
 {

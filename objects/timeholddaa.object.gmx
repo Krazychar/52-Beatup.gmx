@@ -57,7 +57,7 @@ ms=60
 y=view_yview[0]+50
 
 ms-=2
-if(ms&lt;=0)
+if(ms&lt;=0 &amp;&amp; global.time&gt;0)
 {
 ms=60
 global.time--
@@ -88,12 +88,12 @@ if(global.roundEnd=1)
             <kind>1</kind>
             <string>draw_set_font(font2)
 draw_set_color(c_black)
-if(global.time&gt;9)draw_text(view_xview[0]+280,view_yview[0]+23,global.time)
-else draw_text(view_xview[0]+280,view_yview[0]+23,"0"+string(global.time))
+if(global.time&gt;9)draw_text(view_xview[0]+285,view_yview[0]+23,global.time)
+else draw_text(view_xview[0]+285,view_yview[0]+23,"0"+string(global.time))
 if(global.time&lt;=20 &amp;&amp; ms&gt;=50) draw_set_color(c_red)
 else draw_set_color(c_white)
-if(global.time&gt;9)draw_text(view_xview[0]+275,view_yview[0]+20,global.time)
-else draw_text(view_xview[0]+275,view_yview[0]+20,"0"+string(global.time))
+if(global.time&gt;9)draw_text(view_xview[0]+280,view_yview[0]+20,global.time)
+else draw_text(view_xview[0]+280,view_yview[0]+20,"0"+string(global.time))
 draw_set_font(font1)
 
 

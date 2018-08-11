@@ -58,13 +58,13 @@ block=0
 freakingslickdash=0
 dashtimerfinal=0
 cancel=0
-hp=160
+hp=155
 mhp=hp
 atk=1
 abi=5
 mabi=abi
 projdef=0
-dashlng=23
+dashlng=16
 rage=false
 nKb=false
 coward=false
@@ -145,13 +145,17 @@ airMovementDir = 0;
           <argument>
             <kind>1</kind>
             <string>///input
+//keep the player out of the wall
+if(place_meeting(x,y,ground)){x+=2*image_xscale}
+
+
 left=keyboard_check_direct(vk_left)
 right=keyboard_check_direct(vk_right)
 pleft=keyboard_check_pressed(vk_left)
 pright=keyboard_check_pressed(vk_right)
 jump=keyboard_check_direct(vk_up)
 //move left and right
-//if(left or right) hsp=round(hsp)if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
     {
     
     if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_alta_dash &amp;&amp; sprite_index!=spr_alta_backdash)
@@ -249,15 +253,14 @@ if (left)
 if(hsp&lt;-agi){}
 else
 {hsp=-agi}
-
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
 {hsp=agi}
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
@@ -304,7 +307,7 @@ if grounded == 0// &amp;&amp; hitstun == 0
     
 //light player collision
 if(place_meeting(x+hsp,y,p1)) hsp=0
-if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;=1 &amp;&amp; image_index&lt;=4)
+if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;=1 &amp;&amp; image_index&lt;=4 &amp;&amp; !place_meeting(x+hsp,y,p1))
 {hsp=4*image_xscale}
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
@@ -377,7 +380,7 @@ if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index=spr_alta_li
 {cancel=0
 hboxhit=0
 hit=3
-damage=4
+damage=6
 xscal=6
 yscal=6
 hstun=60
@@ -413,19 +416,19 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;9)
+if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;8)
 {
 sprite_index=spr_alta_idle
 attacking=0
 image_index=0
 }
 
-//stab with hitbox bigger than 2 el reys side by side
+
 if(heavy &amp;&amp; !(left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_xscale=4) &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
 {cancel=0
 hboxhit=0
 hit=4
-damage=18
+damage=17
 xscal=7
 yscal=3
 hstun=45
@@ -438,7 +441,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;10)
+if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;8)
 {hsp+=3*image_xscale
 sprite_index=spr_alta_idle
 attacking=0
@@ -449,7 +452,7 @@ if(heavy &amp;&amp; (left &amp;&amp; image_xscale=-4 or right &amp;&amp; image_x
 {cancel=0
 hboxhit=0
 hit=4
-damage=35
+damage=34
 xscal=6
 yscal=10
 hstun=45
@@ -462,7 +465,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;14)
+if(sprite_index=spr_alta_forheavy &amp;&amp; image_index&gt;12)
 {hsp+=3*image_xscale
 sprite_index=spr_alta_idle
 attacking=0
@@ -473,7 +476,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta
 {hboxhit=0
 cancel=0
 hit=6
-damage=18
+damage=20
 hstun=55
 xscal=2
 yscal=12
@@ -486,7 +489,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_alta_launch &amp;&amp; image_index&gt;12)
+if(sprite_index=spr_alta_launch &amp;&amp; image_index&gt;10)
 {
 sprite_index=spr_alta_idle
 attacking=0
@@ -694,9 +697,9 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(linkdir)) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
 link=1
 linkatk="Z"
@@ -707,7 +710,7 @@ if(FBlv=3)linkspr=spr_alan_fireball2
 }
 //FB1
 if(sprite_index=spr_alta_fireball1 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+30,obj_altafireball)}
-if(sprite_index=spr_alta_fireball1 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_rey_idle}
+if(sprite_index=spr_alta_fireball1 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_alta_idle}
 //FB2
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
@@ -754,8 +757,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;s
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y-70,dashtime)
-
+            <string>
 if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (sprite_index=spr_alta_dash or sprite_index=spr_alta_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
@@ -804,7 +806,7 @@ if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=10 &amp;&amp; hit
 if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit=5)
 {hit=6;instance_create(x-32*image_xscale,y-118,obj_altasuper1B)}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=28 )
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=26)
 {hit=0;attacking=0;image_speed=0.2;sprite_index=spr_alta_idle}
 
 draw_self()

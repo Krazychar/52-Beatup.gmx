@@ -67,7 +67,7 @@ dashcheck=0
 freakingslickdash=0
 dashtimerfinal=0
 cancel=0
-hp=200
+hp=175
 mhp=hp
 atk=1
 abi=4
@@ -153,13 +153,16 @@ airMovementDir = 0;
           <argument>
             <kind>1</kind>
             <string>///input
+//keep the player out of the wall
+if(place_meeting(x,y,ground)){x+=2*image_xscale}
+
 left=keyboard_check_direct(ord("A"))
 right=keyboard_check_direct(ord("D"))
 pleft=keyboard_check_pressed(ord("A"))
 pright=keyboard_check_pressed(ord("D"))
 jump=keyboard_check_direct(ord("W"))
 //move left and right
-//if(left or right) hsp=round(hsp)if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
     {
     
     if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_jack_dash &amp;&amp; sprite_index!=spr_jack_backdash)
@@ -429,7 +432,7 @@ hsp=1
 attacking=1
 angle=0
 }
-if(sprite_index=spr_jack_forlight &amp;&amp; image_index&gt;7)
+if(sprite_index=spr_jack_forlight &amp;&amp; image_index&gt;5)
 {
 sprite_index=spr_jack_idle
 attacking=0
@@ -455,7 +458,7 @@ hsp+=1*image_xscale
 attacking=1
 angle=0
 }
-if(sprite_index=spr_jack_heavy &amp;&amp; image_index&gt;6)
+if(sprite_index=spr_jack_heavy &amp;&amp; image_index&gt;7)
 {hsp+=3*image_xscale
 sprite_index=spr_jack_idle
 attacking=0
@@ -481,7 +484,7 @@ hsp+=1*image_xscale
 angle=90
 attacking=1
 }
-if(sprite_index=spr_jack_launch &amp;&amp; image_index&gt;9)
+if(sprite_index=spr_jack_launch &amp;&amp; image_index&gt;8)
 {
 sprite_index=spr_jack_idle
 attacking=0
@@ -653,9 +656,9 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
 link=1
 linkatk="J"
@@ -700,6 +703,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;s
             <string>///hit
 if(hitstun&gt;0)
 {
+
 if grounded == 0
     hsp = 0;
 hitstun--
@@ -751,7 +755,7 @@ global.p2combo=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y-70,dashtime)
+            <string>
 
 if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
@@ -851,6 +855,8 @@ if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=21 &amp;&amp; hit
 
 draw_self()
 
+if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=26)
+{attacking=0;sprite_index=spr_jack_idle}
 </string>
           </argument>
         </arguments>

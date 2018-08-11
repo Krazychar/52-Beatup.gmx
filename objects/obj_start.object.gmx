@@ -61,6 +61,8 @@ p2.abi=p2.mabi
             <kind>1</kind>
             <string>p1.hp=p1.mhp
 p2.hp=p2.mhp
+p1.hspeed=0
+p2.hspeed=0
 room_speed=60
 gal.timeEnd=0
 instance_destroy(ftb)

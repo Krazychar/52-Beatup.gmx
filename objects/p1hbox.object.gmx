@@ -50,8 +50,7 @@ image_yscale=p1.yscal
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>p1.cancel=1
-room_speed=60
+            <string>room_speed=60
 p2.hsp=0
 p1.hsp=0
 </string>
@@ -85,7 +84,7 @@ if(instance_exists(obj_alan))
 {instance_create(x,y,obj_hiteffect)}
 if(instance_exists(obj_ace))
 {instance_create(x,y,obj_hiteffect)}
-
+if(p1.attacking!=2)p1.cancel=1
 p2.depth=0
 camera.x+=p1.damage*p1.image_xscale
 p1.depth=-1
@@ -94,7 +93,7 @@ global.p1combo++
 camera.shakeIntensity=p1.damage*p1.image_xscale/8
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 room_speed=60-p1.hstun/2
-if(!place_meeting(p2.x+10*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/5)*p1.image_xscale
+if(!place_meeting(p2.x+15*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/5)*p1.image_xscale
 else p1.x-=round(p1.damage/5)*p1.image_xscale
 if(p1.rage=false) p2.hp-=p1.damage+p1.atk
 else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
@@ -114,7 +113,7 @@ if(!place_meeting(p1.x,p1.y+4,ground)) p1.vsp=-1}
 }
 if(p1.launchh==true) 
 {
-
+if(p2.block=1) p1.cancel=0
 p2.vsp=-11
 p2.airMovementDir=p1.image_xscale/8
 p2.grounded=0

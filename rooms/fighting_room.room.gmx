@@ -63,6 +63,7 @@
     <instance objName="obj_hpbarp1" x="128" y="64" name="inst_BC64E68F" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_rey" x="176" y="272" name="inst_5FBA215F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="dab" x="288" y="736" name="inst_0D337699" locked="0" code="" scaleX="4" scaleY="4" colour="4294967295" rotation="0"/>
+    <instance objName="diimmadab" x="640" y="736" name="inst_7DB0203B" locked="0" code="" scaleX="-4" scaleY="4" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

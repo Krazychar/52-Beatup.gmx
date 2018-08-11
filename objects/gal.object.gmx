@@ -231,17 +231,25 @@ cardpick=false
 if(global.roundEnd=0)
 {
 if(p1.hp&lt;=0)
-{p2win+=1
-losername=global.p1char}
+{losername=global.p1char}
 
 if(p2.hp&lt;=0)
-{p1win+=1
-losername=global.p2char}
+{losername=global.p2char}
 
 }
 if((p1.hp&lt;=0 or p2.hp&lt;=0) &amp;&amp; !instance_exists(card1))
 {
 global.roundEnd=1
+//end animation thing
+
+
+if(instance_exists(obj_winflash))
+{
+if(losername=global.p1char &amp;&amp; global.roundEnd=1 &amp;&amp; obj_winflash.switchh=0) {obj_winflash.switchh=1;p1.vsp=-6;p1.hstun=1000}
+if(losername=global.p2char &amp;&amp; global.roundEnd=1 &amp;&amp; obj_winflash.switchh=0) {obj_winflash.switchh=1;p2.vsp=-6;p2.hstun=1000}
+}
+
+
 }
 if((p1.hp&lt;=0 or p2.hp&lt;=0) &amp;&amp; !instance_exists(card1) &amp;&amp; !instance_exists(obj_ko) &amp;&amp; (p2win&gt;=5 or p1win&gt;=5))
 {
@@ -257,19 +265,18 @@ if(p1.hp&lt;=0)
 if(p2.hp&lt;=0)
 {winnerName=global.p1char}
 
-//if(timeEnd&lt;=30) draw_text(view_xview[0]+view_wview[0]/2,view_yview[0]+view_hview[0]/2,winnerName+" Wins!")
-timeEnd++
+//timeEnd++
 
 }
 
-if(timeEnd&gt;=20 &amp;&amp; timeEnd&lt;=80 &amp;&amp; !instance_exists(ftb))
+if(timeEnd&gt;=40 &amp;&amp; timeEnd&lt;=100 &amp;&amp; !instance_exists(ftb))
 {
 instance_create(x,y,ftb)
 room_speed=60
 ftb.image_alpha=(timeEnd/100)
 }
 
-if(timeEnd&gt;=40)
+if(timeEnd&gt;=80)
 {draw_set_color(c_white)
 if(global.pickturn=0 &amp;&amp; !instance_exists(obj_start) &amp;&amp; !instance_exists(restart_match)) //outline time kms
 {
@@ -293,7 +300,7 @@ draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,di
 
 
 }
-if(global.pickturn=1)
+if(global.pickturn=1 &amp;&amp; !instance_exists(obj_start) &amp;&amp; !instance_exists(restart_match))
 {
 
 draw_set_color(c_green);
@@ -316,9 +323,9 @@ draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,di
 }
 
 }
-if(timeEnd=40)instance_create(view_xview[0]+150,view_yview[0]+150 ,card1)
-if(timeEnd=45)instance_create(view_xview[0]+320,view_yview[0]+150 ,card1)
-if(timeEnd=50)instance_create(view_xview[0]+500,view_yview[0]+150 ,card1)
+if(timeEnd=60){instance_create(view_xview[0]+150,view_yview[0]+150 ,card1);timeEnd++}
+if(timeEnd=65){instance_create(view_xview[0]+320,view_yview[0]+150 ,card1);timeEnd++}
+if(timeEnd=70){instance_create(view_xview[0]+500,view_yview[0]+150 ,card1);timeEnd++}
 </string>
           </argument>
         </arguments>
@@ -339,7 +346,7 @@ if(timeEnd=50)instance_create(view_xview[0]+500,view_yview[0]+150 ,card1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Round Resume?D!??!?!?
+            <string>///Round Resume!??!?!?
 
 if(global.pickturn=2 &amp;&amp; instance_exists(ftb))
 {
@@ -348,6 +355,10 @@ p1.hp=p1.mhp
 p1.abi=p1.mabi
 p2.abi=p2.mabi
 p2.hp=p2.mhp
+p1.hsp=0
+p2.hsp=0
+p1.hspeed=0
+p2.hspeed=0
 room_speed=60
 global.time=99
 timeEnd=0
@@ -474,6 +485,22 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>223</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_current_room</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

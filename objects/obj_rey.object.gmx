@@ -58,13 +58,13 @@ block=0
 freakingslickdash=0
 dashtimerfinal=0
 cancel=0
-hp=240
+hp=230
 mhp=hp
 atk=1
 abi=3
 mabi=abi
 projdef=0
-dashlng=23
+dashlng=17
 rage=false
 nKb=false
 coward=false
@@ -145,13 +145,17 @@ airMovementDir = 0;
           <argument>
             <kind>1</kind>
             <string>///input
+//keep the player out of the wall
+if(place_meeting(x,y,ground)){x+=2*image_xscale}
+
+
 left=keyboard_check_direct(vk_left)
 right=keyboard_check_direct(vk_right)
 pleft=keyboard_check_pressed(vk_left)
 pright=keyboard_check_pressed(vk_right)
 jump=keyboard_check_direct(vk_up)
 //move left and right
-//if(left or right) hsp=round(hsp)if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
     {
     
     if(pleft &amp;&amp; dashdirection=1 &amp;&amp; dashcheck=1 &amp;&amp; sprite_index!=spr_rey_dash &amp;&amp; sprite_index!=spr_rey_backdash)
@@ -248,15 +252,14 @@ if (left)
 if(hsp&lt;-agi){}
 else
 {hsp=-agi}
-
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
 {hsp=agi}
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=agi +2}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
@@ -387,7 +390,7 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_rey_light &amp;&amp; image_index&gt;6)
+if(sprite_index=spr_rey_light &amp;&amp; image_index&gt;5)
 {
 sprite_index=spr_rey_idle
 attacking=0
@@ -411,7 +414,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_rey_heavy &amp;&amp; image_index&gt;10)
+if(sprite_index=spr_rey_heavy &amp;&amp; image_index&gt;7)
 {hsp+=3*image_xscale
 sprite_index=spr_rey_idle
 attacking=0
@@ -435,7 +438,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;13)
+if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;11)
 {
 sprite_index=spr_rey_idle
 attacking=0
@@ -497,7 +500,7 @@ if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image
 {cancel=0
 hboxhit=0
 hit=4
-damage=20
+damage=25
 xscal=10
 yscal=4
 hstun=36
@@ -626,9 +629,9 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(linkdir)) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking=0)
+if(down &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
 link=1
 linkatk="Z"
@@ -723,7 +726,7 @@ global.p1combo=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y-70,dashtime)
+            <string>
 
 if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (sprite_index=spr_rey_dash or sprite_index=spr_rey_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
@@ -734,6 +737,7 @@ draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscal
 }
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
+draw_text(x,y-100,global.roundEnd)
 
 if(keyboard_check_pressed(ord("B")))
 {

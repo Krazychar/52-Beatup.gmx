@@ -64,12 +64,12 @@ p1.hsp=0
 p1.vsp=0
 p1.hitstun=0
 global.p1combo=0
-p1.x=384;
+p1.x=448;
 p1.y=736;
 
 p2.sprite_index=p2.idle
 p2.image_xscale=-4
-p2.x=896;
+p2.x=832;
 p2.y=736;
 p2.hsp=0
 p2.vsp=0

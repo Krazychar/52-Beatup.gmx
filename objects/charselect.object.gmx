@@ -56,7 +56,8 @@ if(obj_p2mouse.hplace=2 &amp;&amp; obj_p2mouse.vplace=0) {obj_p2display.sprite_i
 if(obj_p2mouse.hplace=0 &amp;&amp; obj_p2mouse.vplace=1) {obj_p2display.sprite_index=spr_alta_idle;obj_p2display.text="Alta"}
 if(obj_p2mouse.hplace=1 &amp;&amp; obj_p2mouse.vplace=1) {obj_p2display.sprite_index=spr_jack_idle;obj_p2display.text="Jackson"}
 if(obj_p2mouse.hplace=2 &amp;&amp; obj_p2mouse.vplace=1) {obj_p2display.sprite_index=spr_magnus_idle;obj_p2display.text="Magnus"}
-
+if(obj_p2mouse.hplace=0 &amp;&amp; obj_p2mouse.vplace=2) {obj_p2display.sprite_index=spr_skip_idle;obj_p2display.text="Skip"}
+if(obj_p2mouse.hplace=1 &amp;&amp; obj_p2mouse.vplace=2) {obj_p2display.sprite_index=spr_haley_idle;obj_p2display.text="Haley"}
 
 if(obj_p1mouse.hplace=0 &amp;&amp; obj_p1mouse.vplace=0) {obj_p1display.sprite_index=spr_alan_idle;obj_p1display.text="Alan"}
 if(obj_p1mouse.hplace=1 &amp;&amp; obj_p1mouse.vplace=0) {obj_p1display.sprite_index=spr_rey_idle;obj_p1display.text="El Rey"}
@@ -64,6 +65,8 @@ if(obj_p1mouse.hplace=2 &amp;&amp; obj_p1mouse.vplace=0) {obj_p1display.sprite_i
 if(obj_p1mouse.hplace=0 &amp;&amp; obj_p1mouse.vplace=1) {obj_p1display.sprite_index=spr_alta_idle;obj_p1display.text="Alta"}
 if(obj_p1mouse.hplace=1 &amp;&amp; obj_p1mouse.vplace=1) {obj_p1display.sprite_index=spr_jack_idle;obj_p1display.text="Jackson"}
 if(obj_p1mouse.hplace=2 &amp;&amp; obj_p1mouse.vplace=1) {obj_p1display.sprite_index=spr_magnus_idle;obj_p1display.text="Magnus"}
+if(obj_p1mouse.hplace=0 &amp;&amp; obj_p1mouse.vplace=2) {obj_p1display.sprite_index=spr_skip_idle;obj_p1display.text="Skip"}
+if(obj_p1mouse.hplace=1 &amp;&amp; obj_p1mouse.vplace=2) {obj_p1display.sprite_index=spr_haley_idle;obj_p1display.text="Haley"}
 
 </string>
           </argument>

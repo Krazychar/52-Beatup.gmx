@@ -58,13 +58,13 @@ block=0
 freakingslickdash=0
 dashtimerfinal=0
 cancel=0
-hp=240
+hp=220
 mhp=hp
 atk=1
 abi=3
 mabi=abi
 projdef=0
-dashlng=23
+dashlng=14
 rage=false
 nKb=false
 coward=false
@@ -145,6 +145,10 @@ airMovementDir = 0;
           <argument>
             <kind>1</kind>
             <string>///input
+//keep the player out of the wall
+if(place_meeting(x,y,ground)){x+=2*image_xscale}
+
+
 left=keyboard_check_direct(vk_left)
 right=keyboard_check_direct(vk_right)
 pleft=keyboard_check_pressed(vk_left)
@@ -249,15 +253,14 @@ if (left)
 if(hsp&lt;-agi){}
 else
 {hsp=-agi}
-
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
 {hsp=agi}
-}
+if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
@@ -304,7 +307,7 @@ if grounded == 0// &amp;&amp; hitstun == 0
     
 //light player collision
 if(place_meeting(x+hsp,y,p1)) hsp=0
-if(image_index=2 &amp;&amp; !place_meeting(x+20,y,p1) &amp;&amp; (sprite_index=spr_magnus_heavy or sprite_index=spr_magnus_launch)) hsp =5*image_xscale
+if(image_index=2 &amp;&amp; !place_meeting(x+5*image_xscale,y,p1) &amp;&amp; (sprite_index=spr_magnus_heavy or sprite_index=spr_magnus_launch)) hsp =5*image_xscale
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -390,7 +393,7 @@ image_index=0
 image_speed=0.2
 attacking=1
 }
-if(sprite_index=spr_magnus_light &amp;&amp; image_index&gt;11)
+if(sprite_index=spr_magnus_light &amp;&amp; image_index&gt;8)
 {
 sprite_index=spr_magnus_idle
 attacking=0
@@ -401,7 +404,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=3
-damage=5
+damage=6
 xscal=4
 yscal=2
 hstun=25
@@ -415,7 +418,7 @@ attacking=1
 }
 if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;=5 &amp;&amp; hit=3)
 {hit=7;hboxhit=0}
-if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;12)
+if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;11)
 {
 sprite_index=spr_magnus_idle
 attacking=0
@@ -426,11 +429,11 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=6
-damage=25
+damage=30
 xscal=13
 yscal=13
 hstun=45
-xpos=hsp+50
+xpos=hsp+58
 ypos=0
 launchh=false
 sprite_index=spr_magnus_forheavy
@@ -439,7 +442,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_magnus_forheavy &amp;&amp; image_index&gt;16)
+if(sprite_index=spr_magnus_forheavy &amp;&amp; image_index&gt;13)
 {hsp+=3*image_xscale
 sprite_index=spr_magnus_idle
 attacking=0
@@ -463,7 +466,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_magnus_heavy &amp;&amp; image_index&gt;11)
+if(sprite_index=spr_magnus_heavy &amp;&amp; image_index&gt;10)
 {hsp+=3*image_xscale
 sprite_index=spr_magnus_idle
 attacking=0
@@ -654,9 +657,9 @@ if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
 if(link!=0) linktime--
 if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
 if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(linkdir)) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=1;sprite_index=linkspr;image_index=0;hit=0}
+if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0)// &amp;&amp; attacking=0)
+if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
 link=1
 linkatk="Z"
@@ -751,7 +754,7 @@ global.p1combo=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y-70,dashtime)
+            <string>
 
 if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (attacking=1 or sprite_index=spr_magnus_dash or sprite_index=spr_magnus_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
