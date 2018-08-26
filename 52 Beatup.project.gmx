@@ -4,11 +4,7 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound">
-    <sound>sound\medpunch1</sound>
-    <sound>sound\harpunch1</sound>
-    <sound>sound\sound2</sound>
-  </sounds>
+  <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="Alan">
       <sprite>sprites\spr_alan_idle</sprite>
@@ -20,7 +16,6 @@
       <sprite>sprites\spr_alan_launch</sprite>
       <sprite>sprites\spr_alan_hit2</sprite>
       <sprite>sprites\spr_alan_hit</sprite>
-      <sprite>sprites\spr_alan_jump</sprite>
       <sprite>sprites\spr_alan_win</sprite>
       <sprite>sprites\spr_alan_lightair</sprite>
       <sprite>sprites\spr_alan_lightupair</sprite>
@@ -36,14 +31,23 @@
         <sprite>sprites\spr_alan_fireball2</sprite>
         <sprite>sprites\spr_alan_specsuper1</sprite>
         <sprite>sprites\spr_alan_spec2</sprite>
+        <sprite>sprites\spr_alan_spec22</sprite>
+        <sprite>sprites\spr_alan_spec23</sprite>
         <sprite>sprites\spr_alan_proj1</sprite>
         <sprite>sprites\spr_alan_superproj1</sprite>
         <sprite>sprites\spr_alan_proj</sprite>
         <sprite>sprites\spr_alan_proj1eff</sprite>
       </sprites>
+      <sprites name="AlanJump">
+        <sprite>sprites\spr_alan_jump</sprite>
+        <sprite>sprites\spr_alan_tjump</sprite>
+        <sprite>sprites\spr_alan_fall</sprite>
+      </sprites>
     </sprites>
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
+      <sprite>sprites\spr_rey_forwalk</sprite>
+      <sprite>sprites\spr_rey_backwalk</sprite>
       <sprite>sprites\spr_rey_light</sprite>
       <sprite>sprites\spr_rey_heavy</sprite>
       <sprite>sprites\spr_rey_launch</sprite>
@@ -53,7 +57,6 @@
       <sprite>sprites\spr_rey_launchair</sprite>
       <sprite>sprites\spr_rey_hit</sprite>
       <sprite>sprites\spr_rey_hit2</sprite>
-      <sprite>sprites\spr_rey_jump</sprite>
       <sprite>sprites\spr_rey_block</sprite>
       <sprite>sprites\spr_rey_dash</sprite>
       <sprite>sprites\spr_rey_backdash</sprite>
@@ -62,15 +65,22 @@
         <sprite>sprites\spr_rey_fireball1</sprite>
         <sprite>sprites\spr_rey_specsuper1</sprite>
       </sprites>
+      <sprites name="ReyJump">
+        <sprite>sprites\spr_rey_jump</sprite>
+        <sprite>sprites\spr_rey_tjump</sprite>
+        <sprite>sprites\spr_rey_fall</sprite>
+      </sprites>
     </sprites>
     <sprites name="Ace">
       <sprite>sprites\spr_ace_idle</sprite>
+      <sprite>sprites\spr_ace_downheavy</sprite>
+      <sprite>sprites\spr_ace_forwalk</sprite>
+      <sprite>sprites\spr_ace_backwalk</sprite>
       <sprite>sprites\spr_ace_hit2</sprite>
       <sprite>sprites\spr_ace_backdash</sprite>
       <sprite>sprites\spr_ace_dash</sprite>
       <sprite>sprites\spr_ace_hit</sprite>
       <sprite>sprites\spr_ace_block</sprite>
-      <sprite>sprites\spr_ace_jump</sprite>
       <sprite>sprites\spr_ace_launchair</sprite>
       <sprite>sprites\spr_ace_light</sprite>
       <sprite>sprites\spr_ace_heavy</sprite>
@@ -80,6 +90,7 @@
       <sprite>sprites\spr_ace_launch</sprite>
       <sprite>sprites\spr_ace_lightair</sprite>
       <sprite>sprites\spr_ace_heavyair</sprite>
+      <sprite>sprites\spr_ace_grenade</sprite>
       <sprite>sprites\spr_ace_bullet</sprite>
       <sprites name="acespecials">
         <sprite>sprites\spr_ace_fireball</sprite>
@@ -88,10 +99,16 @@
         <sprite>sprites\spr_ace_specsuper1</sprite>
         <sprite>sprites\spr_ace_pan</sprite>
       </sprites>
-      <sprite>sprites\spr_ace_grenade</sprite>
+      <sprites name="AceJump">
+        <sprite>sprites\spr_ace_jump</sprite>
+        <sprite>sprites\spr_ace_tjump</sprite>
+        <sprite>sprites\spr_ace_fall</sprite>
+      </sprites>
     </sprites>
     <sprites name="Alta">
       <sprite>sprites\spr_alta_idle</sprite>
+      <sprite>sprites\spr_alta_forwalk</sprite>
+      <sprite>sprites\spr_alta_backwalk</sprite>
       <sprite>sprites\spr_alta_light</sprite>
       <sprite>sprites\spr_alta_light2</sprite>
       <sprite>sprites\spr_alta_heavy</sprite>
@@ -106,18 +123,28 @@
       <sprite>sprites\spr_alta_hit</sprite>
       <sprite>sprites\spr_alta_backdash</sprite>
       <sprite>sprites\spr_alta_dash</sprite>
-      <sprite>sprites\spr_alta_jump</sprite>
       <sprites name="AltaSpecials">
-        <sprite>sprites\spr_alta_fireball1</sprite>
-        <sprite>sprites\spr_alta_proj</sprite>
-        <sprite>sprites\spr_alta_superproj1</sprite>
-        <sprite>sprites\spr_alta_superproj1b</sprite>
-        <sprite>sprites\spr_alta_superproj2</sprite>
-        <sprite>sprites\spr_alta_specsuper1</sprite>
+        <sprite>sprites\spr_alta_spec1</sprite>
+        <sprite>sprites\spr_alta_spec1c</sprite>
+        <sprites name="trash">
+          <sprite>sprites\spr_alta_proj</sprite>
+          <sprite>sprites\spr_alta_superproj1b</sprite>
+          <sprite>sprites\spr_alta_superproj2</sprite>
+          <sprite>sprites\spr_alta_specsuper1</sprite>
+          <sprite>sprites\spr_alta_fireball1</sprite>
+          <sprite>sprites\spr_alta_superproj1</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="AltaJump">
+        <sprite>sprites\spr_alta_jump</sprite>
+        <sprite>sprites\spr_alta_tjump</sprite>
+        <sprite>sprites\spr_alta_fall</sprite>
       </sprites>
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_forwalk</sprite>
+      <sprite>sprites\spr_jack_backwalk</sprite>
       <sprite>sprites\spr_jack_light</sprite>
       <sprite>sprites\spr_jack_forlight</sprite>
       <sprite>sprites\spr_jack_heavy</sprite>
@@ -130,17 +157,24 @@
       <sprite>sprites\spr_jack_backdash</sprite>
       <sprite>sprites\spr_jack_dash</sprite>
       <sprite>sprites\spr_jack_block</sprite>
-      <sprite>sprites\spr_jack_jump</sprite>
       <sprites name="jackspecials">
         <sprite>sprites\spr_jackitems</sprite>
         <sprite>sprites\spr_jackitemeff</sprite>
         <sprite>sprites\spr_jack_specsuper1</sprite>
         <sprite>sprites\spr_jack_flurry</sprite>
         <sprite>sprites\spr_jack_fireball1</sprite>
+        <sprite>sprites\spr_jack_spec21</sprite>
+      </sprites>
+      <sprites name="JacksonJump">
+        <sprite>sprites\spr_jack_jump</sprite>
+        <sprite>sprites\spr_jack_tjump</sprite>
+        <sprite>sprites\spr_jack_fall</sprite>
       </sprites>
     </sprites>
     <sprites name="Magnus">
       <sprite>sprites\spr_magnus_idle</sprite>
+      <sprite>sprites\spr_magnus_forwalk</sprite>
+      <sprite>sprites\spr_magnus_backwalk</sprite>
       <sprite>sprites\spr_magnus_light</sprite>
       <sprite>sprites\spr_magnus_forlight</sprite>
       <sprite>sprites\spr_magnus_heavy</sprite>
@@ -152,7 +186,6 @@
       <sprite>sprites\spr_magnus_block</sprite>
       <sprite>sprites\spr_magnus_backdash</sprite>
       <sprite>sprites\spr_magnus_dash</sprite>
-      <sprite>sprites\spr_magnus_jump</sprite>
       <sprite>sprites\spr_magnus_heavyair</sprite>
       <sprite>sprites\spr_magnus_launchair</sprite>
       <sprite>sprites\spr_magnus_lightair</sprite>
@@ -163,6 +196,11 @@
         <sprite>sprites\spr_magnus_fireball1</sprite>
         <sprite>sprites\spr_magnus_specsuper1</sprite>
       </sprites>
+      <sprites name="Magnusjump">
+        <sprite>sprites\spr_magnus_jump</sprite>
+        <sprite>sprites\spr_magnus_tjump</sprite>
+        <sprite>sprites\spr_magnus_fall</sprite>
+      </sprites>
     </sprites>
     <sprites name="Skip">
       <sprite>sprites\spr_skip_idle</sprite>
@@ -170,12 +208,13 @@
     </sprites>
     <sprites name="Haley">
       <sprite>sprites\spr_haley_idle</sprite>
+      <sprite>sprites\spr_haley_jump</sprite>
       <sprite>sprites\spr_haley_light</sprite>
+      <sprite>sprites\spr_haley_heavy</sprite>
       <sprite>sprites\spr_haley_launch</sprite>
     </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
-    <sprite>sprites\spr_buffcards</sprite>
     <sprite>sprites\spr_activecards</sprite>
     <sprite>sprites\spr_supercards</sprite>
     <sprite>sprites\spr_debuffcards</sprite>
@@ -194,6 +233,7 @@
       <sprite>sprites\dasheffect</sprite>
     </sprites>
     <sprite>sprites\pictureedit</sprite>
+    <sprite>sprites\spr_buffcards</sprite>
     <sprite>sprites\pickacard</sprite>
     <sprite>sprites\readysetgo</sprite>
     <sprite>sprites\spr_ko</sprite>
@@ -206,6 +246,7 @@
     <sprite>sprites\spr_whiteflash</sprite>
     <sprite>sprites\spr_abicount</sprite>
     <sprite>sprites\tw</sprite>
+    <sprite>sprites\spr_flavortext</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -237,8 +278,6 @@
     <object>objects\p1</object>
     <object>objects\p2</object>
     <object>objects\ground</object>
-    <object>objects\obj_hiteffect</object>
-    <object>objects\obj_blockeffect</object>
     <object>objects\card1</object>
     <object>objects\gal</object>
     <object>objects\camera</object>
@@ -246,6 +285,8 @@
     <object>objects\restart_match</object>
     <objects name="effects">
       <object>objects\obj_alanfireball0</object>
+      <object>objects\obj_blockeffect</object>
+      <object>objects\obj_hiteffect</object>
       <object>objects\obj_start</object>
       <object>objects\obj_jumpeffect</object>
       <object>objects\obj_ko</object>
@@ -287,6 +328,7 @@
     <object>objects\p1proj</object>
     <object>objects\p2proj</object>
     <object>objects\meme</object>
+    <object>objects\obj_flavourtext</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\char_select</room>

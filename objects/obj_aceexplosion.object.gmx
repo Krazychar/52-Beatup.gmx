@@ -51,7 +51,7 @@ image_yscale=4
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(place_meeting(x,y,p2) &amp;&amp; hit&gt;=4)
+            <string>if(place_meeting(x,y,p2) &amp;&amp; hit&lt;=4)
 {
 global.p1combo++
 hit++

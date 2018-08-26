@@ -41,6 +41,7 @@ hboxhit=0
 dashtime=0
 angle=0
 dashdirection=0
+ImagePL=sprite_index
 //special move variables
 link=false
 linktime=0
@@ -51,7 +52,7 @@ FBlv=1
 RDlv=1
 GBlv=1
 //battle variables
-agi=3
+agi=4
 dashing=0
 dashcheck=0
 block=0
@@ -148,7 +149,6 @@ airMovementDir = 0;
 //keep the player out of the wall
 if(place_meeting(x,y,ground)){x+=2*image_xscale}
 
-
 left=keyboard_check_direct(vk_left)
 right=keyboard_check_direct(vk_right)
 pleft=keyboard_check_pressed(vk_left)
@@ -214,7 +214,7 @@ if(dashtime&lt;=0 &amp;&amp; (sprite_index==spr_rey_dash or sprite_index==spr_re
     dashdirection=0
     }
 
-if(sprite_index=spr_rey_idle) freakingslickdash=0
+if(sprite_index=spr_rey_idle or sprite_index=spr_rey_forwalk or sprite_index=spr_rey_backwalk) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
@@ -237,14 +237,21 @@ if(grounded=0 &amp;&amp; dashing=0)
     dashing=0
     dashtime=0
     }
-
-if(attacking==0 &amp;&amp; vsp&lt;0 &amp;&amp; !place_meeting(x,y+3,ground))
-{sprite_index=spr_rey_jump}
-if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1)
-{sprite_index=spr_rey_idle}
-if(attacking=0 or grounded=0)
+//key moev..ment
+if(attacking==0 &amp;&amp; vsp&lt;-2 &amp;&amp; !place_meeting(x,y+3,ground)) sprite_index=spr_rey_jump
+if(attacking==0 &amp;&amp; vsp&gt;=-2 &amp;&amp; vsp &lt;=1 &amp;&amp; !place_meeting(x,y+3,ground)) sprite_index=spr_rey_tjump
+if(attacking==0 &amp;&amp; vsp&gt;1 &amp;&amp; !place_meeting(x,y+3,ground)) sprite_index=spr_rey_fall
+if(attacking==0 &amp;&amp; hsp==0 &amp;&amp; grounded=1) sprite_index=spr_rey_idle
+if(attacking==0 &amp;&amp; grounded=1)
 {
-if(dashing=0 &amp;&amp; hitstun&lt;=0)
+if(left &amp;&amp; sign(image_xscale)=1) sprite_index=spr_rey_backwalk
+if(left &amp;&amp; sign(image_xscale)=-1) sprite_index=spr_rey_forwalk
+if(right &amp;&amp; sign(image_xscale)=1) sprite_index=spr_rey_forwalk
+if(right &amp;&amp; sign(image_xscale)=-1) sprite_index=spr_rey_backwalk
+}
+if(attacking==0 or grounded==0)
+{
+if(dashing==0 &amp;&amp; hitstun&lt;=0)
 {
 if (left)
 
@@ -362,7 +369,7 @@ sprite_index=spr_rey_jump
 attacking=0
 }
 
-if((sprite_index=spr_rey_heavyair or sprite_index=spr_rey_lightair or sprite_index=spr_rey_launchair or sprite_index=spr_rey_heavyforair) &amp;&amp; place_meeting(x,y+1,ground)) 
+if((sprite_index=spr_rey_fireball1 &amp;&amp; sprite_index=spr_rey_heavyair or sprite_index=spr_rey_lightair or sprite_index=spr_rey_launchair or sprite_index=spr_rey_heavyforair) &amp;&amp; place_meeting(x,y+1,ground)) 
 {
 sprite_index=spr_rey_idle
 freakingslickdash=0
@@ -480,7 +487,7 @@ hit=3
 damage=16
 xscal=10
 yscal=4
-hstun=40
+hstun=35
 xpos=hsp+20
 ypos=+20
 launchh=false
@@ -503,7 +510,7 @@ hit=4
 damage=25
 xscal=10
 yscal=4
-hstun=36
+hstun=30
 xpos=hsp+20
 ypos=+20
 launchh=false
@@ -696,6 +703,32 @@ global.p1combo=0
       </action>
       <action>
         <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reset Image_index Code (ImagePL)
+if(sprite_index!=ImagePL)
+{
+image_index=0
+ImagePL=sprite_index
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>424</id>
         <kind>2</kind>
         <userelative>0</userelative>
@@ -733,11 +766,12 @@ if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (sprite_i
 freakingslickdash=1
 draw_set_color(c_blue)
 draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,4,0,c_green,0.4)
-
 }
+
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
-draw_text(x,y-100,global.roundEnd)
+
+if(global.p2combo=0) freakingslickdash=0
 
 if(keyboard_check_pressed(ord("B")))
 {

@@ -59,6 +59,7 @@ image_blend=c_white
 if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=0)
 {
 hitt=1
+p1.image_blend=c_yellow
 p2.damage=15
 global.p2combo++
 camera.shakeIntensity=5

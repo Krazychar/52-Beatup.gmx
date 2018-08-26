@@ -268,7 +268,11 @@ if(p2.hp&lt;=0)
 //timeEnd++
 
 }
-
+if(timeEnd=1)
+{
+if(p1.hp&lt;=0)p2win++
+if(p2.hp&lt;=0)p1win++
+}
 if(timeEnd&gt;=40 &amp;&amp; timeEnd&lt;=100 &amp;&amp; !instance_exists(ftb))
 {
 instance_create(x,y,ftb)
@@ -439,6 +443,30 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
 
 
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="81">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>p1.hp=9999
+p2.hp=9999
 </string>
           </argument>
         </arguments>

@@ -85,13 +85,13 @@ p1.image_index=0
 camera.x+=p2.damage*p2.image_xscale
 global.p2combo++
 if(p2.attacking!=2)p2.cancel=1
-camera.shakeIntensity=p2.damage*p2.image_xscale/8
+camera.shakeIntensity=round(p2.damage*p2.image_xscale/6)
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 room_speed=60-p2.hstun/2
 if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/5)*p2.image_xscale
 else p2.x-=round(p2.damage/5)*p2.image_xscale
 if(p2.rage=false) p1.hp-=p2.damage+p2.atk
-else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/25)
+else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/75)
 p1.hitstun+=p2.hstun-(round(global.p2combo*2.5))
 //death effect
 if(p1.hp&lt;=0)

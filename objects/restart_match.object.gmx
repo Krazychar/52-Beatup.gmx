@@ -31,6 +31,7 @@ image_yscale=400
 x=view_xview[0]+view_wview[0]/2
 y=view_yview[0]+view_hview[0]/2
 timer=0
+
 </string>
           </argument>
         </arguments>
