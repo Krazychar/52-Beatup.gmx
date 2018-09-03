@@ -149,12 +149,16 @@ airMovementDir = 0;
 //keep the player out of the wall
 if(place_meeting(x,y,ground)){x+=2*image_xscale}
 
-
-left=keyboard_check_direct(vk_left)
-right=keyboard_check_direct(vk_right)
-pleft=keyboard_check_pressed(vk_left)
-pright=keyboard_check_pressed(vk_right)
-jump=keyboard_check_direct(vk_up)
+//left=keyboard_check_direct(vk_left)
+left=gamepad_button_check(0,gp_padl)
+//right=keyboard_check_direct(vk_right)
+right=gamepad_button_check(0,gp_padr)
+//pleft=keyboard_check_pressed(vk_left)
+pleft=gamepad_button_check_pressed(0,gp_padl)
+//pright=keyboard_check_pressed(vk_right)
+pright=gamepad_button_check_pressed(0,gp_padr)
+//jump=keyboard_check_direct(vk_up)
+jump=gamepad_button_check(0,gp_padu)
 //move left and right
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
     {
@@ -353,9 +357,12 @@ vsp+=grav
           <argument>
             <kind>1</kind>
             <string>///attacking
-light=keyboard_check_pressed(ord("Z"))
-heavy=keyboard_check_pressed(ord("X"))
-launch=keyboard_check_pressed(ord("C"))
+//light=keyboard_check_pressed(ord("Z"))
+light=gamepad_button_check_pressed(0,gp_face3)
+//heavy=keyboard_check_pressed(ord("X"))
+heavy=gamepad_button_check_pressed(0,gp_face4)
+//launch=keyboard_check_pressed(ord("C"))
+launch=gamepad_button_check_pressed(0,gp_face2)
 //face direction
 if(grounded=1 &amp;&amp; attacking=0)
 {
@@ -388,11 +395,11 @@ if(place_meeting(x,y+1,ground))
 if(light &amp;&amp; (attacking=0 or cancel=1)&amp;&amp; sprite_index=spr_alta_light &amp;&amp; sprite_index!=spr_alta_forheavy)
 {cancel=0
 hboxhit=0
-hit=3
+hit=2
 damage=6
 xscal=6
 yscal=6
-hstun=30
+hstun=40
 xpos=hsp+35
 ypos=-13
 launchh=false
@@ -402,7 +409,7 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_alta_light2&amp;&amp; image_index&gt;9)
+if(sprite_index=spr_alta_light2&amp;&amp; image_index&gt;8)
 {
 sprite_index=spr_alta_idle
 attacking=0
@@ -411,11 +418,11 @@ image_index=0
 if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_light2 &amp;&amp; sprite_index!=spr_alta_light&amp;&amp; sprite_index!=spr_alta_heavy &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
 {cancel=0
 hboxhit=0
-hit=3
+hit=2
 damage=8
 xscal=6
 yscal=6
-hstun=30
+hstun=40
 xpos=hsp+35
 ypos=-13
 launchh=false
@@ -425,7 +432,7 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;8)
+if(sprite_index=spr_alta_light&amp;&amp; image_index&gt;7)
 {
 sprite_index=spr_alta_idle
 attacking=0
@@ -450,7 +457,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;7)
+if(sprite_index=spr_alta_heavy &amp;&amp; image_index&gt;8)
 {hsp+=3*image_xscale
 sprite_index=spr_alta_idle
 attacking=0
@@ -484,7 +491,7 @@ image_index=0
 if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_launch &amp;&amp; sprite_index!=spr_alta_forheavy)
 {hboxhit=0
 cancel=0
-hit=4
+hit=3
 damage=20
 hstun=55
 xscal=2
@@ -512,11 +519,11 @@ else
 if(light &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair  &amp;&amp; sprite_index!=spr_alta_lightair)
 {cancel=0
 hboxhit=0
-hit=3
+hit=2
 damage=12
 xscal=5
 yscal=10
-hstun=28
+hstun=40
 xpos=hsp+38
 ypos=-37
 launchh=false
@@ -536,11 +543,11 @@ image_index=0
 if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_alta_heavyair &amp;&amp; sprite_index!=spr_alta_launchair)
 {cancel=0
 hboxhit=0
-hit=2
+hit=4
 damage=15
 xscal=10
 yscal=10
-hstun=25
+hstun=45
 xpos=hsp+5
 ypos=0
 launchh=false
@@ -567,7 +574,7 @@ hit=3
 damage=20
 xscal=5
 yscal=12
-hstun=25
+hstun=50
 xpos=hsp+50
 ypos=-5
 launchh=false
@@ -612,7 +619,7 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
           <argument>
             <kind>1</kind>
             <string>///blocking
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking=true or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking!=0 or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
 attacking=1
 hsp=0
@@ -625,7 +632,7 @@ attacking=0
 block=0
 sprite_index=spr_alta_idle
 }
-if(attacking=false)
+if(sprite_index!=spr_alta_block)
 {block=0
 image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
@@ -691,31 +698,15 @@ global.p1combo=0
             <kind>1</kind>
             <string>///Special Moves (Holy Heck)
 down=keyboard_check_pressed(vk_down)
-if(image_xscale&gt;0) 
+if(hitstun=0)
 {
-forward=vk_right
-backward=vk_left
-}
-else
-{
-forward=vk_left
-backward=vk_right
-}
-//Input Checker
-if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
-if(link!=0) linktime--
-if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
-if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(linkdir)) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
 //FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(0,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
-link=1
-linkatk="Z"
-linkdir=forward
 if(FBlv=1)linkspr=spr_alta_fireball1
 if(FBlv=2)linkspr=spr_alan_fireball
 if(FBlv=3)linkspr=spr_alan_fireball2
+attacking=2;abi--;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
 if(sprite_index=spr_alta_fireball1 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+30,obj_altafireball)}
@@ -729,7 +720,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
 
 
-
+}
 </string>
           </argument>
         </arguments>
@@ -793,7 +784,7 @@ ImagePL=sprite_index
           <argument>
             <kind>1</kind>
             <string>
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp; (sprite_index=spr_alta_dash or sprite_index=spr_alta_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_alta_dash or sprite_index=spr_alta_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_purple)
@@ -805,7 +796,7 @@ if(place_meeting(x,y+1,ground))
 
 if(global.p2combo=0) freakingslickdash=0
 
-if(keyboard_check_pressed(ord("B")))
+if(gamepad_button_check_pressed(0,gp_shoulderlb) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=1
@@ -845,7 +836,16 @@ if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit
 
 if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=26)
 {hit=0;attacking=0;image_speed=0.2;sprite_index=spr_alta_idle}
-
+//Outline Code//
+draw_sprite_ext(sprite_index,image_index,x+4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y  ,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y  ,image_xscale,4,0,c_black,1)
+//Outline Code//
 draw_self()
 
 </string>

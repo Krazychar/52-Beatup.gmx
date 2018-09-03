@@ -54,7 +54,7 @@ instance_create(x,y,obj_whiteflash)
             <kind>1</kind>
             <string> 
 
-if(place_meeting(x,y,p1) &amp;&amp; hitt=0)
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=false)
 {
 hitt=1
 p2.damage=15
@@ -67,6 +67,14 @@ else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/25)
 p1.hitstun=30
 p1.vsp=-1
 instance_create(x,y,jackitemeffect)
+}
+
+if(place_meeting(x,y,p1) &amp;&amp; p1.block=true)
+{
+instance_create(p1.x,p1.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p1.image_xscale
+instance_destroy()
+p1.hp-=3
 }
 </string>
           </argument>

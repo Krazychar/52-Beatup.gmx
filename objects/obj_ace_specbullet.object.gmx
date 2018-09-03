@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>p1proj</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -80,7 +80,9 @@ image_angle=direction
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>p2.image_index=0
+            <string>if(p2.block=false)
+{
+p2.image_index=0
 p1.damage=10
 p2.hitstun=30
 global.p1combo++
@@ -92,6 +94,14 @@ if(p1.rage=false) p2.hp-=p1.damage+p1.atk
 else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
 instance_create(x,y,jackitemeffect)
 instance_destroy()
+}
+else
+{
+instance_create(p2.x,p2.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p2.image_xscale
+p2.hp-=1
+instance_destroy()
+}
 </string>
           </argument>
         </arguments>

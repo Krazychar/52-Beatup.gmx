@@ -62,7 +62,7 @@ cancel=0
 hp=170
 mhp=hp
 atk=1
-abi=6
+abi=9
 mabi=abi
 projdef=0
 dashlng=23
@@ -384,7 +384,7 @@ if(place_meeting(x,y+1,ground))
 if(light &amp;&amp; (attacking=0 or cancel=1)  &amp;&amp; sprite_index!=spr_ace_downheavy  &amp;&amp; sprite_index!=spr_ace_light &amp;&amp; sprite_index!=spr_ace_heavy &amp;&amp; sprite_index!=spr_ace_launch &amp;&amp; sprite_index!=spr_ace_heavy2 &amp;&amp; sprite_index!=spr_ace_heavy3 &amp;&amp; sprite_index!=spr_ace_heavy4)
 {cancel=0
 hboxhit=0
-hit=1
+hit=2
 damage=7
 xscal=4
 yscal=2
@@ -398,7 +398,7 @@ image_speed=0.2
 hsp=1
 attacking=1
 }
-if(sprite_index=spr_ace_light &amp;&amp; image_index&gt;5)
+if(sprite_index=spr_ace_light &amp;&amp; image_index&gt;6)
 {
 sprite_index=spr_ace_idle
 attacking=0
@@ -455,7 +455,7 @@ attacking=0
 image_index=0
 }
 //2nd hit
-if(heavy &amp;&amp; dashing=0 &amp;&amp; sprite_index=spr_ace_heavy)
+if(heavy &amp;&amp; dashing=0 &amp;&amp; cancel=1 &amp;&amp; sprite_index=spr_ace_heavy)
 {cancel=0
 hboxhit=0
 hit=2
@@ -482,7 +482,7 @@ image_index=0
 if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &amp;&amp; heavy &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1)  &amp;&amp; sprite_index!=spr_ace_downheavy  &amp;&amp; sprite_index!=spr_alan_launch &amp;&amp; sprite_index!=spr_ace_heavy &amp;&amp; sprite_index!=spr_ace_heavy2 &amp;&amp; sprite_index!=spr_ace_heavy3 &amp;&amp; sprite_index!=spr_ace_heavy4)
 {cancel=0
 hboxhit=0
-hit=2
+hit=3
 damage=12
 hstun=45
 xscal=4
@@ -496,7 +496,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_ace_heavy &amp;&amp; image_index&gt;7)
+if(sprite_index=spr_ace_heavy &amp;&amp; image_index&gt;8)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
 attacking=0
@@ -708,7 +708,7 @@ global.p2combo=0
           <argument>
             <kind>1</kind>
             <string>///blocking
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking=true or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking!=0 or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
 {
 attacking=1
 hsp=0
@@ -722,7 +722,7 @@ block=0
 sprite_index=spr_ace_idle
 image_blend=c_white
 }
-if(attacking=false)
+if(sprite_index!=spr_ace_block)
 {block=0
 image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
@@ -750,31 +750,15 @@ attacking=0}
             <kind>1</kind>
             <string>///Special Moves (Holy Heck)
 down=keyboard_check_pressed(ord("S"))
-if(image_xscale&gt;0) 
+if(hitstun=0)
 {
-forward="D"
-backward="A"
-}
-else
+//Gunshot
+if(keyboard_check_pressed(ord("U")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
 {
-forward="A"
-backward="D"
-}
-//Input Checker
-if(link=1 &amp;&amp; linktime&lt;=0) linktime=20
-if(link!=0) linktime--
-if(link!=0 &amp;&amp; linktime&lt;5) {link=0;linktime=0}
-if(link=1 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkdir))) {link=2;linktime=20}
-if(link=2 &amp;&amp; linktime&gt;4 &amp;&amp; keyboard_check_pressed(ord(linkatk)) &amp;&amp; abi&gt;0) {abi--;attacking=2;sprite_index=linkspr;image_index=0;hit=0}
-//FireBall
-if(down &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
-{
-link=1
-linkatk="J"
-linkdir=forward
 if(FBlv=1)linkspr=spr_ace_fireball
 if(FBlv=2)linkspr=spr_ace_fireball2
 if(FBlv=3)linkspr=spr_ace_fireball3
+hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
 }
 //FB1
 if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+25*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
@@ -787,7 +771,18 @@ if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0)
 if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2;instance_create(x+25*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
 if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
 
-
+//Scorched Earth
+if(keyboard_check_pressed(ord("I")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
+{
+if(FBlv=1)linkspr=spr_ace_spec21
+if(FBlv=2)linkspr=spr_ace_fireball2
+if(FBlv=3)linkspr=spr_ace_fireball3
+hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
+}
+//FB1
+if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+25*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acebottle1)}
+if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=12) {attacking=0;sprite_index=spr_ace_idle}
+}
 </string>
           </argument>
         </arguments>
@@ -852,7 +847,7 @@ ImagePL=sprite_index
             <kind>1</kind>
             <string>
 
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_ace_dash or sprite_index=spr_ace_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_ace_dash or sprite_index=spr_ace_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_black)
@@ -860,9 +855,19 @@ draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscal
 }
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
+//Outline Code//
+draw_sprite_ext(sprite_index,image_index,x+4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y  ,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y  ,image_xscale,4,0,c_black,1)
+//Outline Code//
 draw_self()
 
-if(keyboard_check_pressed(ord("H")))
+if(keyboard_check_pressed(ord("H")) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=1

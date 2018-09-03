@@ -55,6 +55,7 @@
       <sprite>sprites\spr_rey_heavyair</sprite>
       <sprite>sprites\spr_rey_heavyforair</sprite>
       <sprite>sprites\spr_rey_launchair</sprite>
+      <sprite>sprites\spr_rey_break</sprite>
       <sprite>sprites\spr_rey_hit</sprite>
       <sprite>sprites\spr_rey_hit2</sprite>
       <sprite>sprites\spr_rey_block</sprite>
@@ -63,6 +64,7 @@
       <sprites name="ElreySpecials">
         <sprite>sprites\spr_rey_proj</sprite>
         <sprite>sprites\spr_rey_fireball1</sprite>
+        <sprite>sprites\spr_rey_spec21</sprite>
         <sprite>sprites\spr_rey_specsuper1</sprite>
       </sprites>
       <sprites name="ReyJump">
@@ -91,11 +93,14 @@
       <sprite>sprites\spr_ace_lightair</sprite>
       <sprite>sprites\spr_ace_heavyair</sprite>
       <sprite>sprites\spr_ace_grenade</sprite>
+      <sprite>sprites\spr_ace_grenade2</sprite>
       <sprite>sprites\spr_ace_bullet</sprite>
       <sprites name="acespecials">
         <sprite>sprites\spr_ace_fireball</sprite>
         <sprite>sprites\spr_ace_fireball2</sprite>
         <sprite>sprites\spr_ace_fireball3</sprite>
+        <sprite>sprites\spr_ace_spec21_burn</sprite>
+        <sprite>sprites\spr_ace_spec21</sprite>
         <sprite>sprites\spr_ace_specsuper1</sprite>
         <sprite>sprites\spr_ace_pan</sprite>
       </sprites>
@@ -195,6 +200,7 @@
         <sprite>sprites\spr_magnus_specproj1</sprite>
         <sprite>sprites\spr_magnus_fireball1</sprite>
         <sprite>sprites\spr_magnus_specsuper1</sprite>
+        <sprite>sprites\spr_magnus_spec21</sprite>
       </sprites>
       <sprites name="Magnusjump">
         <sprite>sprites\spr_magnus_jump</sprite>
@@ -243,10 +249,11 @@
     <sprite>sprites\p2mouse</sprite>
     <sprite>sprites\spr_shooteffect</sprite>
     <sprite>sprites\spr_acereflect</sprite>
-    <sprite>sprites\spr_whiteflash</sprite>
+    <sprite>sprites\_</sprite>
     <sprite>sprites\spr_abicount</sprite>
     <sprite>sprites\tw</sprite>
     <sprite>sprites\spr_flavortext</sprite>
+    <sprite>sprites\__twit</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -282,6 +289,7 @@
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>
+    <object>objects\obj_winflash</object>
     <object>objects\restart_match</object>
     <objects name="effects">
       <object>objects\obj_alanfireball0</object>
@@ -290,8 +298,6 @@
       <object>objects\obj_start</object>
       <object>objects\obj_jumpeffect</object>
       <object>objects\obj_ko</object>
-      <object>objects\obj_acefireball</object>
-      <object>objects\obj_ace_grenade</object>
       <object>objects\obj_jackslasheff1</object>
       <object>objects\obj_jackitems</object>
       <object>objects\obj_reyfireball</object>
@@ -299,20 +305,25 @@
       <object>objects\obj_magnussuper1</object>
       <object>objects\obj_magnusfireball</object>
       <object>objects\obj_altafireball</object>
-      <object>objects\obj_aceexplosion</object>
       <object>objects\jackitemeffect</object>
       <object>objects\obj_whiteflash</object>
-      <object>objects\obj_winflash</object>
       <object>objects\alanfireballeff</object>
       <object>objects\obj_acereflect</object>
       <object>objects\obj_alanfireball</object>
-      <object>objects\obj_ace_specbullet</object>
       <object>objects\obj_altasuper1A</object>
       <object>objects\obj_altasuper1B</object>
       <object>objects\obj_dasheffect</object>
       <object>objects\obj_bdasheffect</object>
       <object>objects\obj_alansuper1</object>
-      <object>objects\obj_shooteffect</object>
+      <objects name="AceEffects">
+        <object>objects\obj_aceexplosion</object>
+        <object>objects\obj_aceburn</object>
+        <object>objects\obj_acefireball</object>
+        <object>objects\obj_ace_grenade</object>
+        <object>objects\obj_acebottle1</object>
+        <object>objects\obj_shooteffect</object>
+        <object>objects\obj_ace_specbullet</object>
+      </objects>
     </objects>
     <objects name="CharacterSelect">
       <object>objects\charselect</object>

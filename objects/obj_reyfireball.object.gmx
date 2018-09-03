@@ -74,8 +74,14 @@ p1.vsp=-1
 instance_create(x,y,jackitemeffect)
 instance_destroy()
 }
-if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=1)
-{hitt=1}
+if(place_meeting(x,y,p1) &amp;&amp; p1.block=true)
+{
+instance_create(p1.x,p1.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p1.image_xscale
+instance_destroy()
+hitt=1
+p1.hp-=5
+}
 </string>
           </argument>
         </arguments>

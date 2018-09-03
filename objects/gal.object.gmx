@@ -228,6 +228,19 @@ cardpick=false
           <argument>
             <kind>1</kind>
             <string>///Rounnnnnd Endddd!!!!
+if(p1.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
+{
+instance_create(x,y,obj_winflash)
+p1.vsp=-6
+}
+
+
+if(p2.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
+{
+instance_create(x,y,obj_winflash)
+p2.vsp=-6
+}
+
 if(global.roundEnd=0)
 {
 if(p1.hp&lt;=0)

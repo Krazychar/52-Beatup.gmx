@@ -35,5 +35,11 @@
     <frame index="12">images\spr_jack_spec21_12.png</frame>
     <frame index="13">images\spr_jack_spec21_13.png</frame>
     <frame index="14">images\spr_jack_spec21_14.png</frame>
+    <frame index="15">images\spr_jack_spec21_15.png</frame>
+    <frame index="16">images\spr_jack_spec21_16.png</frame>
+    <frame index="17">images\spr_jack_spec21_17.png</frame>
+    <frame index="18">images\spr_jack_spec21_18.png</frame>
+    <frame index="19">images\spr_jack_spec21_19.png</frame>
+    <frame index="20">images\spr_jack_spec21_20.png</frame>
   </frames>
 </sprite>

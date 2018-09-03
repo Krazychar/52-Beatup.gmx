@@ -327,8 +327,8 @@ if grounded == 0// &amp;&amp; hitstun == 0
     
 //light player collision
 if(place_meeting(x+hsp,y,p2)) hsp=0
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2)) hsp = 3 * image_xscale
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; place_meeting(x+3*image_xscale,y,p2)) hsp = p2.hsp
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; image_index&lt;=8 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2)) hsp = 2 * image_xscale
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; image_index&lt;=8 &amp;&amp;  place_meeting(x+3*image_xscale,y,p2)) hsp = p2.hsp
 //horizontal collision   
 if place_meeting(x+hsp,y,ground)
 {
@@ -415,7 +415,7 @@ hsp=1
 attacking=1
 angle=0
 }
-if(sprite_index=spr_jack_light &amp;&amp; image_index&gt;5)
+if(sprite_index=spr_jack_light &amp;&amp; image_index&gt;6)
 {
 sprite_index=spr_jack_idle
 attacking=0
@@ -440,7 +440,7 @@ hsp=1
 attacking=1
 angle=0
 }
-if(sprite_index=spr_jack_forlight &amp;&amp; image_index&gt;5)
+if(sprite_index=spr_jack_forlight &amp;&amp; image_index&gt;8)
 {
 sprite_index=spr_jack_idle
 attacking=0
@@ -607,7 +607,7 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
             <kind>1</kind>
             <string>///blocking
 
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking=true or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=false)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking!=0 or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
 {
 attacking=1
 hsp=0
@@ -621,7 +621,7 @@ block=0
 sprite_index=spr_jack_idle
 image_blend=c_white
 }
-if(attacking=false)
+if(sprite_index!=spr_jack_block)
 {block=0
 image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
@@ -649,6 +649,8 @@ attacking=0}
             <kind>1</kind>
             <string>///Special Moves (Holy Heck)
 down=keyboard_check_pressed(ord("S"))
+if(hitstun=0)
+{
 //FireBall
 if(abi&gt;0 &amp;&amp; keyboard_check_pressed(ord("U")) &amp;&amp; grounded=1 &amp;&amp; link=0 &amp;&amp; attacking!=2)
 {
@@ -678,10 +680,11 @@ if(RDlv=3)linkspr=spr_alan_fireball2
 abi-=1;attacking=2;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hsp=5*image_xscale;vsp=-10;launchh=true;xscal=4;yscal=10;xpos=20*image_xscale;damage=15;hstun=30;hit=1;instance_create(x+20*image_xscale,y-16,p1hbox)}
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hsp=3*image_xscale;vsp=-8;launchh=true;xscal=4;yscal=10;xpos=20*image_xscale;damage=15;hstun=30;hit=2;instance_create(x+20*image_xscale,y-16,p1hbox)}
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=2) {hsp=1*image_xscale;vsp=-6;launchh=false;xscal=4;yscal=10;xpos=20*image_xscale;damage=15;hstun=30;hit=3;instance_create(x+20*image_xscale,y-16,p1hbox)}
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_jack_jump}
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hsp=1*image_xscale;vsp=-10;launchh=true;xscal=4;yscal=10;xpos=20*image_xscale;damage=15;hstun=30;hit=1;instance_create(x+20*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hsp=1*image_xscale;vsp=-8;launchh=true;xscal=4;yscal=10;xpos=20*image_xscale;damage=15;hstun=30;hit=2;instance_create(x+20*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=14) {attacking=0;sprite_index=spr_jack_jump}
+
+}
 </string>
           </argument>
         </arguments>
@@ -785,7 +788,7 @@ ImagePL=sprite_index
             <kind>1</kind>
             <string>
 
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0   &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_red)
@@ -839,7 +842,7 @@ if(sprite_index=spr_jack_flurry &amp;&amp; image_index&gt;=29 &amp;&amp; hit=11)
 {instance_create(x+40*image_xscale,y,p1hbox);hit++}
 
 
-if(keyboard_check_pressed(ord("H")))
+if(keyboard_check_pressed(ord("H")) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=1
@@ -878,7 +881,16 @@ if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=19 &amp;&amp; hit
 
 if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=21 &amp;&amp; hit=4)
 {instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);instance_create(x+15*image_xscale,y+55,obj_jackitems);hit++}
-
+//Outline Code//
+draw_sprite_ext(sprite_index,image_index,x+4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y+4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x  ,y-4,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x+4,y  ,image_xscale,4,0,c_black,1)
+draw_sprite_ext(sprite_index,image_index,x-4,y  ,image_xscale,4,0,c_black,1)
+//Outline Code//
 draw_self()
 
 if(sprite_index=spr_jack_specsuper1 &amp;&amp; image_index&gt;=26)

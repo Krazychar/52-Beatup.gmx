@@ -57,7 +57,7 @@ hitt=0
 
 image_angle+=45
 
-if(place_meeting(x,y,p1) &amp;&amp; hitt=0)
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=false)
 {
 hitt=1
 p2.damage=25
@@ -72,6 +72,13 @@ p1.hitstun=30
 p1.vsp=-1
 instance_create(x,y,jackitemeffect)
 instance_destroy()
+}
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=true)
+{
+instance_create(p1.x,p1.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p1.image_xscale
+instance_destroy()
+p1.hp-=12
 }
 </string>
           </argument>

@@ -30,6 +30,7 @@ image_xscale=obj_alta.image_xscale
 image_yscale=4
 y-=6
 hitt=0
+timer=0
 </string>
           </argument>
         </arguments>
@@ -52,7 +53,11 @@ hitt=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(obj_alta.sprite_index=spr_alta_specsuper1 &amp;&amp; obj_alta.image_index&gt;=16 &amp;&amp; obj_alta.image_index&lt;=19)
+            <string>timer++
+if(timer&gt;=120)
+{instance_destroy()}
+
+if(obj_alta.sprite_index=spr_alta_specsuper1 &amp;&amp; obj_alta.image_index&gt;=16 &amp;&amp; obj_alta.image_index&lt;=19)
 {hspeed=image_xscale*-1}
 
 if(obj_alta.sprite_index=spr_alta_specsuper1 &amp;&amp; obj_alta.image_index&gt;=23)
@@ -60,7 +65,7 @@ if(obj_alta.sprite_index=spr_alta_specsuper1 &amp;&amp; obj_alta.image_index&gt;
 image_speed=0
 image_index=0}
 
-if(place_meeting(x,y,p1) &amp;&amp; hitt=0)
+if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=false)
 {
 hitt=1
 p2.damage=16
@@ -75,6 +80,13 @@ p1.hitstun=30
 p1.vsp=-5
 instance_create(x,y,jackitemeffect)
 
+}
+if(place_meeting(x,y,p1) &amp;&amp; p1.block=true)
+{
+instance_create(p1.x,p1.y,obj_blockeffect)
+obj_blockeffect.image_xscale=p1.image_xscale
+p1.hp-=4
+instance_destroy()
 }
 </string>
           </argument>
