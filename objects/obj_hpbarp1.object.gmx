@@ -29,6 +29,7 @@
 global.p1char=""
 head=0
 abival=0
+hitColor=c_red
 </string>
           </argument>
         </arguments>
@@ -56,7 +57,7 @@ if(global.p1char="Alan")
 {
 head=0
 }
-if(global.p1char="Rey")
+if(global.p1char="El Rey")
 {
 head=1
 }
@@ -136,19 +137,21 @@ draw_set_font(font1)
 
 //outline code (gross)
 draw_set_color(c_black)
-draw_text(view_xview[0]+xx-102+kek,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-98+kek,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-100+kek,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-102+kek,view_yview[0]+yy+40+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-98+kek,view_yview[0]+yy+40+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-102+kek,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-98+kek,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
-draw_text(view_xview[0]+xx-100+kek,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
-
-draw_set_color(c_white)
+draw_text(view_xview[0]+xx-102+kek+3,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-98+kek+3,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-100+kek+3,view_yview[0]+yy+42+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-102+kek+3,view_yview[0]+yy+40+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-98+kek+3,view_yview[0]+yy+40+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-102+kek+3,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-98+kek+3,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
+draw_text(view_xview[0]+xx-100+kek+3,view_yview[0]+yy+38+kek,string(global.p1combo)+" Hit")
+draw_set_color(hitColor)
 draw_text(view_xview[0]+xx-97+kek,view_yview[0]+yy+40+kek,string(global.p1combo)+" Hit")
+hitColor=c_white
 
+//DAMAGE
 draw_set_font(font0)
+draw_text(view_xview[0]+xx-97+kek,view_yview[0]+yy+80+kek,string(global.p1combo)+" Damage!")
 }
 </string>
           </argument>

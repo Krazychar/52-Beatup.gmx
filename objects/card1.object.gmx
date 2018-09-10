@@ -25,15 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>randomize()
+            <string>
 image_speed=0
 image_index=0
 timer=0
-gal.cardpick=true
+//gal.cardpick=true
 image_alpha=0
 soloCheck=false
 global.pickturn=0
-
+playerBuff=0
 </string>
           </argument>
         </arguments>
@@ -82,7 +82,30 @@ global.pickturn=0}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(timer=0)
+            <string>if(global.pickturn=0)
+{
+if(p1.hp&lt;=0)playerBuff=p1
+if(p2.hp&lt;=0)playerBuff=p2
+}
+if(global.pickturn=1)
+{
+if(p1.hp&gt;0)playerBuff=p1
+if(p2.hp&gt;0)playerBuff=p2
+}
+
+if(!place_meeting(x,y,obj_cardpicker))
+{
+
+image_xscale=1
+image_yscale=1
+}
+else
+{
+image_xscale=1.5
+image_yscale=1.5
+}
+
+if(timer=0)
 {vspeed-=0.1}
 if(timer=1)
 {vspeed+=0.1}
@@ -95,10 +118,52 @@ if(timer=1 &amp;&amp; vspeed &gt;= 1)
 
 if(gal.cardpick=false &amp;&amp; soloCheck=false)
 {soloCheck=true
-image_index=gal.cardPicker
+
 image_alpha=1
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Add card 
+
+
+if(place_meeting(x,y,obj_cardpicker) &amp;&amp; (playerBuff = p1 &amp;&amp; keyboard_check_direct(ord("J")) || playerBuff = p2 &amp;&amp; gamepad_button_check_pressed(4,gp_face2)))
+{
+if(image_index=0) {playerBuff.mhp-=20; playerBuff.atk+=1}
+if(image_index=1) playerBuff.rage=true
+if(image_index=2) playerBuff.agi+=1
+if(image_index=3) {playerBuff.dashlng+=6; playerBuff.agi+=1; playerBuff.atk-=1}
+if(image_index=4) {playerBuff.agi-=1; playerBuff.mabi+=2}
+if(image_index=5) {playerBuff.mhp-=25;playerBuff.mabi+=3}
+if(image_index=6) playerBuff.coward=true
+if(image_index=7) {playerBuff.mhp-=round(playerBuff.mhp*.75); playerBuff.mabi+=10;}
+if(image_index=8) playerBuff.mhp+=35
+if(image_index=9) {playerBuff.mhp+=50; playerBuff.atk+=1}
+if(image_index=10) {playerBuff.mhp+=50;playerBuff.mabi-=2}
+if(image_index=11) {playerBuff.mhp+=100; playerBuff.agi-=1}
+if(image_index=12) {playerBuff.mhp+=30; playerBuff.mabi+=1; playerBuff.atk+=2; playerBuff.agi+=1}
+
+
+instance_destroy()
+}
 </string>
           </argument>
         </arguments>
@@ -152,55 +217,6 @@ image_yscale=1.5
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(global.pickturn=0)
-{
-if(p1.hp&lt;=0)playerBuff=p1
-if(p2.hp&lt;=0)playerBuff=p2
-}
-if(global.pickturn=1)
-{
-if(p1.hp&gt;0)playerBuff=p1
-if(p2.hp&gt;0)playerBuff=p2
-}
-
-if(image_index=0) {playerBuff.mhp-=20; playerBuff.atk+=1}
-if(image_index=1) playerBuff.rage=true
-if(image_index=2) playerBuff.agi+=1
-if(image_index=3) {playerBuff.dashlng+=6; playerBuff.agi+=1; playerBuff.atk-=1}
-if(image_index=4) {playerBuff.agi-=1; playerBuff.mabi+=2}
-if(image_index=5) playerBuff.mhp-=25; //playerBuff. (Faster Specials?)
-if(image_index=6) playerBuff.coward=true
-if(image_index=7) {playerBuff.mhp-=round(playerBuff.mhp*.75); playerBuff.mabi+=5;}
-if(image_index=8) playerBuff.mhp+=35
-if(image_index=9) {playerBuff.mhp+=20; playerBuff.nKb=true}
-if(image_index=10) playerBuff.projdef+=1
-if(image_index=11) {playerBuff.mhp+=100; playerBuff.agi-=1}
-if(image_index=12) {playerBuff.mhp+=30; playerBuff.mabi+=1; playerBuff.atk+=1; playerBuff.agi+=1}
-
-
-instance_destroy()
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -219,7 +235,7 @@ instance_destroy()
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_text(x,y-100,string(ds_list_size(gal.deckbuffs)))
+draw_text(x,y-100,string(playerBuff))
 </string>
           </argument>
         </arguments>

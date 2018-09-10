@@ -150,15 +150,15 @@ airMovementDir = 0;
 if(place_meeting(x,y,ground)){x+=2*image_xscale}
 
 //left=keyboard_check_direct(vk_left)
-left=gamepad_button_check(0,gp_padl)
+left=gamepad_button_check(4,gp_padl)
 //right=keyboard_check_direct(vk_right)
-right=gamepad_button_check(0,gp_padr)
+right=gamepad_button_check(4,gp_padr)
 //pleft=keyboard_check_pressed(vk_left)
-pleft=gamepad_button_check_pressed(0,gp_padl)
+pleft=gamepad_button_check_pressed(4,gp_padl)
 //pright=keyboard_check_pressed(vk_right)
-pright=gamepad_button_check_pressed(0,gp_padr)
+pright=gamepad_button_check_pressed(4,gp_padr)
 //jump=keyboard_check_direct(vk_up)
-jump=gamepad_button_check(0,gp_padu)
+jump=gamepad_button_check(4,gp_padu)
 //move left and right
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
     {
@@ -354,11 +354,11 @@ vsp+=grav
             <kind>1</kind>
             <string>///attacking
 //light=keyboard_check_pressed(ord("Z"))
-light=gamepad_button_check_pressed(0,gp_face3)
+light=gamepad_button_check_pressed(4,gp_face3)
 //heavy=keyboard_check_pressed(ord("X"))
-heavy=gamepad_button_check_pressed(0,gp_face4)
+heavy=gamepad_button_check_pressed(4,gp_face4)
 //launch=keyboard_check_pressed(ord("C"))
-launch=gamepad_button_check_pressed(0,gp_face2)
+launch=gamepad_button_check_pressed(4,gp_face2)
 //face direction
 if(grounded=1 &amp;&amp; attacking=0)
 {
@@ -436,7 +436,7 @@ attacking=0
 image_index=0
 }
 
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launch)
+if(launch &amp;&amp; !(left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launch)
 {hboxhit=0
 cancel=0
 hit=3
@@ -454,6 +454,31 @@ hsp+=1*image_xscale
 attacking=1
 }
 if(sprite_index=spr_rey_launch &amp;&amp; image_index&gt;11)
+{
+sprite_index=spr_rey_idle
+attacking=0
+image_index=0
+}
+
+//launch forward
+if(launch &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launch)
+{hboxhit=0
+cancel=0
+hit=5
+damage=21
+hstun=50
+xscal=6
+yscal=3
+xpos=hsp+15
+ypos=-30
+launchh=true
+sprite_index=spr_rey_forlaunch
+image_index=0
+image_speed=0.2
+hsp+=1*image_xscale
+attacking=1
+}
+if(sprite_index=spr_rey_forlaunch &amp;&amp; image_index&gt;12)
 {
 sprite_index=spr_rey_idle
 attacking=0
@@ -488,7 +513,7 @@ image_index=0
 }
 
 
-if(heavy &amp;&amp;  !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair &amp;&amp; sprite_index!=spr_rey_heavyforair)
+if(heavy &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavyair &amp;&amp; sprite_index!=spr_rey_launchair &amp;&amp; sprite_index!=spr_rey_heavyforair)
 {cancel=0
 hboxhit=0
 hit=3
@@ -511,7 +536,7 @@ attacking=0
 image_index=0
 }
 
-if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; !keyboard_check_direct(ord("W")) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_heavyforair)
+if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_launchair  &amp;&amp; sprite_index!=spr_rey_heavyforair)
 {cancel=0
 hboxhit=0
 hit=4
@@ -632,7 +657,7 @@ down=keyboard_check_pressed(vk_down)
 if(hitstun=0)
 {
 //FireBall
-if(gamepad_button_check_pressed(0,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(4,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2)
 {
 if(FBlv=1)linkspr=spr_rey_fireball1
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -652,7 +677,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
 
 //FireBall
-if(gamepad_button_check_pressed(0,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2 &amp;&amp; grounded=true)
+if(gamepad_button_check_pressed(4,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2 &amp;&amp; grounded=true)
 {
 if(FBlv=1)linkspr=spr_rey_break
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -796,7 +821,7 @@ if(place_meeting(x,y+1,ground))
 
 if(global.p2combo=0) freakingslickdash=0
 
-if(gamepad_button_check_pressed(0,gp_shoulderlb) &amp;&amp; grounded=1)
+if(gamepad_button_check_pressed(4,gp_shoulderlb) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=1

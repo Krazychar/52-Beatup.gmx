@@ -62,7 +62,7 @@ cancel=0
 hp=170
 mhp=hp
 atk=1
-abi=9
+abi=6
 mabi=abi
 projdef=0
 dashlng=23
@@ -622,20 +622,20 @@ image_index=0
 if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_launchair)
 {cancel=0
 hboxhit=0
-hit=3
+hit=4
 damage=12
-xscal=2
-yscal=3
+xscal=5
+yscal=5
 hstun=40
-xpos=hsp+28
-ypos=69
+xpos=hsp+35
+ypos=80
 launchh=false
 sprite_index=spr_ace_launchair
 image_index=0
 image_speed=0.2
 attacking=1
 }
-if(sprite_index=spr_ace_launchair &amp;&amp; image_index&gt;9)
+if(sprite_index=spr_ace_launchair &amp;&amp; image_index&gt;12)
 {
 sprite_index=spr_ace_jump
 attacking=0

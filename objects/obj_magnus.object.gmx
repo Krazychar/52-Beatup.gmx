@@ -150,15 +150,15 @@ airMovementDir = 0;
 if(place_meeting(x,y,ground)){x+=2*image_xscale}
 
 //left=keyboard_check_direct(vk_left)
-left=gamepad_button_check(0,gp_padl)
+left=gamepad_button_check(4,gp_padl)
 //right=keyboard_check_direct(vk_right)
-right=gamepad_button_check(0,gp_padr)
+right=gamepad_button_check(4,gp_padr)
 //pleft=keyboard_check_pressed(vk_left)
-pleft=gamepad_button_check_pressed(0,gp_padl)
+pleft=gamepad_button_check_pressed(4,gp_padl)
 //pright=keyboard_check_pressed(vk_right)
-pright=gamepad_button_check_pressed(0,gp_padr)
+pright=gamepad_button_check_pressed(4,gp_padr)
 //jump=keyboard_check_direct(vk_up)
-jump=gamepad_button_check(0,gp_padu)
+jump=gamepad_button_check(4,gp_padu)
 //move left and right
 //if(left or right) hsp=round(hsp)
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
@@ -360,11 +360,11 @@ vsp+=grav
             <kind>1</kind>
             <string>///attacking
 //light=keyboard_check_pressed(ord("Z"))
-light=gamepad_button_check_pressed(0,gp_face3)
+light=gamepad_button_check_pressed(4,gp_face3)
 //heavy=keyboard_check_pressed(ord("X"))
-heavy=gamepad_button_check_pressed(0,gp_face4)
+heavy=gamepad_button_check_pressed(4,gp_face4)
 //launch=keyboard_check_pressed(ord("C"))
-launch=gamepad_button_check_pressed(0,gp_face2)
+launch=gamepad_button_check_pressed(4,gp_face2)
 //face direction
 if(grounded=1 &amp;&amp; attacking=0)
 {
@@ -495,7 +495,7 @@ if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_magn
 cancel=0
 hit=5
 damage=19
-hstun=70
+hstun=50
 xscal=5
 yscal=8
 xpos=hsp+47
@@ -525,7 +525,7 @@ hit=3
 damage=8
 xscal=3
 yscal=2
-hstun=45
+hstun=40
 xpos=hsp+45
 ypos=+65
 launchh=false
@@ -549,7 +549,7 @@ hit=3
 damage=14
 xscal=6
 yscal=6
-hstun=50
+hstun=40
 xpos=hsp+25
 ypos=+25
 launchh=false
@@ -573,7 +573,7 @@ hit=4
 damage=15
 xscal=3
 yscal=6
-hstun=60
+hstun=45
 xpos=hsp+35
 ypos=45
 launchh=false
@@ -664,7 +664,7 @@ attacking=0}
 down=keyboard_check_pressed(vk_down)
 if(hitstun=0)
 {
-if(gamepad_button_check_pressed(0,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(4,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
 if(FBlv=1)linkspr=spr_magnus_fireball1
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -682,7 +682,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
 
-if(gamepad_button_check_pressed(0,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(4,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
 if(FBlv=1)linkspr=spr_magnus_spec21
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -690,13 +690,13 @@ if(FBlv=3)linkspr=spr_alan_fireball2
 attacking=2;abi--;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=7;xscal=8;yscal=8;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=5 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=7 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=9 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=2 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=7;xscal=8;yscal=8;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=3 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=4 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
 
 
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index&gt;=14) {attacking=0;sprite_index=spr_magnus_idle}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_magnus_idle}
 
 
 }
@@ -813,7 +813,7 @@ if(place_meeting(x,y+1,ground))
 
 if(global.p2combo=0) freakingslickdash=0
 
-if(gamepad_button_check_pressed(0,gp_shoulderlb) &amp;&amp; grounded=1)
+if(gamepad_button_check_pressed(4,gp_shoulderlb) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=1

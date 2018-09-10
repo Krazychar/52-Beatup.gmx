@@ -102,15 +102,19 @@ if(instance_exists(obj_alan))
 if(instance_exists(obj_ace))
 {instance_create(x,y,obj_hiteffect)}
 if(p1.attacking!=2)p1.cancel=1
+//hitColor change
+obj_hpbarp1.hitColor=c_red
+//Override Depth
 p2.depth=0
-camera.x+=p1.damage*p1.image_xscale
 p1.depth=-1
+//Push Camera a bit
+camera.x+=p1.damage*p1.image_xscale
 p2.image_index=0
 global.p1combo++
 camera.shakeIntensity=round(p1.damage*p1.image_xscale/6)
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 
-if(60-p1.hstun/2 &gt; 0) room_speed=60-p1.hstun/2
+room_speed=25
 
 if(!place_meeting(p2.x+15*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/5)*p1.image_xscale
 else p1.x-=round(p1.damage/5)*p1.image_xscale
@@ -149,6 +153,10 @@ if(place_meeting(x,y,p2) &amp;&amp; p2.block=true)
 {
 instance_create(p2.x,p2.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p2.image_xscale
+//Move FARTHER
+if(!place_meeting(p2.x+15*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/4)*p1.image_xscale
+if(!place_meeting(p1.x+15*p1.image_xscale,y,ground))  p1.x-=round(p1.damage/4)*p1.image_xscale
+if(p1.launchh=false) p1.cancel=1;
 }
 
 if(time&gt;=4) instance_destroy()

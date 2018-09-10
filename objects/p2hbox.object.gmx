@@ -89,7 +89,7 @@ if(p2.attacking!=2)p2.cancel=1
 camera.shakeIntensity=round(p2.damage*p2.image_xscale/6)
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 
-if(60-p2.hstun/2 &gt; 0) room_speed=60-p2.hstun/2
+room_speed=25
 
 if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/5)*p2.image_xscale
 else p2.x-=round(p2.damage/5)*p2.image_xscale
@@ -128,6 +128,9 @@ if(place_meeting(x,y,p1) &amp;&amp; p1.block=true &amp;&amp; unblockable=false)
 {
 instance_create(p1.x,p1.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p1.image_xscale
+//MOVE FARTHER
+if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/4)*p2.image_xscale
+else p2.x-=round(p2.damage/4)*p2.image_xscale
 }
 
 if(time&gt;=4) instance_destroy()

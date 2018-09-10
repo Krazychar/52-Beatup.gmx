@@ -184,8 +184,10 @@ rancrap=0
 if(setPicker==1 &amp;&amp; ds_list_size(deckbuffs) &gt;= 1)//Buffs
 {rancrap=irandom_range(0,ds_list_size(deckbuffs))
 cardPicker=ds_list_find_value(deckbuffs,rancrap)
+show_debug_message(cardPicker)
 ds_list_delete(deckbuffs,rancrap)
 ds_list_shuffle(deckbuffs)
+cardpick=false
 } else setPicker=2
 
 if(setPicker==2 &amp;&amp; ds_list_size(deckactives) &gt;= 1)//Buffs
@@ -340,9 +342,49 @@ draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,di
 }
 
 }
-if(timeEnd=60){instance_create(view_xview[0]+150,view_yview[0]+150 ,card1);timeEnd++}
-if(timeEnd=65){instance_create(view_xview[0]+320,view_yview[0]+150 ,card1);timeEnd++}
-if(timeEnd=70){instance_create(view_xview[0]+500,view_yview[0]+150 ,card1);timeEnd++}
+if(timeEnd=60)
+{
+rancrap=irandom_range(0,ds_list_size(deckbuffs))
+cardPicker=ds_list_find_value(deckbuffs,rancrap)
+show_debug_message(cardPicker)
+ds_list_delete(deckbuffs,rancrap)
+ds_list_shuffle(deckbuffs)
+
+with (instance_create(view_xview[0]+150,view_yview[0]+150 ,card1))
+{
+image_index=other.cardPicker
+}
+timeEnd++
+}
+
+if(timeEnd=65)
+{
+rancrap=irandom_range(0,ds_list_size(deckbuffs))
+cardPicker=ds_list_find_value(deckbuffs,rancrap)
+show_debug_message(cardPicker)
+ds_list_delete(deckbuffs,rancrap)
+ds_list_shuffle(deckbuffs)
+with (instance_create(view_xview[0]+320,view_yview[0]+150 ,card1))
+{
+image_index=other.cardPicker
+}
+instance_create(view_xview[0]+320,view_yview[0]+150,obj_cardpicker)
+timeEnd++
+}
+
+if(timeEnd=70)
+{
+rancrap=irandom_range(0,ds_list_size(deckbuffs))
+cardPicker=ds_list_find_value(deckbuffs,rancrap)
+show_debug_message(cardPicker)
+ds_list_delete(deckbuffs,rancrap)
+ds_list_shuffle(deckbuffs)
+with (instance_create(view_xview[0]+500,view_yview[0]+150 ,card1))
+{
+image_index=other.cardPicker
+}
+timeEnd++
+}
 </string>
           </argument>
         </arguments>
@@ -379,6 +421,7 @@ p2.hspeed=0
 room_speed=60
 global.time=99
 timeEnd=0
+instance_destroy(obj_cardpicker)
 instance_destroy(card1)
 }
 </string>
@@ -480,6 +523,8 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
             <kind>1</kind>
             <string>p1.hp=9999
 p2.hp=9999
+p1.abi=999
+p2.abi=999
 </string>
           </argument>
         </arguments>

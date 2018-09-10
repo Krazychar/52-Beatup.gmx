@@ -46,6 +46,7 @@
     </sprites>
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
+      <sprite>sprites\spr_rey_forlaunch</sprite>
       <sprite>sprites\spr_rey_forwalk</sprite>
       <sprite>sprites\spr_rey_backwalk</sprite>
       <sprite>sprites\spr_rey_light</sprite>
@@ -94,6 +95,7 @@
       <sprite>sprites\spr_ace_heavyair</sprite>
       <sprite>sprites\spr_ace_grenade</sprite>
       <sprite>sprites\spr_ace_grenade2</sprite>
+      <sprite>sprites\spr_ace_bulletshell</sprite>
       <sprite>sprites\spr_ace_bullet</sprite>
       <sprites name="acespecials">
         <sprite>sprites\spr_ace_fireball</sprite>
@@ -129,6 +131,8 @@
       <sprite>sprites\spr_alta_backdash</sprite>
       <sprite>sprites\spr_alta_dash</sprite>
       <sprites name="AltaSpecials">
+        <sprite>sprites\spr_alta_spec22</sprite>
+        <sprite>sprites\spr_alta_spec21</sprite>
         <sprite>sprites\spr_alta_spec1</sprite>
         <sprite>sprites\spr_alta_spec1c</sprite>
         <sprites name="trash">
@@ -148,12 +152,14 @@
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_downheavy</sprite>
       <sprite>sprites\spr_jack_forwalk</sprite>
       <sprite>sprites\spr_jack_backwalk</sprite>
       <sprite>sprites\spr_jack_light</sprite>
       <sprite>sprites\spr_jack_forlight</sprite>
       <sprite>sprites\spr_jack_heavy</sprite>
       <sprite>sprites\spr_jack_launch</sprite>
+      <sprite>sprites\spr_jack_forheavyair</sprite>
       <sprite>sprites\spr_jack_lightair</sprite>
       <sprite>sprites\spr_jack_heavyair</sprite>
       <sprite>sprites\spr_jack_launchair</sprite>
@@ -219,9 +225,18 @@
       <sprite>sprites\spr_haley_heavy</sprite>
       <sprite>sprites\spr_haley_launch</sprite>
     </sprites>
+    <sprites name="Nikki">
+      <sprite>sprites\spr_nikki_idle</sprite>
+      <sprite>sprites\spr_nikki_light</sprite>
+      <sprite>sprites\spr_nikki_heavy</sprite>
+      <sprite>sprites\spr_nikki_launch</sprite>
+      <sprite>sprites\spr_nikki_taunt</sprite>
+    </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
+    <sprite>sprites\spr_cardpicker</sprite>
     <sprite>sprites\spr_activecards</sprite>
+    <sprite>sprites\spr_cardback</sprite>
     <sprite>sprites\spr_supercards</sprite>
     <sprite>sprites\spr_debuffcards</sprite>
     <sprite>sprites\spr_sandbag_idle</sprite>
@@ -230,6 +245,7 @@
     <sprite>sprites\spr_gameborder</sprite>
     <sprites name="SpriteEffects">
       <sprite>sprites\hiteffect1</sprite>
+      <sprite>sprites\hiteffect4</sprite>
       <sprite>sprites\blockeffect</sprite>
       <sprite>sprites\spr_jumpeffectlight</sprite>
       <sprite>sprites\spr_combo</sprite>
@@ -286,6 +302,7 @@
     <object>objects\p2</object>
     <object>objects\ground</object>
     <object>objects\card1</object>
+    <object>objects\obj_cardpicker</object>
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>

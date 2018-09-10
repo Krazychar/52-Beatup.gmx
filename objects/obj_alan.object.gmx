@@ -62,7 +62,7 @@ cancel=0
 hp=185
 mhp=hp
 atk=1
-abi=6
+abi=4
 mabi=abi
 projdef=0
 dashlng=23
@@ -217,12 +217,11 @@ launchh=false
 sprite_index=spr_alan_forheavy
 image_index=0
 image_speed=0.2
-hsp+=1*image_xscale
 attacking=1
 angle=0
 }
 if(sprite_index=spr_alan_forheavy &amp;&amp; image_index&gt;8)
-{hsp+=3*image_xscale
+{
 sprite_index=spr_alan_idle
 attacking=0
 image_index=0
@@ -285,10 +284,10 @@ cancel=0
 hit=3
 damage=13
 hstun=40
-xscal=2
-yscal=3
+xscal=6
+yscal=8
 xpos=hsp+30
-ypos=-40
+ypos=-25
 launchh=true
 sprite_index=spr_alan_launch
 image_index=0
@@ -297,7 +296,7 @@ hsp+=1*image_xscale
 angle=90
 attacking=1
 }
-if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;7)
+if(sprite_index=spr_alan_launch &amp;&amp; image_index&gt;10)
 {
 sprite_index=spr_alan_idle
 attacking=0
@@ -718,7 +717,7 @@ if(RDlv=1)linkspr=spr_alan_spec2
 abi-=1;attacking=2;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
-if(sprite_index=spr_alan_spec2 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {airMovementDir=sign(image_xscale);vsp=-5;hit=1;instance_create(x+12*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_alan_spec2 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {airMovementDir=sign(image_xscale);damage=15;hstun=45;launchh=false;vsp=-5;hit=1;instance_create(x+12*image_xscale,y-16,p1hbox)}
 if(sprite_index=spr_alan_spec2 &amp;&amp; image_index&gt;=9) {attacking=0;sprite_index=spr_alan_jump}
 
 }

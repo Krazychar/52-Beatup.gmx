@@ -55,7 +55,7 @@ if(global.p2char="Alan")
 {
 head=0
 }
-if(global.p2char="Rey")
+if(global.p2char="El Rey")
 {
 head=1
 }

@@ -78,8 +78,8 @@ p2.hitstun=0
 global.p2combo=0
 
 p1.hp=p1.mhp
-p1.abi=p1.mabi
-p2.abi=p2.mabi
+//p1.abi=p1.mabi
+//p2.abi=p2.mabi
 p2.hp=p2.mhp
 global.time=99
 instance_destroy(card1)
