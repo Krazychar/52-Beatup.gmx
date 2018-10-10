@@ -104,7 +104,7 @@ head=5
 {combohp=p1.hp}
 
 if(global.p2combo=0 &amp;&amp; combohp&gt;p1.hp)
-{combohp-=5}
+{combohp-=10}
 
 draw_set_color(c_white)
 kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
@@ -124,7 +124,7 @@ if(abival&gt;round((p1.abi/p1.mabi)*100))
 {abival-=2}
 
 abicheck=round((p1.abi/p1.mabi)*100)
-col=make_colour_rgb(0,255,255)
+col=make_colour_rgb(255,0,255)
 draw_set_color(col)
 //draw_sprite_ext(spr_abicount,0,view_xview[0]+xx-50+kek,view_yview[0]+yy+42+kek,3,3,0,c_white,1)
 draw_healthbar(view_xview[0]+75+kek,view_yview[0]+55+kek,view_xview[0]+177+kek,view_yview[0]+74+kek,abival,c_white,col,col,0,true,false)
@@ -151,7 +151,7 @@ hitColor=c_white
 
 //DAMAGE
 draw_set_font(font0)
-draw_text(view_xview[0]+xx-97+kek,view_yview[0]+yy+80+kek,string(global.p1combo)+" Damage!")
+draw_text(view_xview[0]+xx-77+kek,view_yview[0]+yy+80+kek,string(obj_hpbarp2.combohp - p2.hp)+" Damage!")
 }
 </string>
           </argument>

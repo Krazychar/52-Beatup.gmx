@@ -26,11 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>image_speed=0.4
-if(abs(p1.x-x) &lt; abs(p2.x-x))
-{image_xscale=p1.image_xscale*-1}
-else
-{image_xscale=p1.image_xscale*-1}
 image_yscale=4
+
+if(abs(p1.x - x) &lt; abs(p2.x-x))//See who's closer to determine which x_scale to base it off of
+{image_xscale=-p1.image_xscale}
+else
+{image_xscale=-p2.image_xscale}
 </string>
           </argument>
         </arguments>

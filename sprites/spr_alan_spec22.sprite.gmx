@@ -2,23 +2,23 @@
 <sprite>
   <type>0</type>
   <xorig>32</xorig>
-  <yorigin>32</yorigin>
+  <yorigin>46</yorigin>
   <colkind>1</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>2</bboxmode>
   <bbox_left>18</bbox_left>
   <bbox_right>40</bbox_right>
-  <bbox_top>13</bbox_top>
-  <bbox_bottom>63</bbox_bottom>
+  <bbox_top>29</bbox_top>
+  <bbox_bottom>77</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>64</width>
-  <height>64</height>
+  <width>78</width>
+  <height>78</height>
   <frames>
     <frame index="0">images\spr_alan_spec22_0.png</frame>
     <frame index="1">images\spr_alan_spec22_1.png</frame>
@@ -36,7 +36,5 @@
     <frame index="13">images\spr_alan_spec22_13.png</frame>
     <frame index="14">images\spr_alan_spec22_14.png</frame>
     <frame index="15">images\spr_alan_spec22_15.png</frame>
-    <frame index="16">images\spr_alan_spec22_16.png</frame>
-    <frame index="17">images\spr_alan_spec22_17.png</frame>
   </frames>
 </sprite>

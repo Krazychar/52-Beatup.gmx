@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-999</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -35,7 +35,8 @@ setPicker=0//Picks one of the four sets in the deck
 cardPicker=0//Picks card in individual set
 global.pickturn=0
 global.super=0
-
+hitStop=false//makes the characters freeze animation on hit
+HSF=0//Hit Stop Frames
 //SINCE YOU CAN ONILY FREAKING USE 14 IM JUST GONNA USE 13 FOR EACH AND SEPERATE THEM
 deckbuffs = ds_list_create();
 deckactives = ds_list_create();
@@ -144,15 +145,49 @@ if(keyboard_check_pressed(ord("T")))
 {
 p1.FBlv++
 p1.RDlv++
-p1.GBlv++
+
+p2.FBlv++
+p2.RDlv++
 }
 
 if(keyboard_check_pressed(ord("Y")))
 {
 p1.FBlv--
 p1.RDlv--
-p1.GBlv--
+
+p2.FBlv--
+p2.RDlv--
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///HitStop
+if(hitStop=true)
+{
+HSF--;
+p1.image_speed=0
+p2.image_speed=0
+}
+
+if(HSF&lt;=0) hitStop=false;
+else hitStop=true;
 </string>
           </argument>
         </arguments>
@@ -245,6 +280,7 @@ p2.vsp=-6
 
 if(global.roundEnd=0)
 {
+if(!(p1.hp&lt;=0 &amp;&amp; p2.hp&lt;=0))//if 
 if(p1.hp&lt;=0)
 {losername=global.p1char}
 
@@ -414,6 +450,10 @@ p1.hp=p1.mhp
 p1.abi=p1.mabi
 p2.abi=p2.mabi
 p2.hp=p2.mhp
+p1.attacking=0
+p2.attacking=0
+p1.OTG=false
+p2.OTG=false
 p1.hsp=0
 p2.hsp=0
 p1.hspeed=0
@@ -445,20 +485,20 @@ instance_destroy(card1)
           <argument>
             <kind>1</kind>
             <string>///supereffect
-if(global.super=0) rad=100
+if(global.super=0) rad=180
 if(global.super=1 &amp;&amp; rad&gt;0)
 {rad-=5
 draw_set_color(c_blue)
 draw_circle(p1.x,p1.y,rad,true)
 draw_circle(p1.x,p1.y,rad+1,true)
 draw_circle(p1.x,p1.y,rad-1,true)
-
+draw_set_color(c_red)
 draw_circle(p1.x,p1.y,rad*3,true)
 draw_circle(p1.x,p1.y,(rad*3)+1,true)
 draw_circle(p1.x,p1.y,(rad*3)+2,true)
 draw_circle(p1.x,p1.y,(rad*3)-1,true)
 draw_circle(p1.x,p1.y,(rad*3)-2,true)
-
+draw_set_color(c_green)
 draw_circle(p1.x,p1.y,rad*3,true)
 draw_circle(p1.x,p1.y,(rad*5)+1,true)
 draw_circle(p1.x,p1.y,(rad*5)+2,true)
@@ -473,20 +513,20 @@ draw_circle(p1.x,p1.y,(rad*5)-4,true)
 }
 if(rad&lt;=0) global.super=0
 //effect2
-if(global.super=0) rad=100
+if(global.super=0) rad=180
 if(global.super=2 &amp;&amp; rad&gt;0)
 {rad-=5
 draw_set_color(c_blue)
 draw_circle(p2.x,p2.y,rad,true)
 draw_circle(p2.x,p2.y,rad+1,true)
 draw_circle(p2.x,p2.y,rad-1,true)
-
+draw_set_color(c_red)
 draw_circle(p2.x,p2.y,rad*3,true)
 draw_circle(p2.x,p2.y,(rad*3)+1,true)
 draw_circle(p2.x,p2.y,(rad*3)+2,true)
 draw_circle(p2.x,p2.y,(rad*3)-1,true)
 draw_circle(p2.x,p2.y,(rad*3)-2,true)
-
+draw_set_color(c_green)
 draw_circle(p2.x,p2.y,rad*3,true)
 draw_circle(p2.x,p2.y,(rad*5)+1,true)
 draw_circle(p2.x,p2.y,(rad*5)+2,true)

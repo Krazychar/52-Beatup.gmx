@@ -55,6 +55,7 @@ image_yscale=2
 {
 p2.hp-=10
 p2.hitstun+=30
+global.p1combo++
 instance_destroy()
 }
 if(p2.block=1)

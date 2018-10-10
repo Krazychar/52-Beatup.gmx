@@ -104,8 +104,39 @@ if(image_xscale&gt;=4 &amp;&amp; trigger=true)
 trigger=false
 timer=0
 }
-
 if(image_index&gt;2) {instance_destroy();global.roundEnd=0}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reset Player Values
+
+p1.hsp=0
+p2.hsp=0
+p1.hspeed=0
+p2.hspeed=0
+p1.OTG=false
+p2.OTG=false
+p1.attacking=0
+p2.attacking=0
 </string>
           </argument>
         </arguments>

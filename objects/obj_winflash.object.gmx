@@ -92,9 +92,14 @@ if(timer==8)
 vsp=8
 if(p1.hp&lt;=0)parent=p1
 if(p2.hp&lt;=0)parent=p2
+if(p1.hp&lt;=0 &amp;&amp; p2.hp&lt;=0) //TIE OH NO
+{
+parent=25//25 = Restart
+}
 
 parent.hstun=1000
 parent.y-=6
+parent.OTG=true
 }
 if(timer&gt;=8)
 {

@@ -55,6 +55,7 @@ hspeed=2*image_xscale
 {
 p2.hitstun=40
 p2.hp-=15+p1.atk
+global.p1combo++
 instance_create(p2.x,p2.y,alanfireballeff)
 instance_destroy()
 }

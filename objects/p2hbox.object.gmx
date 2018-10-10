@@ -77,7 +77,7 @@ p2.hsp=0
           <argument>
             <kind>1</kind>
             <string>time++
-if(place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; (p1.block=false or unblockable=true &amp;&amp; p1.grounded=true))
+if(p1.OTG = false &amp;&amp; place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; (p1.block=false or unblockable=true &amp;&amp; p1.grounded=true))
 {
 
 p2.depth=-1
@@ -89,28 +89,42 @@ if(p2.attacking!=2)p2.cancel=1
 camera.shakeIntensity=round(p2.damage*p2.image_xscale/6)
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 
-room_speed=25
+//room_speed=25
+gal.HSF=round(p2.damage * 0.5)+2
 
 if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/5)*p2.image_xscale
 else p2.x-=round(p2.damage/5)*p2.image_xscale
 if(p2.rage=false) p1.hp-=p2.damage+p2.atk
 else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/75)
-p1.hitstun=p2.hstun-(round(global.p2combo*2.5))
+p1.hitstun=p2.hstun-(round(global.p2combo*1.5))
+//hitColor change
+obj_hpbarp2.hitColor=c_red
 //death effect
 if(p1.hp&lt;=0)
 {
 instance_create(x,y,obj_winflash)
 p2.launch=true
 }
-
+if(p2.launchh=false)
+{
 instance_create(x,y,obj_hiteffect)
+}
+else {
+with instance_create(x,y,obj_launcheffect)
+{
+image_xscale=p2.image_xscale/2
+}
+
+}
 if(p2.freakingslickdash=1 &amp;&amp; p2.launch=false)
 {
-if(!place_meeting(p2.x,p2.y+3,ground) &amp;&amp; p2.grounded=0)
-{p1.vsp=-2
-if(!place_meeting(p2.x,p2.y+4,ground)) p2.vsp=-2}
+
+if(!place_meeting(p2.x,p2.y+3,ground))//Continue the air combo
+{p1.vsp=-3}
+if(!place_meeting(p2.x,p2.y+4,ground)) p2.vsp=-3
 }
-if(p2.launchh==true) 
+
+if(p2.launchh==true) //Launch to the Air
 {
 if(p1.block=1) p2.cancel=0
 p1.vsp=-11
@@ -118,10 +132,19 @@ p1.airMovementDir=p2.image_xscale/8
 p1.grounded=0
 }
 
-if(p2.sprite_index=spr_rey_launchair or p2.sprite_index=spr_magnus_launchair or p2.sprite_index=spr_alta_launchair or p2.sprite_index=spr_magnus_forheavy)
+if(p2.sprite_index=spr_rey_forlaunch or p2.sprite_index=spr_rey_launchair or p2.sprite_index=spr_magnus_launchair or p2.sprite_index=spr_alta_launchair or p2.sprite_index=spr_magnus_forheavy)
 {
 p1.vsp=13
+p1.OTG=true
+with instance_create(x,y,obj_launcheffect)
+{
+image_xscale=p2.image_xscale/2
+image_yscale=-2
 }
+
+}
+
+instance_destroy()
 }
 ////////
 if(place_meeting(x,y,p1) &amp;&amp; p1.block=true &amp;&amp; unblockable=false)
@@ -129,10 +152,10 @@ if(place_meeting(x,y,p1) &amp;&amp; p1.block=true &amp;&amp; unblockable=false)
 instance_create(p1.x,p1.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p1.image_xscale
 //MOVE FARTHER
-if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/4)*p2.image_xscale
-else p2.x-=round(p2.damage/4)*p2.image_xscale
+if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/2)*p2.image_xscale
+else p2.x-=round(p2.damage/2)*p2.image_xscale
 }
-
+if(p2.launchh=false) p2.cancel=1;
 if(time&gt;=4) instance_destroy()
 
 if(room_speed=50 &amp;&amp; p1.hsp==0)

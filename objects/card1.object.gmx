@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-image_speed=0
+            <string>image_speed=0
 image_index=0
 timer=0
 //gal.cardpick=true
@@ -34,6 +33,7 @@ image_alpha=0
 soloCheck=false
 global.pickturn=0
 playerBuff=0
+
 </string>
           </argument>
         </arguments>
@@ -145,7 +145,7 @@ image_alpha=1
             <string>///Add card 
 
 
-if(place_meeting(x,y,obj_cardpicker) &amp;&amp; (playerBuff = p1 &amp;&amp; keyboard_check_direct(ord("J")) || playerBuff = p2 &amp;&amp; gamepad_button_check_pressed(4,gp_face2)))
+if(place_meeting(x,y,obj_cardpicker) &amp;&amp; (playerBuff = p1 &amp;&amp; keyboard_check_direct(ord("J")) || playerBuff = p2 &amp;&amp; gamepad_button_check_pressed(4,gp_face3)))
 {
 if(image_index=0) {playerBuff.mhp-=20; playerBuff.atk+=1}
 if(image_index=1) playerBuff.rage=true
@@ -235,7 +235,7 @@ image_yscale=1.5
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_text(x,y-100,string(playerBuff))
+
 </string>
           </argument>
         </arguments>
