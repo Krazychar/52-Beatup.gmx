@@ -76,7 +76,7 @@ if(p2.hp&gt;0)playerBuff=p2
 }
 
 if(playerBuff=p1){left=keyboard_check_pressed(ord("A"));right=keyboard_check_pressed(ord("D"))}
-if(playerBuff=p2){left=gamepad_button_check_pressed(4,gp_padl);right=gamepad_button_check_pressed(4,gp_padr);}
+if(playerBuff=p2){left=gamepad_button_check_pressed(global.gamepadSlot,gp_padl);right=gamepad_button_check_pressed(global.gamepadSlot,gp_padr);}
 
 //Move card hand
 if(left)

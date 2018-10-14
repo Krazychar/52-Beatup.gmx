@@ -294,7 +294,7 @@ if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &
 {cancel=0
 hboxhit=0
 hit=3
-damage=13
+damage=15
 xscal=2
 yscal=1
 hstun=36
@@ -771,7 +771,7 @@ abi-=1;attacking=2;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball0)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_alan_idle}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_alan_idle}
 //FB2
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball);}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}

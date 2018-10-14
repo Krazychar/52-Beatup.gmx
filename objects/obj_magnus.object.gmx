@@ -210,15 +210,15 @@ global.p1combo=0
 if(place_meeting(x,y,ground)){x+=2*image_xscale}
 
 //left=keyboard_check_direct(vk_left)
-left=gamepad_button_check(4,gp_padl)
+left=gamepad_button_check(global.gamepadSlot,gp_padl)
 //right=keyboard_check_direct(vk_right)
-right=gamepad_button_check(4,gp_padr)
+right=gamepad_button_check(global.gamepadSlot,gp_padr)
 //pleft=keyboard_check_pressed(vk_left)
-pleft=gamepad_button_check_pressed(4,gp_padl)
+pleft=gamepad_button_check_pressed(global.gamepadSlot,gp_padl)
 //pright=keyboard_check_pressed(vk_right)
-pright=gamepad_button_check_pressed(4,gp_padr)
+pright=gamepad_button_check_pressed(global.gamepadSlot,gp_padr)
 //jump=keyboard_check_direct(vk_up)
-jump=gamepad_button_check(4,gp_padu)
+jump=gamepad_button_check(global.gamepadSlot,gp_padu)
 //move left and right
 //if(left or right) hsp=round(hsp)
 if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
@@ -427,11 +427,11 @@ vsp+=grav
             <kind>1</kind>
             <string>///attacking
 //light=keyboard_check_pressed(ord("Z"))
-light=gamepad_button_check_pressed(4,gp_face3)
+light=gamepad_button_check_pressed(global.gamepadSlot,gp_face3)
 //heavy=keyboard_check_pressed(ord("X"))
-heavy=gamepad_button_check_pressed(4,gp_face4)
+heavy=gamepad_button_check_pressed(global.gamepadSlot,gp_face4)
 //launch=keyboard_check_pressed(ord("C"))
-launch=gamepad_button_check_pressed(4,gp_face2)
+launch=gamepad_button_check_pressed(global.gamepadSlot,gp_face2)
 //face direction
 if(grounded=1 &amp;&amp; attacking=0)
 {
@@ -456,7 +456,7 @@ sprite_index=spr_magnus_idle
 freakingslickdash=0
 attacking=0
 }
-if(hitstun&lt;=0)
+if(hitstun&lt;=0 &amp;&amp; attacking!=2)
 {
 if(place_meeting(x,y+1,ground))
 {
@@ -731,7 +731,7 @@ attacking=0}
 down=keyboard_check_pressed(vk_down)
 if(hitstun=0)
 {
-if(gamepad_button_check_pressed(4,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
 if(FBlv=1)linkspr=spr_magnus_fireball1
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -749,7 +749,7 @@ if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
 if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
 
-if(gamepad_button_check_pressed(4,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
 if(FBlv=1)linkspr=spr_magnus_spec21
 if(FBlv=2)linkspr=spr_alan_fireball
@@ -888,7 +888,7 @@ if(global.roundEnd=1 &amp;&amp; attacking!=3)
 else if(gal.hitStop=false)
 {image_speed=0.25}
 
-if(gamepad_button_check_pressed(4,gp_shoulderlb) &amp;&amp; grounded=1)
+if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderlb) &amp;&amp; grounded=1)
 {
 hit=0
 attacking=3

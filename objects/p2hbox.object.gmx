@@ -97,6 +97,8 @@ else p2.x-=round(p2.damage/5)*p2.image_xscale
 if(p2.rage=false) p1.hp-=p2.damage+p2.atk
 else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/75)
 p1.hitstun=p2.hstun-(round(global.p2combo*1.5))
+//make sure there are no ghost hitboxes
+p1.hboxhix=1
 //hitColor change
 obj_hpbarp2.hitColor=c_red
 //death effect
@@ -127,7 +129,7 @@ if(!place_meeting(p2.x,p2.y+4,ground)) p2.vsp=-3
 if(p2.launchh==true) //Launch to the Air
 {
 if(p1.block=1) p2.cancel=0
-p1.vsp=-11
+p1.vsp=-13
 p1.airMovementDir=p2.image_xscale/8
 p1.grounded=0
 }
@@ -151,9 +153,9 @@ if(place_meeting(x,y,p1) &amp;&amp; p1.block=true &amp;&amp; unblockable=false)
 {
 instance_create(p1.x,p1.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p1.image_xscale
-//MOVE FARTHER
-if(!place_meeting(p1.x+15*p2.image_xscale,p1.y,ground)) p1.x+=round(p2.damage/2)*p2.image_xscale
-else p2.x-=round(p2.damage/2)*p2.image_xscale
+//Move FARTHER
+if(!place_meeting(p2.x-15*p2.image_xscale,y,ground)) p1.x+=round(p1.damage/2)*p2.image_xscale
+if(!place_meeting(p1.x-15*p2.image_xscale,y,ground))  p2.x-=round(p1.damage/2)*p2.image_xscale
 }
 if(p2.launchh=false) p2.cancel=1;
 if(time&gt;=4) instance_destroy()

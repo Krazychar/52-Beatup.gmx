@@ -507,10 +507,10 @@ hboxhit=0
 hit=2
 damage=7
 xscal=5
-yscal=1
+yscal=4
 hstun=32
 xpos=hsp+43
-ypos=-13
+ypos=32
 launchh=false
 sprite_index=spr_jack_forlight
 image_index=0
@@ -531,7 +531,7 @@ if(heavy &amp;&amp; !down &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel
 {cancel=0
 hboxhit=0
 hit=3
-damage=15
+damage=12
 xscal=8
 yscal=6
 hstun=38
@@ -556,12 +556,12 @@ if(heavy &amp;&amp;down &amp;&amp; dashing=0 &amp;&amp; (attacking=0 or cancel=1
 {cancel=0
 hboxhit=0
 hit=2
-damage=13
-xscal=5
-yscal=8
+damage=8
+xscal=9
+yscal=5
 hstun=30
 xpos=hsp+40
-ypos=-14
+ypos=50
 launchh=false
 sprite_index=spr_jack_downheavy
 image_index=0
@@ -636,7 +636,7 @@ if(heavy &amp;&amp; !(left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; imag
 {cancel=0
 hboxhit=0
 hit=3
-damage=19
+damage=14
 xscal=6
 yscal=6
 hstun=55
@@ -661,7 +661,7 @@ if(heavy &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image
 {cancel=0
 hboxhit=0
 hit=2
-damage=10
+damage=6
 xscal=4
 yscal=4
 hstun=55
@@ -693,6 +693,7 @@ hstun=40
 xpos=hsp+40
 ypos=20
 launchh=false
+freakingslickdash=1
 sprite_index=spr_jack_launchair
 image_index=0
 image_speed=0.2
@@ -918,7 +919,7 @@ ImagePL=sprite_index
             <kind>1</kind>
             <string>
 
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0   &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(sprite_index==spr_jack_launchair || !place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0   &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_red)

@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>sound_global_volume(30)
 
-
+global.gamepadSlot=4
 p1win=0
 p2win=0
 cardpick=false
@@ -450,6 +450,8 @@ p1.hp=p1.mhp
 p1.abi=p1.mabi
 p2.abi=p2.mabi
 p2.hp=p2.mhp
+p1.image_yscale=4
+p2.image_yscale=4
 p1.attacking=0
 p2.attacking=0
 p1.OTG=false
