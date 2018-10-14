@@ -77,7 +77,7 @@ p2.hsp=0
           <argument>
             <kind>1</kind>
             <string>time++
-if(p1.OTG = false &amp;&amp; place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; (p1.block=false or unblockable=true &amp;&amp; p1.grounded=true))
+if(p1.OTG = false &amp;&amp; place_meeting(x,y,p1) &amp;&amp; room_speed==60 &amp;&amp; p2.hitstun==0 &amp;&amp; (p1.block=false or unblockable=true &amp;&amp; p1.grounded=true))
 {
 
 p2.depth=-1

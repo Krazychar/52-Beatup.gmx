@@ -399,7 +399,7 @@ if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;4  &amp;&amp; !place_m
 
 if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; image_index&lt;=8 &amp;&amp;  place_meeting(x+3*image_xscale,y,p2)) hsp = p2.hsp
 
-if(sprite_index=spr_jack_forlight &amp;&amp; image_index&lt;=2 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2)) hsp = 2 * image_xscale
+if(sprite_index=spr_jack_forlight &amp;&amp; image_index&lt;=2 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2)) hsp = -2 * image_xscale
 
 if(sprite_index=spr_jack_launchair &amp;&amp; image_index&lt;=3 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2)) {vsp=-1;hsp = 1*-image_xscale}
 if(sprite_index=spr_jack_launchair &amp;&amp; image_index&gt;3 &amp;&amp; !place_meeting(x+3*image_xscale,y,p2) &amp;&amp; !place_meeting(x,y+13,ground)) {vsp=12;hsp = 3 * image_xscale}
@@ -465,13 +465,24 @@ sprite_index=spr_jack_jump
 attacking=0
 }
 
-if((sprite_index=spr_jack_heavyair or sprite_index=spr_jack_forheavyair or sprite_index=spr_jack_lightair or sprite_index=spr_jack_launchair) &amp;&amp; place_meeting(x,y+1,ground)) 
+if((sprite_index=spr_jack_heavyair or sprite_index=spr_jack_forheavyair or sprite_index=spr_jack_lightair) &amp;&amp; place_meeting(x,y+1,ground)) 
 {
 sprite_index=spr_jack_idle
 freakingslickdash=0
 attacking=0
 }
-if(hitstun&lt;=0)
+if(sprite_index=spr_jack_launchair &amp;&amp; place_meeting(x,y+1,ground)) 
+{
+sprite_index=spr_jack_getup
+freakingslickdash=0
+image_index=0;
+instance_create(x,y,obj_groundbits);instance_create(x,y,obj_groundbits)
+}
+if(sprite_index=spr_jack_getup &amp;&amp; image_index&gt;=3)
+{attacking=0}
+
+
+if(hitstun&lt;=0 &amp;&amp; attacking !=2)
 {
 if(place_meeting(x,y+1,ground))
 {
@@ -690,7 +701,7 @@ damage=16
 xscal=4
 yscal=8
 hstun=40
-xpos=hsp+40
+xpos=hsp+20
 ypos=20
 launchh=false
 freakingslickdash=1
@@ -814,7 +825,7 @@ abi-=1;attacking=2;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
 if(sprite_index=spr_jack_spec21 &amp;&amp; image_index=0) {hsp-=3*image_xscale;}
-if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {cancel=1;launchh=false;vsp=0;hsp=50*image_xscale;xscal=20;yscal=4;xpos=20*image_xscale;damage=15;hstun=70;hit=1;instance_create(x+20*image_xscale,y-16,p1hbox)}
+if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {cancel=1;launchh=false;vsp=0;hsp=50*image_xscale;xscal=20;yscal=4;xpos=20*image_xscale;damage=15;hstun=45;hit=1;instance_create(x+20*image_xscale,y-16,p1hbox)}
 if(sprite_index=spr_jack_spec21 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_jack_jump}
 
 }
