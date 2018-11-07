@@ -67,7 +67,7 @@ atk=1
 abi=6
 mabi=abi
 projdef=0
-dashlng=23
+dashlng=20
 rage=false
 nKb=false
 coward=false
@@ -207,7 +207,11 @@ global.p1combo=0
             <kind>1</kind>
             <string>///input
 //keep the player out of the wall
-if(place_meeting(x,y,ground)){x+=2*image_xscale}
+if(place_meeting(x,y,ground))
+{
+if(x&gt;room_width/2) x-=2
+else x+=2
+}
 
 left=keyboard_check_direct(ord("A"))
 right=keyboard_check_direct(ord("D"))
@@ -229,7 +233,7 @@ if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
             {sprite_index=spr_ace_dash;with (instance_create(x-16*image_xscale,y,obj_dasheffect)) image_xscale=p1.image_xscale}
         
         image_index=0
-        hsp=-17
+        hsp=-15
         dashtime=dashlng
         dashing=1
     }
@@ -251,7 +255,7 @@ if(dashing=0 &amp;&amp; block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
             {sprite_index=spr_ace_backdash;with (instance_create(x+16*image_xscale,y,obj_bdasheffect)) image_xscale=-p1.image_xscale}
             
         image_index=0
-        hsp=17
+        hsp=15
         dashtime=dashlng
         dashing=1
         }
@@ -279,7 +283,7 @@ if(sprite_index=spr_ace_idle) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0 or jump or light or heavy or launch)
 
     {
     dashing=0
@@ -300,7 +304,7 @@ if(grounded=0 &amp;&amp; dashing=0)
     }
 
 //KEY MOVEMENT
-if(OTG==false)
+if(OTG==false &amp;&amp; hitstun=0)
 {
 
 if(attacking==0 &amp;&amp; vsp&lt;-2 &amp;&amp; !place_meeting(x,y+3,ground)) sprite_index=spr_ace_jump
@@ -319,7 +323,7 @@ if(left &amp;&amp; right) sprite_index=spr_ace_idle
 }
 
 }
-if(attacking=0 or grounded=0)
+if((attacking=0 or grounded=0) &amp;&amp; hitstun==0)
 {
 if (left)
 {
@@ -416,6 +420,63 @@ vsp+=grav
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Special Moves (Holy Heck)
+down=keyboard_check_pressed(ord("S"))
+if(hitstun=0 &amp;&amp; OTG=false or hitstun!=0)
+{
+//Gunshot
+if(keyboard_check_pressed(ord("U")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
+{
+gal.hitstop=false
+gal.HSF=0
+if(FBlv=1)linkspr=spr_ace_fireball
+if(FBlv=2)linkspr=spr_ace_fireball2
+if(FBlv=3)linkspr=spr_ace_fireball3
+hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
+}
+//FB1
+if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+30*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
+if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
+//FB2
+if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+26*image_xscale,y+16,obj_shooteffect);instance_create(x+12*image_xscale,y+16,obj_acefireball);obj_acefireball.vspeed=-1;obj_acefireball.angle=5*image_xscale}
+if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_ace_idle}
+//FB3
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_ace_grenade)}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2;instance_create(x+35*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
+if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
+
+//Scorched Earth
+if(keyboard_check_pressed(ord("I")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
+{
+if(FBlv=1)linkspr=spr_ace_spec21
+if(FBlv=2)linkspr=spr_ace_spec22
+if(FBlv=3)linkspr=spr_ace_fireball3
+hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
+}
+//FB1
+if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_acebottle1)}
+if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=12) {attacking=0;sprite_index=spr_ace_idle}
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///attacking
 light=keyboard_check_pressed(ord("J"))
 heavy=keyboard_check_pressed(ord("K"))
@@ -492,6 +553,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
+if(sprite_index=spr_ace_heavy4 &amp;&amp; image_index=3) {instance_create(x+15*image_xscale,y-15,obj_aceshelleffect);instance_create(x+15*image_xscale,y-15,obj_ace_smokeeffect)}
 if(sprite_index=spr_ace_heavy4 &amp;&amp; image_index&gt;7)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
@@ -517,6 +579,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
+if(sprite_index=spr_ace_heavy3 &amp;&amp; image_index=2) {instance_create(x-5*image_xscale,y+5,obj_aceshelleffect);instance_create(x+10*image_xscale,y+5,obj_ace_smokeeffect)}
 if(sprite_index=spr_ace_heavy3 &amp;&amp; image_index&gt;5)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
@@ -541,6 +604,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
+if(sprite_index=spr_ace_heavy2 &amp;&amp; image_index=2) {instance_create(x+5*image_xscale,y+15,obj_aceshelleffect);instance_create(x+15*image_xscale,y+15,obj_ace_smokeeffect)}
 if(sprite_index=spr_ace_heavy2 &amp;&amp; image_index&gt;5)
 {hsp+=3*image_xscale
 sprite_index=spr_ace_idle
@@ -577,7 +641,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 hboxhit=0
 hit=2
 damage=4
-hstun=35
+hstun=45
 xscal=8
 yscal=2
 xpos=hsp+35
@@ -603,7 +667,7 @@ image_index=0
 
 
 
-if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_launch &amp;&amp; sprite_index!=spr_ace_heavy2 &amp;&amp; sprite_index!=spr_ace_heavy3 &amp;&amp; sprite_index!=spr_ace_heavy4)
+if(launch &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_ace_downheavy &amp;&amp; sprite_index!=spr_ace_launch &amp;&amp; sprite_index!=spr_ace_heavy2 &amp;&amp; sprite_index!=spr_ace_heavy3 &amp;&amp; sprite_index!=spr_ace_heavy4)
 {hboxhit=0
 cancel=0
 hit=5
@@ -704,6 +768,7 @@ image_index=0
 image_speed=0.2
 attacking=1
 }
+if(sprite_index=spr_ace_launchair &amp;&amp; image_index=4) {instance_create(x+5*image_xscale,y+25,obj_aceshelleffect);instance_create(x+15*image_xscale,y+30,obj_ace_smokeeffect)}
 if(sprite_index=spr_ace_launchair &amp;&amp; image_index&gt;12)
 {
 sprite_index=spr_ace_jump
@@ -713,7 +778,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_ace_fireball  &amp;&amp; sprite_index!=spr_ace_fireball2  &amp;&amp; sprite_index!=spr_ace_fireball3  &amp;&amp; sprite_index!=spr_ace_specsuper1)
+if(hitstun=0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_ace_fireball  &amp;&amp; sprite_index!=spr_ace_fireball2  &amp;&amp; sprite_index!=spr_ace_fireball3  &amp;&amp; sprite_index!=spr_ace_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
@@ -760,61 +825,6 @@ image_blend=c_white}
 if((image_xscale&lt;0 &amp;&amp; !right or image_xscale&gt;0 &amp;&amp; !left) &amp;&amp; block=1)
 {block=0
 attacking=0}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Special Moves (Holy Heck)
-down=keyboard_check_pressed(ord("S"))
-if(hitstun=0 &amp;&amp; OTG=false)
-{
-//Gunshot
-if(keyboard_check_pressed(ord("U")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
-{
-if(FBlv=1)linkspr=spr_ace_fireball
-if(FBlv=2)linkspr=spr_ace_fireball2
-if(FBlv=3)linkspr=spr_ace_fireball3
-hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
-}
-//FB1
-if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+30*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
-if(sprite_index=spr_ace_fireball &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
-//FB2
-if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+26*image_xscale,y+16,obj_shooteffect);instance_create(x+12*image_xscale,y+16,obj_acefireball);obj_acefireball.vspeed=-1;obj_acefireball.angle=5*image_xscale}
-if(sprite_index=spr_ace_fireball2 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_ace_idle}
-//FB3
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_ace_grenade)}
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2;instance_create(x+35*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acefireball)}
-if(sprite_index=spr_ace_fireball3 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_ace_idle}
-
-//Scorched Earth
-if(keyboard_check_pressed(ord("I")) &amp;&amp; grounded=1 &amp;&amp; attacking!=2 &amp;&amp; abi&gt;0)
-{
-if(FBlv=1)linkspr=spr_ace_spec21
-if(FBlv=2)linkspr=spr_ace_spec22
-if(FBlv=3)linkspr=spr_ace_fireball3
-hit=0;sprite_index=linkspr;image_index=0;abi--;attacking=2
-}
-//FB1
-if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+25*image_xscale,y-16,obj_shooteffect);instance_create(x+12*image_xscale,y-16,obj_acebottle1)}
-if(sprite_index=spr_ace_spec21 &amp;&amp; image_index&gt;=12) {attacking=0;sprite_index=spr_ace_idle}
-}
 </string>
           </argument>
         </arguments>
@@ -971,17 +981,17 @@ draw_sprite_ext(sprite_index,image_index-3,x-(5-hsp*3)*sign(image_xscale),y-vsp*
 
 draw_self()
 if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index=7)instance_create(x+10*image_xscale,y,obj_acepan)
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index=13)global.roundEnd=0//////
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=16 &amp;&amp; hit=0){hit=1;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=18 &amp;&amp; hit=1){hit=2;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=19 &amp;&amp; hit=2){hit=3instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=21 &amp;&amp; hit=3){hit=4;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=22 &amp;&amp; hit=4){hit=5;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=24 &amp;&amp; hit=5){hit=6;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=25 &amp;&amp; hit=6){hit=7;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=27 &amp;&amp; hit=7){hit=8;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=28 &amp;&amp; hit=8){hit=9;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
-if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=30 &amp;&amp; hit=9){hit=10;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index=13 &amp;&amp; !instance_exists(ftb)) global.roundEnd=0//////
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=16 &amp;&amp; hit=0){hit=1;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=18 &amp;&amp; hit=1){hit=2;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=19 &amp;&amp; hit=2){hit=3instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=21 &amp;&amp; hit=3){hit=4;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=22 &amp;&amp; hit=4){hit=5;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=24 &amp;&amp; hit=5){hit=6;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=25 &amp;&amp; hit=6){hit=7;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=27 &amp;&amp; hit=7){hit=8;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=28 &amp;&amp; hit=8){hit=9;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
+if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=30 &amp;&amp; hit=9){hit=10;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet);instance_create(x+10*image_xscale,y-75,obj_aceshelleffect);instance_create(x+10*image_xscale,y-75,obj_ace_smokeeffect)}
 if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=31 &amp;&amp; hit=10){hit=11;instance_create(x+10*image_xscale,y-50,obj_ace_specbullet)}
 }
 if(sprite_index=spr_ace_specsuper1 &amp;&amp; image_index&gt;=33)

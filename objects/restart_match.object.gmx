@@ -54,13 +54,18 @@ timer=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>timer++
+            <string>if(instance_exists(obj_cardpicker))
+{
+instance_destroy(obj_cardpicker)
+}
+timer++
 if(timer=10) image_alpha=0.8
 if(timer=20) image_alpha=1
 if(timer=40) 
 {//resets positions so equal starting ground
 p1.sprite_index=p1.idle
 p1.image_xscale=4
+p1.image_yscale=4
 p1.hsp=0
 p1.vsp=0
 p1.hitstun=0
@@ -70,6 +75,7 @@ p1.y=736;
 
 p2.sprite_index=p2.idle
 p2.image_xscale=-4
+p2.image_yscale=4
 p2.x=832;
 p2.y=736;
 p2.hsp=0

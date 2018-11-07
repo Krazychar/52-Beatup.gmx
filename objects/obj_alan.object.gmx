@@ -32,6 +32,7 @@ image_yscale=4
 idle=spr_alan_idle//important for resuming round
 attacking=0
 OTG=false
+timer=0
 global.p1char="Alan"
 OutlineCol=c_black;
 hsp=0
@@ -470,7 +471,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2 &amp;&amp; sprite_index!=spr_alan_specsuper1)
+if(hitstun=0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2 &amp;&amp; sprite_index!=spr_alan_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
@@ -498,7 +499,11 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
             <kind>1</kind>
             <string>///input
 //keep the player out of the wall
-if(place_meeting(x,y,ground)){x+=2*image_xscale}
+if(place_meeting(x,y,ground))
+{
+if(x&gt;room_width/2) x-=2
+else x+=2
+}
 
 left=keyboard_check_direct(ord("A"))
 right=keyboard_check_direct(ord("D"))
@@ -570,7 +575,7 @@ if(sprite_index=spr_alan_idle or sprite_index=spr_alan_forwalk or sprite_index=s
 
 if(dashtime&gt;0) dashtime-=1
 
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0 or jump or light or heavy or launch)
 
     {
     dashing=0
@@ -771,7 +776,7 @@ abi-=1;attacking=2;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
 if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball0)}
-if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=11) {attacking=0;sprite_index=spr_alan_idle}
+if(sprite_index=spr_alan_shieldbreak &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_alan_idle}
 //FB2
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y-16,obj_alanfireball);}
 if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
@@ -965,7 +970,18 @@ if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; global.p1
 {
 freakingslickdash=1
 draw_set_color(c_blue)
-draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,image_yscale,0,c_blue,1)
+timer++
+if(timer&gt;=15)
+{
+with instance_create(x,y,aftereffect){
+image_xscale=p1.image_xscale
+image_yscale=p1.image_yscale
+sprite_index=p1.sprite_index
+image_index=p1.image_index
+image_blend=c_blue
+}
+timer=0
+}
 }
 if(place_meeting(x,y+1,ground) or (place_meeting(x,y+1,ground) &amp;&amp; attacking=1))
 {freakingslickdash=0}
@@ -1020,7 +1036,7 @@ draw_sprite_ext(sprite_index,image_index,x-4,y  ,image_xscale,image_yscale,0,Out
 draw_self()
 if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=10 &amp;&amp; hit=0)
 {
-global.roundEnd=0
+if(!instance_exists(ftb))global.roundEnd=0
 }
 
 if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=12 &amp;&amp; hit=0)

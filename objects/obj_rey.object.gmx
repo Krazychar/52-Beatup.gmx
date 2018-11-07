@@ -207,8 +207,11 @@ global.p1combo=0
             <kind>1</kind>
             <string>///input
 //keep the player out of the wall
-image_alpha=1
-if(place_meeting(x,y,ground)){x+=2*image_xscale}
+if(place_meeting(x,y,ground))
+{
+if(x&gt;room_width/2) x-=2
+else x+=2
+}
 
 //left=keyboard_check_direct(vk_left)
 left=gamepad_button_check(global.gamepadSlot,gp_padl)
@@ -286,7 +289,7 @@ if(sprite_index=spr_rey_idle or sprite_index=spr_rey_forwalk or sprite_index=spr
 
 if(dashtime&gt;0) dashtime-=1
 
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0 or jump or light or heavy or launch)
 
     {
     dashing=0
@@ -485,7 +488,7 @@ attacking=0
 image_index=0
 }
 
-if(light &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
+if(light &amp;&amp; (left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &amp;&amp; (attacking=0 or cancel=1) &amp;&amp; sprite_index!=spr_rey_forlight &amp;&amp; sprite_index!=spr_rey_heavy &amp;&amp; sprite_index!=spr_rey_launch)
 {cancel=0
 hboxhit=0
 hit=4
@@ -682,7 +685,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_rey_fireball1 &amp;&amp; sprite_index!=spr_rey_specsuper1)
+if(hitstun == 0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_rey_fireball1 &amp;&amp; sprite_index!=spr_rey_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
 }
@@ -782,7 +785,7 @@ if(FBlv=3)linkspr=spr_alan_fireball2
 attacking=2;hit=0;launch=0;sprite_index=linkspr;image_index=0
 abi--;
 }
-if(sprite_index=spr_rey_spec21g &amp;&amp; image_index=3 &amp;&amp; place_meeting(x+8*image_xscale,y,p1))
+if(sprite_index=spr_rey_spec21g &amp;&amp; image_index=3 &amp;&amp; place_meeting(x+8*image_xscale,y,p1) &amp;&amp; p1.OTG=false &amp;&amp; place_meeting(p1.x,p1.y+1,ground) &amp;&amp; p1.hitstun==0)
 {
 sprite_index=spr_rey_spec21t
 image_index=0
@@ -970,7 +973,7 @@ draw_sprite_ext(sprite_index,image_index-2,x-(5-hsp*3)*sign(image_xscale),y-vsp*
 draw_sprite_ext(sprite_index,image_index-3,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,image_yscale,0,c_black,0.2)
 }
 if(sprite_index=spr_rey_specsuper1 &amp;&amp; image_index&gt;=9)
-{global.roundEnd=0}
+{if(!instance_exists(ftb))global.roundEnd=0}
 
 if(sprite_index=spr_rey_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit=1)
 {x+=2*image_xscale;image_speed=0.25;damage=8;xscal=10;yscal=4;hstun=45;xpos=hsp+20;ypos=+20;launchh=false;hit=2;instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox);}

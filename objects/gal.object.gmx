@@ -192,6 +192,31 @@ else hitStop=true;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Make sure game doesnt break
+if(p1.mhp&lt;0)
+{p1.mhp=1}
+if(p2.mhp&lt;0)
+{p2.mhp=1}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -269,6 +294,7 @@ if(p1.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
 {
 instance_create(x,y,obj_winflash)
 p1.vsp=-6
+p1.image_index=4
 }
 
 
@@ -276,6 +302,7 @@ if(p2.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
 {
 instance_create(x,y,obj_winflash)
 p2.vsp=-6
+p2.image_index=4
 }
 
 if(global.roundEnd=0)
@@ -489,7 +516,7 @@ instance_destroy(card1)
             <string>///supereffect
 if(global.super=0) rad=180
 if(global.super=1 &amp;&amp; rad&gt;0)
-{rad-=5
+{rad-=4
 draw_set_color(c_blue)
 draw_circle(p1.x,p1.y,rad,true)
 draw_circle(p1.x,p1.y,rad+1,true)
@@ -541,6 +568,27 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
 
 
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_line(room_width-2,room_height,room_width+2,0)
 </string>
           </argument>
         </arguments>

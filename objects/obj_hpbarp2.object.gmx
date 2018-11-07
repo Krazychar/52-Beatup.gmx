@@ -107,7 +107,8 @@ if(global.p1combo=0 &amp;&amp; combohp&gt;p2.hp)
 {combohp-=10}
 
 draw_set_color(c_white)
-kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
+if(global.p1combo!=0)kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
+else kek=0
 //red hp
 draw_healthbar(view_xview[0]+365+kek,view_yview[0]+30+kek,view_xview[0]+571+kek,view_yview[0]+50+kek,(combohp/p2.mhp)*100,c_black,c_red,c_red,90,true,false)
 //green hp
@@ -157,8 +158,17 @@ hitColor=c_white
 
 //DAMAGE
 draw_set_font(font0)
-draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+80+kek,string(obj_hpbarp1.combohp - p1.hp)+" Damage!")
-}
+draw_set_color(c_black)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+80+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+80+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
+draw_set_color(c_white)
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+80+kek,string(obj_hpbarp2.combohp - p2.hp)+" Damage!")}
 </string>
           </argument>
         </arguments>

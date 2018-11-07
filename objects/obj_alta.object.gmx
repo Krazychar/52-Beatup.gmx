@@ -207,7 +207,11 @@ global.p1combo=0
             <kind>1</kind>
             <string>///input
 //keep the player out of the wall
-if(place_meeting(x,y,ground)){x+=2*image_xscale}
+if(place_meeting(x,y,ground))
+{
+if(x&gt;room_width/2) x-=2
+else x+=2
+}
 
 //left=keyboard_check_direct(vk_left)
 left=gamepad_button_check(global.gamepadSlot,gp_padl)
@@ -283,7 +287,7 @@ if(sprite_index=spr_alta_idle) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0 or jump or light or heavy or launch)
 
     {
     dashing=0
@@ -662,7 +666,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
+if(hitstun==0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
 }
@@ -775,7 +779,9 @@ vsp=0
 if(FBlv=1)linkspr=spr_alta_spec11
 if(FBlv=2)linkspr=spr_alan_fireball
 if(FBlv=3)linkspr=spr_alan_fireball2
-attacking=1;abi--;sprite_index=linkspr;image_index=0;hit=0
+if(grounded=0)attacking=1;
+else attacking=2;
+abi--;sprite_index=linkspr;image_index=0;hit=0
 airMovementDir = sign(image_xscale) * -1;
 }
 //FB1
@@ -785,7 +791,7 @@ if(sprite_index=spr_alta_spec11 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {
 if(sprite_index=spr_alta_spec11 &amp;&amp; image_index&gt;=12) {attacking=0;sprite_index=spr_alta_idle}
 
 //Flurry
-if((gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderr) or keyboard_check_pressed(ord("V"))) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2)
+if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; attacking!=2)
 {
 if(RDlv=1)linkspr=spr_alta_spec21
 if(RDlv=2)linkspr=spr_alta_spec22
@@ -793,19 +799,19 @@ if(RDlv=3)linkspr=spr_alan_fireball2
 attacking=2;abi--;sprite_index=linkspr;image_index=0;hit=0
 }
 //spec1
-if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=3;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=3;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=5 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=3;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=3;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=4) {hit=5;xpos=0;ypos=0;launchh=false;damage=3;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=3;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=3;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=5 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=3;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=3;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=4) {hit=5;xpos=0;ypos=0;launchh=false;damage=5;xscal=12;yscal=4;hstun=65;instance_create(x+20*image_xscale,y+15,p2hbox)}
 if(sprite_index=spr_alta_spec21 &amp;&amp; image_index&gt;=15) {sprite_index=spr_alta_idle;attacking=0}
 //spec2
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=4;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=4;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=5 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=4;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=4;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=4) {hit=5;xpos=0;ypos=0;launchh=false;damage=4;xscal=10;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=12 &amp;&amp; hit=5) {hit=6;xpos=0;ypos=0;launchh=false;damage=12;xscal=10;yscal=4;hstun=600;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=4;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=4;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=5 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=4;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=4;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=4) {hit=5;xpos=0;ypos=0;launchh=false;damage=4;xscal=12;yscal=4;hstun=50;instance_create(x+20*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=12 &amp;&amp; hit=5) {hit=6;xpos=0;ypos=0;launchh=false;damage=12;xscal=12;yscal=4;hstun=60;instance_create(x+20*image_xscale,y+15,p2hbox)}
 if(sprite_index=spr_alta_spec22 &amp;&amp; image_index&gt;=20) {sprite_index=spr_alta_idle;attacking=0}
 }
 </string>
@@ -929,7 +935,7 @@ if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=10 &amp;&amp; hit
 if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit=5)
 {hit=6;instance_create(x-32*image_xscale,y-118,obj_altasuper1B)}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=13){global.roundEnd=0}
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=13){if(!instance_exists(ftb))global.roundEnd=0}
 
 if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=26)
 {hit=0;attacking=0;image_speed=0.2;sprite_index=spr_alta_idle}

@@ -207,7 +207,11 @@ global.p1combo=0
             <kind>1</kind>
             <string>///input
 //keep the player out of the wall
-if(place_meeting(x,y,ground)){x+=2*image_xscale}
+if(place_meeting(x,y,ground))
+{
+if(x&gt;room_width/2) x-=2
+else x+=2
+}
 
 //left=keyboard_check_direct(vk_left)
 left=gamepad_button_check(global.gamepadSlot,gp_padl)
@@ -284,7 +288,7 @@ if(sprite_index=spr_magnus_idle) freakingslickdash=0
 
 if(dashtime&gt;0) dashtime-=1
 
-if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0)
+if(dashing=1 &amp;&amp; dashtimerfinal&gt;40 or dashtime&lt;=0 or jump or light or heavy or launch)
 
     {
     dashing=0
@@ -465,7 +469,7 @@ if((!left &amp;&amp; image_xscale&lt;0 or !right &amp;&amp; image_xscale&gt;0) &
 {cancel=0
 hboxhit=0
 hit=3
-damage=9
+damage=11
 xscal=2
 yscal=3
 hstun=35
@@ -477,7 +481,7 @@ image_index=0
 image_speed=0.2
 attacking=1
 }
-if(sprite_index=spr_magnus_light &amp;&amp; image_index&gt;8)
+if(sprite_index=spr_magnus_light &amp;&amp; image_index&gt;6)
 {
 sprite_index=spr_magnus_idle
 attacking=0
@@ -488,7 +492,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=3
-damage=6
+damage=4
 xscal=4
 yscal=2
 hstun=35
@@ -501,7 +505,7 @@ image_speed=0.2
 attacking=1
 }
 if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;=5 &amp;&amp; hit=3)
-{hit=7;hboxhit=0}
+{hit=7;damage=5;hboxhit=0}
 if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;11)
 {
 sprite_index=spr_magnus_idle
@@ -658,7 +662,7 @@ image_index=0
 
 }
 
-if(attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_magnus_fireball1 &amp;&amp; sprite_index!=spr_magnus_specsuper1)
+if(hitstun==0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_magnus_fireball1 &amp;&amp; sprite_index!=spr_magnus_specsuper1)
 {hboxhit=1
 instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
 }
@@ -729,7 +733,7 @@ attacking=0}
             <kind>1</kind>
             <string>///Special Moves (Holy Heck)
 down=keyboard_check_pressed(vk_down)
-if(hitstun=0)
+if(hitstun=0 &amp;&amp; OTG=false)
 {
 if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
@@ -869,14 +873,14 @@ ImagePL=sprite_index
           <argument>
             <kind>1</kind>
             <string>
-
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (attacking=1 or sprite_index=spr_magnus_dash or sprite_index=spr_magnus_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+//took 'attacking=1 or'  out of this statement to see if it runs correctly
+if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_magnus_dash or sprite_index=spr_magnus_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_blue)
 draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,image_yscale,0,c_aqua,1)
-
 }
+
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
 
@@ -895,14 +899,12 @@ attacking=3
 sprite_index=spr_magnus_specsuper1
 image_index=0
 cancel=0
-hboxhit=0
 damage=5
 xscal=4
 yscal=5
 hstun=90
 xpos=hsp+30
 ypos=+20
-launchh=true
 global.super=2
 }
 if(sprite_index=spr_magnus_specsuper1)

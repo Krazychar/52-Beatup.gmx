@@ -22,8 +22,8 @@
       <sprite>sprites\spr_alan_win</sprite>
       <sprite>sprites\spr_alan_lightair</sprite>
       <sprite>sprites\spr_alan_lightupair</sprite>
-      <sprite>sprites\spr_alan_launchair</sprite>
       <sprite>sprites\spr_alan_heavyair</sprite>
+      <sprite>sprites\spr_alan_launchair</sprite>
       <sprite>sprites\spr_alan_backdash</sprite>
       <sprite>sprites\spr_alan_block</sprite>
       <sprite>sprites\spr_alan_heavydash</sprite>
@@ -49,15 +49,15 @@
     </sprites>
     <sprites name="El Rey">
       <sprite>sprites\spr_rey_idle</sprite>
-      <sprite>sprites\spr_rey_forlight</sprite>
       <sprite>sprites\spr_rey_getup</sprite>
       <sprite>sprites\spr_rey_ground</sprite>
-      <sprite>sprites\spr_rey_forlaunch</sprite>
       <sprite>sprites\spr_rey_forwalk</sprite>
       <sprite>sprites\spr_rey_backwalk</sprite>
       <sprite>sprites\spr_rey_light</sprite>
+      <sprite>sprites\spr_rey_forlight</sprite>
       <sprite>sprites\spr_rey_heavy</sprite>
       <sprite>sprites\spr_rey_launch</sprite>
+      <sprite>sprites\spr_rey_forlaunch</sprite>
       <sprite>sprites\spr_rey_lightair</sprite>
       <sprite>sprites\spr_rey_heavyair</sprite>
       <sprite>sprites\spr_rey_heavyforair</sprite>
@@ -107,6 +107,7 @@
       <sprite>sprites\spr_ace_grenade</sprite>
       <sprite>sprites\spr_ace_grenade2</sprite>
       <sprite>sprites\spr_ace_grenade3</sprite>
+      <sprite>sprites\spr_ace_smoke</sprite>
       <sprite>sprites\spr_ace_bulletshell</sprite>
       <sprite>sprites\spr_ace_bullet</sprite>
       <sprites name="acespecials">
@@ -168,6 +169,7 @@
     </sprites>
     <sprites name="Jackson">
       <sprite>sprites\spr_jack_idle</sprite>
+      <sprite>sprites\spr_jack_dash</sprite>
       <sprite>sprites\spr_jack_forwalk</sprite>
       <sprite>sprites\spr_jack_backwalk</sprite>
       <sprite>sprites\spr_jack_downheavy</sprite>
@@ -185,7 +187,6 @@
       <sprite>sprites\spr_jack_hit2</sprite>
       <sprite>sprites\spr_jack_hit3</sprite>
       <sprite>sprites\spr_jack_backdash</sprite>
-      <sprite>sprites\spr_jack_dash</sprite>
       <sprite>sprites\spr_jack_block</sprite>
       <sprites name="jackspecials">
         <sprite>sprites\spr_jackitems</sprite>
@@ -237,11 +238,16 @@
     </sprites>
     <sprites name="Haley">
       <sprite>sprites\spr_haley_idle</sprite>
-      <sprite>sprites\spr_haley_jump</sprite>
-      <sprite>sprites\spr_haley_light</sprite>
-      <sprite>sprites\spr_haley_heavy</sprite>
       <sprite>sprites\spr_haley_forheavy</sprite>
+      <sprite>sprites\spr_haley_light</sprite>
+      <sprite>sprites\spr_haley_forlight</sprite>
+      <sprite>sprites\spr_haley_heavy</sprite>
       <sprite>sprites\spr_haley_launch</sprite>
+      <sprite>sprites\spr_haley_spec11</sprite>
+      <sprite>sprites\spr_haley_spec21</sprite>
+      <sprites name="haleyjump">
+        <sprite>sprites\spr_haley_jump</sprite>
+      </sprites>
     </sprites>
     <sprites name="Nikki">
       <sprite>sprites\spr_nikki_idle</sprite>
@@ -251,15 +257,31 @@
       <sprite>sprites\spr_nikki_taunt</sprite>
     </sprites>
     <sprites name="attempts">
+      <sprite>sprites\spr_test_idle</sprite>
       <sprite>sprites\spr_swan_idle</sprite>
-      <sprite>sprites\spr_stefan_idle</sprite>
       <sprite>sprites\spr_sword_idle</sprite>
       <sprite>sprites\spr_skip_idle</sprite>
+    </sprites>
+    <sprites name="enemies">
+      <sprite>sprites\spr_enemy1_idle</sprite>
+      <sprite>sprites\spr_stefan_idle</sprite>
+    </sprites>
+    <sprites name="SpriteEffects">
+      <sprite>sprites\spr_lighthit1</sprite>
+      <sprite>sprites\spr_groundbits</sprite>
+      <sprite>sprites\hiteffect1</sprite>
+      <sprite>sprites\hiteffect2</sprite>
+      <sprite>sprites\hiteffect3</sprite>
+      <sprite>sprites\hiteffect5</sprite>
+      <sprite>sprites\hiteffect4</sprite>
+      <sprite>sprites\blockeffect</sprite>
+      <sprite>sprites\spr_jumpeffectlight</sprite>
+      <sprite>sprites\slasheffect1</sprite>
+      <sprite>sprites\dasheffect</sprite>
     </sprites>
     <sprite>sprites\spr_healthbar</sprite>
     <sprite>sprites\timeholder</sprite>
     <sprite>sprites\spr_cardpicker</sprite>
-    <sprite>sprites\spr_activecards</sprite>
     <sprite>sprites\spr_cardback</sprite>
     <sprite>sprites\spr_supercards</sprite>
     <sprite>sprites\spr_debuffcards</sprite>
@@ -267,18 +289,6 @@
     <sprite>sprites\spr_sandbag_hit</sprite>
     <sprite>sprites\spr_hitbox</sprite>
     <sprite>sprites\spr_gameborder</sprite>
-    <sprites name="SpriteEffects">
-      <sprite>sprites\spr_lighthit1</sprite>
-      <sprite>sprites\spr_groundbits</sprite>
-      <sprite>sprites\hiteffect1</sprite>
-      <sprite>sprites\hiteffect4</sprite>
-      <sprite>sprites\blockeffect</sprite>
-      <sprite>sprites\spr_jumpeffectlight</sprite>
-      <sprite>sprites\slasheffect1</sprite>
-      <sprite>sprites\hiteffect2</sprite>
-      <sprite>sprites\hiteffect3</sprite>
-      <sprite>sprites\dasheffect</sprite>
-    </sprites>
     <sprite>sprites\pictureedit</sprite>
     <sprite>sprites\spr_buffcards</sprite>
     <sprite>sprites\pickacard</sprite>
@@ -297,6 +307,7 @@
     <sprite>sprites\__twit</sprite>
     <sprite>sprites\spr_timebkg</sprite>
     <sprite>sprites\spr_emote</sprite>
+    <sprite>sprites\spr_shadow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_charselect</background>
@@ -334,6 +345,7 @@
     <object>objects\gal</object>
     <object>objects\camera</object>
     <object>objects\ftb</object>
+    <object>objects\obj_flavourtext</object>
     <object>objects\obj_winflash</object>
     <objects name="Projectiles">
       <object>objects\obj_jackitems</object>
@@ -367,6 +379,8 @@
         <object>objects\jackitemeffect</object>
         <object>objects\alanfireballeff</object>
         <object>objects\obj_hiteffect</object>
+        <object>objects\obj_aceshelleffect</object>
+        <object>objects\obj_ace_smokeeffect</object>
         <object>objects\obj_launcheffect</object>
         <object>objects\obj_blockeffect</object>
         <object>objects\obj_groundbits</object>
@@ -389,7 +403,9 @@
     <object>objects\obj_acepan</object>
     <object>objects\diimmadab</object>
     <object>objects\meme</object>
-    <object>objects\obj_flavourtext</object>
+    <object>objects\obj_p1shadow</object>
+    <object>objects\obj_p2shadow</object>
+    <object>objects\aftereffect</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\fighting_room</room>

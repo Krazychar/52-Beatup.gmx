@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.p1combo=0
-global.p2combo=0
+            <string>global.p1combo=1
+global.p2combo=1
 global.time=99
 global.matchover=false
 ms=60
@@ -36,6 +36,44 @@ ms=60
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///player collison
+
+
+if(place_meeting(p1.x,p1.y,p2))
+{
+//checks who's closer to the middle
+if(abs(p1.x - round(room_width/2)) &lt; abs(p2.x - round(room_width/2)))
+{
+if(p1.x &gt; room_width/2) p1.x-=10
+else p1.x+=10
+}
+else
+{
+if(p2.x &gt; room_width/2) p2.x-=10
+else p2.x+=10
+}
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

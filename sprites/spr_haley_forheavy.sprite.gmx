@@ -17,7 +17,7 @@
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>192</width>
+  <width>64</width>
   <height>64</height>
   <frames>
     <frame index="0">images\spr_haley_forheavy_0.png</frame>
@@ -35,5 +35,8 @@
     <frame index="12">images\spr_haley_forheavy_12.png</frame>
     <frame index="13">images\spr_haley_forheavy_13.png</frame>
     <frame index="14">images\spr_haley_forheavy_14.png</frame>
+    <frame index="15">images\spr_haley_forheavy_15.png</frame>
+    <frame index="16">images\spr_haley_forheavy_16.png</frame>
+    <frame index="17">images\spr_haley_forheavy_17.png</frame>
   </frames>
 </sprite>
