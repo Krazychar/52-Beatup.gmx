@@ -238,12 +238,13 @@
     </sprites>
     <sprites name="Haley">
       <sprite>sprites\spr_haley_idle</sprite>
-      <sprite>sprites\spr_haley_forheavy</sprite>
       <sprite>sprites\spr_haley_light</sprite>
       <sprite>sprites\spr_haley_forlight</sprite>
       <sprite>sprites\spr_haley_heavy</sprite>
+      <sprite>sprites\spr_haley_forheavy</sprite>
       <sprite>sprites\spr_haley_launch</sprite>
       <sprite>sprites\spr_haley_spec11</sprite>
+      <sprite>sprites\spr_haley_spec12</sprite>
       <sprite>sprites\spr_haley_spec21</sprite>
       <sprites name="haleyjump">
         <sprite>sprites\spr_haley_jump</sprite>
