@@ -32,10 +32,11 @@ attacking=0
 OTG=false
 image_yscale=4  
 global.p2char="Alta"
+timer=0
 idle=spr_alta_idle//important for resuming round
 hsp=0
 vsp=0
-grav=0.45
+grav=0.5
 grounded=0
 hitstun=0
 hboxhit=0
@@ -51,7 +52,6 @@ linkatk=keyboard_check_direct(vk_up)
 linkspr=0
 FBlv=1
 RDlv=1
-GBlv=1
 //battle variables
 agi=5
 dashing=0
@@ -120,12 +120,12 @@ vsp=0
 attacking=5
 sprite_index=spr_alta_ground
 image_index=0
-instance_create(x-15,y,obj_groundbits)
-instance_create(x-20,y,obj_groundbits)
-instance_create(x-10,y,obj_groundbits)
-instance_create(x+10,y,obj_groundbits)
-instance_create(x+20,y,obj_groundbits)
-instance_create(x+15,y,obj_groundbits)
+instance_create(x-15,y+80,obj_groundbits)
+instance_create(x-20,y+80,obj_groundbits)
+instance_create(x-10,y+80,obj_groundbits)
+instance_create(x+10,y+80,obj_groundbits)
+instance_create(x+20,y+80,obj_groundbits)
+instance_create(x+15,y+80,obj_groundbits)
 
 }
 
@@ -336,15 +336,18 @@ if (left)
 {
 if(hsp&lt;-agi){}
 else
-{hsp=-agi}
+{hsp=-agi
 if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
+
+}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
-{hsp=agi}
-if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
+{hsp=agi
+if(coward=true &amp;&amp; image_xscale&lt;0) hsp=agi +2}
+}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
@@ -666,9 +669,14 @@ image_index=0
 
 }
 
-if(hitstun==0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
+if(hitstun==0 &amp;&amp; attacking=1 &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alta_fireball1 &amp;&amp; sprite_index!=spr_alta_specsuper1)
 {hboxhit=1
-instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
+if(sprite_index=spr_alta_launchair)
+{
+with instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox) {HBOXLAUNCH=true;DOWNLAUNCH=true}
+}
+else instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
+
 }
 
 }
@@ -693,7 +701,7 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
           <argument>
             <kind>1</kind>
             <string>///blocking
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking!=0 or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking!=0 or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0 &amp;&amp; p1.OTG=false)
 {
 attacking=1
 hsp=0
@@ -735,6 +743,7 @@ attacking=0}
             <string>///hit
 if(hitstun&gt;0 &amp;&amp; OTG==false)
 {
+hboxhit=1
 hitstun--
 if(!place_meeting(x,y+1,ground)) sprite_index=spr_alta_hit2
 else sprite_index=spr_alta_hit
@@ -877,12 +886,21 @@ ImagePL=sprite_index
           <argument>
             <kind>1</kind>
             <string>
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_alta_dash or sprite_index=spr_alta_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(dashing=true || attacking=2 || !place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_alta_dash or sprite_index=spr_alta_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
-draw_set_color(c_purple)
-draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,image_yscale,0,c_purple,1)
-
+timer++
+if(timer&gt;=2)
+{
+with instance_create(x,y,aftereffect){
+image_xscale=p2.image_xscale
+image_yscale=p2.image_yscale
+sprite_index=p2.sprite_index
+image_index=p2.image_index
+image_blend=c_purple
+}
+timer=0
+}
 }
 if(place_meeting(x,y+1,ground))
 {freakingslickdash=0}
@@ -894,9 +912,12 @@ if(global.roundEnd=1 &amp;&amp; attacking!=3)
 {image_speed=0}
 else if(gal.hitStop=false)
 {image_speed=0.25}
-
-if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderlb) &amp;&amp; grounded=1)
+//SUPERS
+if(global.p2super&gt;0 &amp;&amp; gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderlb) &amp;&amp; grounded=1 &amp;&amp; OTG=false &amp;&amp; hitstun&lt;=0)
 {
+global.p2super--;
+hboxhit=1
+hsp=0
 hit=0
 attacking=3
 global.roundEnd=1
@@ -904,7 +925,6 @@ sprite_index=spr_alta_specsuper1
 ImagePL=sprite_index
 image_index=0
 cancel=0
-hboxhit=0
 damage=5
 xscal=4
 yscal=5
@@ -920,24 +940,24 @@ draw_sprite_ext(sprite_index,image_index-1,x-(5-hsp*3)*sign(image_xscale),y-vsp*
 draw_sprite_ext(sprite_index,image_index-2,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,image_yscale,0,c_black,0.4)
 draw_sprite_ext(sprite_index,image_index-3,x-(5-hsp*3)*sign(image_xscale),y-vsp*3,image_xscale,image_yscale,0,c_black,0.2)
 }
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=6 &amp;&amp; hit=0)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit=0)
 {hit=1;instance_create(x-32*image_xscale,y+16,obj_altasuper1A)}
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=12 &amp;&amp; hit=1)
 {hit=2;instance_create(x-32*image_xscale,y+10,obj_altasuper1B)}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=8 &amp;&amp; hit=2)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=13 &amp;&amp; hit=2)
 {hit=3;instance_create(x-32*image_xscale,y-48,obj_altasuper1A)}
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=9 &amp;&amp; hit=3)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=14 &amp;&amp; hit=3)
 {hit=4;instance_create(x-32*image_xscale,y-54,obj_altasuper1B)}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=10 &amp;&amp; hit=4)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=15 &amp;&amp; hit=4)
 {hit=5;instance_create(x-32*image_xscale,y-112,obj_altasuper1A)}
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=11 &amp;&amp; hit=5)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=16 &amp;&amp; hit=5)
 {hit=6;instance_create(x-32*image_xscale,y-118,obj_altasuper1B)}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=13){if(!instance_exists(ftb))global.roundEnd=0}
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=18){if(!instance_exists(ftb))global.roundEnd=0}
 
-if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=26)
+if(sprite_index=spr_alta_specsuper1 &amp;&amp; image_index&gt;=31)
 {hit=0;attacking=0;image_speed=0.2;sprite_index=spr_alta_idle}
 //Outline Code//
 draw_sprite_ext(sprite_index,image_index,x+4,y+4,image_xscale,image_yscale,0,c_black,1)

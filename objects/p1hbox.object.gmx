@@ -29,6 +29,12 @@
 image_xscale=p1.xscal
 image_yscale=p1.yscal
 unblockable=false;
+
+
+HBOXLAUNCH=p1.launchh
+HBOXDAMAGE=p1.damage
+HBOXHSTUN=p1.hstun
+DOWNLAUNCH=false
 </string>
           </argument>
         </arguments>
@@ -54,6 +60,7 @@ unblockable=false;
             <string>room_speed=60
 p2.hsp=0
 p1.hsp=0
+if(p1.attacking!=2)p1.cancel=1
 </string>
           </argument>
         </arguments>
@@ -94,7 +101,7 @@ with instance_create(x,y,obj_flavourtext)
 }
 
 //Check if launched
-if(p1.launchh=false)
+if(HBOXLAUNCH=false)
 {
 
 if(instance_exists(obj_jack) &amp;&amp; p1.sprite_index!=spr_jack_light)
@@ -112,42 +119,47 @@ image_xscale=p1.image_xscale/2
 }
 
 }
-if(p1.attacking!=2)p1.cancel=1
+
 //hitColor change
 obj_hpbarp1.hitColor=c_red
 //Override Depth
 p2.depth=0
 p1.depth=-1
 //Push Camera a bit
-camera.x+=p1.damage*p1.image_xscale
+camera.x+=HBOXDAMAGE*p1.image_xscale
 p2.image_index=0
 global.p1combo++
-camera.shakeIntensity=round(p1.damage*p1.image_xscale/6)
+camera.shakeIntensity=round(HBOXDAMAGE*p1.image_xscale/6)
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
 //make sure there are no ghost hitboxes
 p2.hboxhix=1
-//room_speed=25
-gal.HSF=round(p1.damage*0.5)+2
+gal.HSF=round(HBOXDAMAGE*0.5)+2
 
-if(!place_meeting(p2.x+15*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/5)*p1.image_xscale
-else p1.x-=round(p1.damage/5)*p1.image_xscale
-if(p1.rage=false) p2.hp-=p1.damage+p1.atk
-else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/75)
-p2.hitstun=p1.hstun-(round(global.p1combo*1.5))
+if(!place_meeting(p2.x+15*p1.image_xscale,y,ground)) p2.x+=round(HBOXDAMAGE/5)*p1.image_xscale
+
+else p1.x-=round(HBOXDAMAGE/5)*p1.image_xscale
+
+
+if(p1.rage=false) p2.hp-=HBOXDAMAGE+p1.atk
+
+else p2.hp-=HBOXDAMAGE+p1.atk+round((p1.mhp-p1.hp)/75)
+
+p2.hitstun=HBOXHSTUN-(round(global.p1combo*1.5))
 //death effect
 if(p2.hp&lt;=0)
 {
 instance_create(x,y,obj_winflash)
 p1.launch=true
+p2.y-=15
+p2.OTG=true
 }
 
 if(p1.freakingslickdash=1 &amp;&amp; p1.launch=false)
 {
-if(!place_meeting(p2.x,p2.y+3,ground))
-{p2.vsp=-3}
-if(!place_meeting(p1.x,p1.y+4,ground)) p1.vsp=-3
+if(p2.y&lt;700) p2.vsp=-3//!place_meeting(p2.x,p2.y+3,ground)) p2.vsp=-3
+if(p1.y&lt;700) p1.vsp=-3//!place_meeting(p1.x,p1.y+4,ground)) p1.vsp=-3
 }
-if(p1.launchh==true) 
+if(HBOXLAUNCH==true) 
 {
 if(p2.block=1) p1.cancel=0
 p2.vsp=-13
@@ -155,7 +167,7 @@ p2.airMovementDir=p1.image_xscale/8
 p2.grounded=0
 }
 //Knock down (hard)
-if(p1.sprite_index=spr_alan_launchair or p1.sprite_index=spr_ace_launchair or p1.sprite_index=spr_jack_launchair)
+if(DOWNLAUNCH=true)
 {
 p2.vsp=13
 p2.OTG=true
@@ -182,9 +194,12 @@ if(place_meeting(x,y,p2) &amp;&amp; p2.block=true)
 instance_create(p2.x,p2.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p2.image_xscale
 //Move FARTHER
-if(!place_meeting(p2.x-15*p1.image_xscale,y,ground)) p2.x+=round(p1.damage/2)*p1.image_xscale
-if(!place_meeting(p1.x-15*p1.image_xscale,y,ground))  p1.x-=round(p1.damage/2)*p1.image_xscale
-if(p1.launchh=false) p1.cancel=1;
+if(!place_meeting(p2.x-15*p1.image_xscale,y,ground))  p2.x+=round(HBOXDAMAGE/2)*p1.image_xscale
+if(!place_meeting(p1.x-15*p1.image_xscale,y,ground))  p1.x-=round(HBOXDAMAGE/2)*p1.image_xscale
+//CHIP DAMAGE IF SPECIAL MOVE
+if(p1.attacking==2 || p2.grounded=false) p2.hp-=round((HBOXDAMAGE+p1.atk)/3)
+
+if(HBOXLAUNCH=false) p1.cancel=1;
 }
 
 if(time&gt;=4) instance_destroy()

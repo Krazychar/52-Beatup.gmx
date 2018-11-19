@@ -32,10 +32,11 @@ attacking=0
 OTG=false
 image_yscale=4  
 global.p2char="Magnus"
+timer=0
 idle=spr_magnus_idle//important for resuming round
 hsp=0
 vsp=0
-grav=0.45
+grav=0.5
 grounded=0
 hitstun=0
 hboxhit=0
@@ -51,7 +52,6 @@ linkatk=keyboard_check_direct(vk_up)
 linkspr=0
 FBlv=1
 RDlv=1
-GBlv=1
 //battle variables
 agi=3
 dashing=0
@@ -120,12 +120,12 @@ vsp=0
 attacking=5
 sprite_index=spr_magnus_ground
 image_index=0
-instance_create(x-15,y,obj_groundbits)
-instance_create(x-20,y,obj_groundbits)
-instance_create(x-10,y,obj_groundbits)
-instance_create(x+10,y,obj_groundbits)
-instance_create(x+20,y,obj_groundbits)
-instance_create(x+15,y,obj_groundbits)
+instance_create(x-15,y+80,obj_groundbits)
+instance_create(x-20,y+80,obj_groundbits)
+instance_create(x-10,y+80,obj_groundbits)
+instance_create(x+10,y+80,obj_groundbits)
+instance_create(x+20,y+80,obj_groundbits)
+instance_create(x+15,y+80,obj_groundbits)
 
 }
 
@@ -188,6 +188,46 @@ global.p1combo=0
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///player collison
+
+
+if(place_meeting(p1.x,p1.y,p2) || place_meeting(p2.x,p2.y,p1))
+{
+//checks who's closer to the middle
+if(abs(p1.x - round(room_width/2)) &lt; abs(p2.x - round(room_width/2)) || p1.y &gt; p2.y)
+{
+if(p1.x &gt; room_width/2) p1.x-=5
+else p1.x+=5
+}
+else
+{
+if(p2.x &gt; room_width/2) p2.x-=5
+else p2.x+=5
+}
+
+}
+else
+{}
+</string>
+          </argument>
+        </arguments>
       </action>
       <action>
         <libid>1</libid>
@@ -336,15 +376,18 @@ if (left)
 {
 if(hsp&lt;-agi){}
 else
-{hsp=-agi}
+{hsp=-agi
 if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
+
+}
 
 if (right)
 {
 if(hsp&gt;agi){}
 else
-{hsp=agi}
-if(coward=true &amp;&amp; image_xscale&gt;0) hsp=-agi -2}
+{hsp=agi
+if(coward=true &amp;&amp; image_xscale&lt;0) hsp=agi +2}
+}
 }
 //neutral input = 0 movement
 if (((right &amp;&amp; left) or (!right &amp;&amp; !left)))
@@ -390,7 +433,7 @@ if grounded == 0// &amp;&amp; hitstun == 0
 //light player collision
 if(place_meeting(x+hsp,y,p1)) hsp=0
 //stop player from moving while attacking
-if(image_index&gt;=1 &amp;&amp; image_index&lt;=9 &amp;&amp; sprite_index=spr_magnus_spec21  &amp;&amp; !place_meeting(x+(13-image_index)*sign(image_xscale),y,p1)) hsp=(13-image_index)*sign(image_xscale)
+if(image_index&gt;=1 &amp;&amp; image_index&lt;=5 &amp;&amp; sprite_index=spr_magnus_spec21  &amp;&amp; !place_meeting(x+(13-image_index)*sign(image_xscale),y,p1)) hsp=(13-image_index)*sign(image_xscale)
 if(image_index=2 &amp;&amp; !place_meeting(x+5*image_xscale,y,p1) &amp;&amp; (sprite_index=spr_magnus_heavy or sprite_index=spr_magnus_launch)) hsp =5*image_xscale
 else if(attacking=1 &amp;&amp; grounded=1) hsp=0
 //horizontal collision   
@@ -492,7 +535,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=3
-damage=4
+damage=5
 xscal=4
 yscal=2
 hstun=35
@@ -504,9 +547,9 @@ image_index=0
 image_speed=0.2
 attacking=1
 }
-if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;=5 &amp;&amp; hit=3)
+if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;=7 &amp;&amp; hit=3)
 {hit=7;damage=5;hboxhit=0}
-if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;11)
+if(sprite_index=spr_magnus_forlight &amp;&amp; image_index&gt;12)
 {
 sprite_index=spr_magnus_idle
 attacking=0
@@ -517,7 +560,7 @@ if((left &amp;&amp; image_xscale&lt;0 or right &amp;&amp; image_xscale&gt;0) &am
 {cancel=0
 hboxhit=0
 hit=6
-damage=30
+damage=40
 xscal=13
 yscal=13
 hstun=45
@@ -530,7 +573,7 @@ image_speed=0.2
 hsp+=1*image_xscale
 attacking=1
 }
-if(sprite_index=spr_magnus_forheavy &amp;&amp; image_index&gt;13)
+if(sprite_index=spr_magnus_forheavy &amp;&amp; image_index&gt;15)
 {hsp+=3*image_xscale
 sprite_index=spr_magnus_idle
 attacking=0
@@ -662,9 +705,13 @@ image_index=0
 
 }
 
-if(hitstun==0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_magnus_fireball1 &amp;&amp; sprite_index!=spr_magnus_specsuper1)
+if(hitstun==0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0)
 {hboxhit=1
-instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
+if(sprite_index=spr_magnus_launchair or sprite_index==spr_magnus_forheavy)
+{
+with instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox) {HBOXLAUNCH=true;DOWNLAUNCH=true}
+}
+else instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
 }
 
 }
@@ -689,7 +736,7 @@ instance_create(x+xpos*(image_xscale/2),y+ypos,p2hbox)
           <argument>
             <kind>1</kind>
             <string>///blocking
-if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking!=0 or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if((image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p1.attacking!=0 or instance_exists(p1proj)) &amp;&amp; global.p2combo=0 &amp;&amp; p1.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0 &amp;&amp; p1.OTG=false)
 {
 attacking=1
 hsp=0
@@ -737,21 +784,17 @@ if(hitstun=0 &amp;&amp; OTG=false)
 {
 if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderl) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
-if(FBlv=1)linkspr=spr_magnus_fireball1
+if(FBlv=1)linkspr=spr_magnus_spec11
 if(FBlv=2)linkspr=spr_alan_fireball
 if(FBlv=3)linkspr=spr_alan_fireball2
 attacking=2;abi--;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
-if(sprite_index=spr_magnus_fireball1 &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+8*image_xscale,y+15,obj_magnusfireball)}
-if(sprite_index=spr_magnus_fireball1 &amp;&amp; image_index&gt;=12) {attacking=0;sprite_index=spr_magnus_idle}
-//FB2
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=4 &amp;&amp; hit=0) {hit=1;instance_create(x+12*image_xscale,y+16,obj_alanfireball);}
-if(sprite_index=spr_alan_fireball &amp;&amp; image_index&gt;=13) {attacking=0;sprite_index=spr_alan_idle}
-//FB3
-if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=2 &amp;&amp; hit=0) {hit=1;}
-if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=7 &amp;&amp; hit=1) {hit=2}
-if(sprite_index=spr_alan_fireball2 &amp;&amp; image_index&gt;=18) {attacking=0;sprite_index=spr_alan_idle}
+if(sprite_index=spr_magnus_spec11 &amp;&amp; image_index=1 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=5;xscal=6;yscal=6;hstun=25;instance_create(x+6*image_xscale,y,p2hbox)}
+if(sprite_index=spr_magnus_spec11 &amp;&amp; image_index=3 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=true;damage=15;xscal=9;yscal=9;hstun=40;instance_create(x+6*image_xscale,y,p2hbox)}
+
+
+if(sprite_index=spr_magnus_spec11 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_magnus_idle}
 
 if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderr) &amp;&amp; abi&gt;0 &amp;&amp; grounded=1 &amp;&amp; attacking!=2)
 {
@@ -761,13 +804,9 @@ if(FBlv=3)linkspr=spr_alan_fireball2
 attacking=2;abi--;sprite_index=linkspr;image_index=0;hit=0
 }
 //FB1
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=2 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=7;xscal=8;yscal=8;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=3 &amp;&amp; hit=1) {hit=2;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=4 &amp;&amp; hit=2) {hit=3;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=6 &amp;&amp; hit=3) {hit=4;xpos=0;ypos=0;launchh=false;damage=7;xscal=6;yscal=6;hstun=50;instance_create(x+8*image_xscale,y+15,p2hbox)}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index=3 &amp;&amp; hit=0) {hit=1;xpos=0;ypos=0;launchh=false;damage=22;xscal=6;yscal=6;hstun=35;instance_create(x+32*image_xscale,y,p2hbox)}
 
-
-if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index&gt;=10) {attacking=0;sprite_index=spr_magnus_idle}
+if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index&gt;=8) {attacking=0;sprite_index=spr_magnus_idle}
 
 
 }
@@ -794,8 +833,9 @@ if(sprite_index=spr_magnus_spec21 &amp;&amp; image_index&gt;=10) {attacking=0;sp
             <string>///hit
 if(hitstun&gt;0 &amp;&amp; OTG==false)
 {
-if grounded == 0
-    hsp = 0;
+//if grounded == 0
+//    hsp = 0;
+hboxhit=1    
 hitstun--
 if(!place_meeting(x,y+1,ground)) sprite_index=spr_magnus_hit2
 else sprite_index=spr_magnus_hit
@@ -874,11 +914,21 @@ ImagePL=sprite_index
             <kind>1</kind>
             <string>
 //took 'attacking=1 or'  out of this statement to see if it runs correctly
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_magnus_dash or sprite_index=spr_magnus_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(dashing=true || attacking=2 || !place_meeting(x,y+1,ground) &amp;&amp; global.p1combo=0 &amp;&amp;  global.p2combo!=0  &amp;&amp;  (sprite_index=spr_magnus_dash or sprite_index=spr_magnus_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
-draw_set_color(c_blue)
-draw_sprite_ext(sprite_index,image_index-image_speed,x-hsp*3,y-vsp*3,image_xscale,image_yscale,0,c_aqua,1)
+timer++
+if(timer&gt;=2)
+{
+with instance_create(x,y,aftereffect){
+image_xscale=p2.image_xscale
+image_yscale=p2.image_yscale
+sprite_index=p2.sprite_index
+image_index=p2.image_index
+image_blend=c_aqua
+}
+timer=0
+}
 }
 
 if(place_meeting(x,y+1,ground))
@@ -892,8 +942,10 @@ if(global.roundEnd=1 &amp;&amp; attacking!=3)
 else if(gal.hitStop=false)
 {image_speed=0.25}
 
-if(gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderlb) &amp;&amp; grounded=1)
+if(global.p2super&gt;0 &amp;&amp; gamepad_button_check_pressed(global.gamepadSlot,gp_shoulderlb) &amp;&amp; grounded=1 &amp;&amp; OTG=false  &amp;&amp; hitstun&lt;=0)
 {
+global.p2super--;
+hsp=0
 hit=0
 attacking=3
 sprite_index=spr_magnus_specsuper1

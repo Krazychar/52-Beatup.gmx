@@ -59,30 +59,39 @@ hitt=0
 if(place_meeting(x,y,ground)) instance_destroy()
 image_angle+=10
 
+if(p2.OTG=false)
+{
+
 if(place_meeting(x,y,p2) &amp;&amp; hitt=0 &amp;&amp; p2.block=false)
 {
 hitt=1
 p1.damage=3
-instance_destroy()
 global.p1combo++
 camera.shakeIntensity=5
 if(camera.shakeIntensity=0) camera.shakeIntensity=1
-room_speed=60
 p2.hsp+=1*p1.image_xscale
 if(p1.rage=false) p2.hp-=p1.damage+p1.atk
 else p2.hp-=p1.damage+p1.atk+round((p1.mhp-p1.hp)/25)
 p2.hitstun=30
 p2.vsp=-1
 instance_create(x,y,jackitemeffect)
+//"bounce effect"
+if(vspeed&gt;0) vspeed*=-0.5
+hspeed*=-0.5
+
 
 }
 
-if(place_meeting(x,y,p2) &amp;&amp; p2.block=true)
+if(place_meeting(x,y,p2) &amp;&amp; p2.block=true &amp;&amp; hitt=0)
 {
 instance_create(p2.x,p2.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p2.image_xscale
 p2.hp-=1
-instance_destroy()
+hitt=1
+if(vspeed&gt;0) vspeed*=-0.5
+hspeed*=-0.5
+}
+
 }
 </string>
           </argument>

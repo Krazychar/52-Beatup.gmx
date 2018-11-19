@@ -52,7 +52,12 @@ scale=p1.image_xscale//make sure p1 doesnt change direction and the fire changes
           <argument>
             <kind>1</kind>
             <string>if(!place_meeting(x,y+1,ground)) y++
-hspeed=0.6*scale
+hspeed=0.8*scale
+
+if(p2.OTG=false)
+
+{
+
 
 if(p2.block=false &amp;&amp; place_meeting(x,y,p2) &amp;&amp; (image_index = 1 or image_index = 2 or image_index = 3 or image_index = 4 or image_index = 5 or image_index = 6 or image_index = 7))
 {
@@ -75,6 +80,8 @@ if(p2.block=true &amp;&amp; place_meeting(x,y,p2) &amp;&amp; (image_index = 1 or
 instance_create(p2.x,p2.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p2.image_xscale
 p2.hp-=1
+
+}
 
 }
 </string>

@@ -58,6 +58,10 @@ hitt=0
 if(place_meeting(x,y,ground)) instance_destroy()
 image_angle+=15
 
+if(p1.OTG=false)
+
+{
+
 if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=0)
 {
 hitt=1
@@ -71,16 +75,20 @@ if(p2.rage=false) p1.hp-=p2.damage+p2.atk
 else p1.hp-=p2.damage+p2.atk+round((p2.mhp-p2.hp)/25)
 p1.hitstun=30
 p1.vsp=-1
+//"bounce effect"
+if(vspeed&gt;0) vspeed*=-0.5
+hspeed*=-0.5
 instance_create(x,y,jackitemeffect)
-instance_destroy()
 }
-if(place_meeting(x,y,p1) &amp;&amp; p1.block=true)
+if(place_meeting(x,y,p1) &amp;&amp; p1.block=true &amp;&amp; hitt=0)
 {
 instance_create(p1.x,p1.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p1.image_xscale
 instance_destroy()
 hitt=1
 p1.hp-=5
+}
+
 }
 </string>
           </argument>

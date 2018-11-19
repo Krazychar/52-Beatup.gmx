@@ -107,16 +107,24 @@ if(global.p1combo=0 &amp;&amp; combohp&gt;p2.hp)
 {combohp-=10}
 
 draw_set_color(c_white)
-if(global.p1combo!=0)kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
+if(global.p1combo!=0)kek=camera.shakeIntensity*0.6 * irandom_range(-1,1)
 else kek=0
 //red hp
-draw_healthbar(view_xview[0]+365+kek,view_yview[0]+30+kek,view_xview[0]+571+kek,view_yview[0]+50+kek,(combohp/p2.mhp)*100,c_black,c_red,c_red,90,true,false)
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+30+kek,view_xview[0]+571+kek,view_yview[0]+50+kek,(combohp/p2.mhp)*100,c_black,c_red,c_red,90,true,true)
 //green hp
+//Light "Middle" Strip
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+36+kek,view_xview[0]+571+kek,view_yview[0]+44+kek,(p2.hp/p2.mhp)*100,c_black,make_color_rgb(0,255,0)  ,make_color_rgb(0,255,0)  ,90,false,false)
+//Shaded Strips
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+45+kek,view_xview[0]+571+kek,view_yview[0]+47+kek,(p2.hp/p2.mhp)*100,c_black,make_color_rgb(20,230,20),make_color_rgb(20,230,20),90,false,false)
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+33+kek,view_xview[0]+571+kek,view_yview[0]+35+kek,(p2.hp/p2.mhp)*100,c_black,make_color_rgb(20,230,20),make_color_rgb(20,230,20),90,false,false)
+//Darkest Strips
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+48+kek,view_xview[0]+571+kek,view_yview[0]+50+kek,(p2.hp/p2.mhp)*100,c_black,make_color_rgb(50,200,50),make_color_rgb(50,200,50),90,false,false)
+draw_healthbar(view_xview[0]+365+kek,view_yview[0]+30+kek,view_xview[0]+571+kek,view_yview[0]+32+kek,(p2.hp/p2.mhp)*100,c_black,make_color_rgb(50,200,50),make_color_rgb(50,200,50),90,false,false)
+//
 
 kek=camera.shakeIntensity*0.4 * irandom_range(-1,1)
 draw_set_color(c_white)
-draw_healthbar(view_xview[0]+365+kek,view_yview[0]+30+kek,view_xview[0]+571+kek,view_yview[0]+44+kek,(p2.hp/p2.mhp)*100,c_black,c_lime,c_lime,90,false,false)
-draw_healthbar(view_xview[0]+365+kek,view_yview[0]+45+kek,view_xview[0]+571+kek,view_yview[0]+50+kek,(p2.hp/p2.mhp)*100,c_black,c_green,c_green,90,false,false)
+
 draw_sprite_ext(spr_wongames,gal.p2win,view_xview[0]+406+kek,view_yview[0]+55+kek,-2,2,0,c_white,1)
 //draw_text(view_xview[0]+xx-20,y,p2.hp)
 //draw_text(x,y-40,"P2 Wins: "+string(gal.p2win))
@@ -159,16 +167,16 @@ hitColor=c_white
 //DAMAGE
 draw_set_font(font0)
 draw_set_color(c_black)
-draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+80+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+80+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+81+kek,obj_hpbarp2.combohp - p2.hp)
-draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+79+kek,obj_hpbarp2.combohp - p2.hp)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+81+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+80+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-28+kek,view_yview[0]+yy+79+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+81+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+80+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-29+kek,view_yview[0]+yy+79+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+81+kek,obj_hpbarp1.combohp - p1.hp)
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+79+kek,obj_hpbarp1.combohp - p1.hp)
 draw_set_color(c_white)
-draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+80+kek,string(obj_hpbarp2.combohp - p2.hp)+" Damage!")}
+draw_text(view_xview[0]+xx-27+kek,view_yview[0]+yy+80+kek,string(obj_hpbarp1.combohp - p1.hp)+" Damage!")}
 </string>
           </argument>
         </arguments>

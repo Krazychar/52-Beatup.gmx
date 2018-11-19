@@ -99,7 +99,6 @@ parent=25//25 = Restart
 
 parent.hstun=1000
 parent.y-=6
-parent.OTG=true
 }
 if(timer&gt;=8)
 {
@@ -109,13 +108,14 @@ if(parent.x&gt;64 &amp;&amp; parent.x&lt;1152 &amp;&amp; parent.y&lt;738) parent
 if(parent.y&gt;738) {vsp=0;gal.timeEnd++;timer=0.1}
 else {parent.y-=vsp;vsp-=0.3}
 
-
-parent.image_speed=0;
+parent.OTG=true
+p1.image_speed=0;
 p2.image_speed=0;
 }
 if(instance_exists(obj_start)) 
 {
 timer=-900
+
 parent.hspeed=0
 p2.hspeed=0
 vsp=0

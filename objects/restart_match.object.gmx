@@ -57,6 +57,8 @@ timer=0
             <string>if(instance_exists(obj_cardpicker))
 {
 instance_destroy(obj_cardpicker)
+instance_destroy(obj_cardtop)
+instance_destroy(obj_picksign)
 }
 timer++
 if(timer=10) image_alpha=0.8
@@ -71,13 +73,14 @@ p1.vsp=0
 p1.hitstun=0
 global.p1combo=0
 p1.x=448;
-p1.y=736;
-
+p1.y=720;
+global.p1super=global.p2maxsuper
+global.p2super=global.p2maxsuper
 p2.sprite_index=p2.idle
 p2.image_xscale=-4
 p2.image_yscale=4
 p2.x=832;
-p2.y=736;
+p2.y=720;
 p2.hsp=0
 p2.vsp=0
 p2.hitstun=0
@@ -92,10 +95,10 @@ instance_destroy(card1)
 }
 if(timer=60) image_alpha=0.8
 if(timer=70) image_alpha=0.6
+if(timer=78) instance_create(x,y,obj_start);
 if(timer=80) 
 {
 instance_destroy();
-instance_create(x,y,obj_start);
 p1.attacking=false;
 p2.attacking=false;
 }

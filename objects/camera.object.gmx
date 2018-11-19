@@ -3,7 +3,7 @@
   <spriteName>spr_hitbox</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-99</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -49,8 +49,8 @@ shakeIntensity=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x=((p1.x+p2.x)/2)+shakeIntensity*0.4
-y=((p1.y+p2.y)/2)+shakeIntensity*0.4
+            <string>x=((p1.x+p2.x)/2)+shakeIntensity*0.6
+y=((p1.y+p2.y)/2)+shakeIntensity*0.6
 if(shakeIntensity&gt;0)
 {shakeIntensity-=1}
 
@@ -80,6 +80,63 @@ if(shakeIntensity&lt;0)
             <kind>1</kind>
             <string>draw_self()
 draw_text(50,50,"X: "+string((p1.x-p2.x)/2))
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DEBUGMODE
+if(keyboard_check_direct(ord("N"))) debug=true
+else debug=false
+
+if(debug=true)
+{
+//ACTIVATION PASSIVE
+p1.coward=true
+p2.coward=true
+p1.rage=true
+p2.rage=true
+draw_text(x,y-10,"FPS: "+string(room_speed))
+draw_text(x,y-50,"Roundend: "+string(global.roundEnd))
+if(place_meeting(p1.x,p1.y,p2)) draw_text(x,y-100,"COLLISION=TRUE")
+else draw_text(x,y-100,"COLLISION=FALSE")
+
+//COMMANDS
+if(keyboard_check_pressed(ord("Z"))) room_speed+=5
+if(keyboard_check_pressed(ord("X"))) room_speed-=5
+if(keyboard_check_pressed(ord("C"))) global.roundEnd=0
+if(keyboard_check_pressed(ord("V"))) p1.hp=0
+if(keyboard_check_pressed(ord("T")))
+{
+p1.FBlv++
+p1.RDlv++
+p2.FBlv++
+p2.RDlv++
+}
+
+if(keyboard_check_pressed(ord("Y")))
+{
+p1.FBlv--
+p1.RDlv--
+p2.FBlv--
+p2.RDlv--
+}
+}
 </string>
           </argument>
         </arguments>

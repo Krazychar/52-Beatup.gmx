@@ -39,7 +39,7 @@ hsp=0
 vsp=0
 block=0
 hitstun=0
-grav=0.45
+grav=0.5
 grounded=0
 hboxhit=0
 dashtime=0
@@ -53,7 +53,6 @@ linkatk=keyboard_check_direct(vk_up)
 linkspr=0
 FBlv=1
 RDlv=1
-GBlv=1
 //battle variables
 agi=5
 dashing=0
@@ -121,12 +120,12 @@ vsp=0
 attacking=5
 sprite_index=spr_alan_ground
 image_index=0
-instance_create(x-15,y,obj_groundbits)
-instance_create(x-20,y,obj_groundbits)
-instance_create(x-10,y,obj_groundbits)
-instance_create(x+10,y,obj_groundbits)
-instance_create(x+20,y,obj_groundbits)
-instance_create(x+15,y,obj_groundbits)
+instance_create(x-15,y+80,obj_groundbits)
+instance_create(x-20,y+80,obj_groundbits)
+instance_create(x-10,y+80,obj_groundbits)
+instance_create(x+10,y+80,obj_groundbits)
+instance_create(x+20,y+80,obj_groundbits)
+instance_create(x+15,y+80,obj_groundbits)
 
 }
 
@@ -189,6 +188,46 @@ global.p1combo=0
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///player collison
+
+
+if(place_meeting(p1.x,p1.y,p2) || place_meeting(p2.x,p2.y,p1))
+{
+//checks who's closer to the middle
+if(abs(p1.x - round(room_width/2)) &lt; abs(p2.x - round(room_width/2)))
+{
+if(p1.x &gt; room_width/2) p1.x-=5
+else p1.x+=5
+}
+else
+{
+if(p2.x &gt; room_width/2) p2.x-=5
+else p2.x+=5
+}
+
+}
+else
+{}
+</string>
+          </argument>
+        </arguments>
       </action>
       <action>
         <libid>1</libid>
@@ -473,7 +512,11 @@ image_index=0
 
 if(hitstun=0 &amp;&amp; attacking=true &amp;&amp; image_index&gt;=hit &amp;&amp; hboxhit=0 &amp;&amp; sprite_index!=spr_alan_shieldbreak  &amp;&amp; sprite_index!=spr_alan_fireball  &amp;&amp; sprite_index!=spr_alan_fireball2 &amp;&amp; sprite_index!=spr_alan_specsuper1)
 {hboxhit=1
-instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
+if(sprite_index=spr_alan_launchair)
+{
+with instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox) {HBOXLAUNCH=true;DOWNLAUNCH=true}
+}
+else instance_create(x+xpos*(image_xscale/2),y+ypos,p1hbox)
 }
 
 }}
@@ -721,7 +764,7 @@ vsp+=grav
             <kind>1</kind>
             <string>///blocking
 
-if(!(left &amp;&amp; right) &amp;&amp; (image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking!=0 or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0)
+if(!(left &amp;&amp; right) &amp;&amp; (image_xscale&lt;0 &amp;&amp; right or image_xscale&gt;0 &amp;&amp; left) &amp;&amp; (p2.attacking!=0 or instance_exists(p2proj)) &amp;&amp; global.p1combo=0 &amp;&amp; p2.block=0 &amp;&amp; hitstun&lt;=0 &amp;&amp; attacking=0 &amp;&amp; p2.OTG=false)
 {
 attacking=1
 hsp=0
@@ -803,10 +846,10 @@ if(sprite_index=spr_alan_spec2 &amp;&amp; image_index&gt;=3 &amp;&amp; hit=0)
 hboxhit=0
 hit=1
 damage=15
-xscal=3
-yscal=2
+xscal=12
+yscal=5
 hstun=70
-xpos=hsp+27
+xpos=hsp
 vsp=-4
 ypos=-14
 launchh=false
@@ -827,8 +870,8 @@ damage=33
 xscal=14
 yscal=14
 hstun=90
-xpos=hsp+20
-ypos=-30
+xpos=hsp+5
+ypos=-50
 launchh=true
 vsp=-8
 angle=0
@@ -847,8 +890,8 @@ damage=10
 xscal=14
 yscal=14
 hstun=90
-xpos=hsp+20
-ypos=-30
+xpos=hsp+5
+ypos=-50
 launchh=true
 vsp=-8
 angle=0
@@ -911,7 +954,7 @@ ImagePL=sprite_index
             <string>///hit
 if(hitstun&gt;0 &amp;&amp; OTG==false &amp;&amp; gal.hitStop=false)
 {
-
+hboxhit=1
 hitstun--
 if(!place_meeting(x,y+1,ground) &amp;&amp; OTG = false) sprite_index=spr_alan_hit2
 else if(OTG=false) sprite_index=spr_alan_hit
@@ -964,14 +1007,14 @@ if(OTG=false &amp;&amp; global.p2combo!=0 &amp;&amp; hitstun&lt;=0) //Reset Comb
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if(place_meeting(x,y,p2)) draw_text(x,y-50,"COLLISION")
 
-if(!place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
+if(dashing=true || attacking=2 || !place_meeting(x,y+1,ground) &amp;&amp; global.p2combo=0 &amp;&amp; global.p1combo!=0  &amp;&amp; (sprite_index=spr_alan_dash or sprite_index=spr_alan_backdash or hsp&lt;-agi or hsp&gt;agi or launchh=true or freakingslickdash=1))
 {
 freakingslickdash=1
 draw_set_color(c_blue)
 timer++
-if(timer&gt;=15)
+if(timer&gt;=2)
 {
 with instance_create(x,y,aftereffect){
 image_xscale=p1.image_xscale
@@ -991,11 +1034,11 @@ if(global.roundEnd=1 &amp;&amp; attacking!=3)
 {image_speed=0}
 else if(gal.hitStop=false)
 {image_speed=0.25}
-
-if(keyboard_check_pressed(ord("H")) &amp;&amp; grounded=1)
+//SUPER
+if(global.p1super&gt;0 &amp;&amp; keyboard_check_pressed(ord("H")) &amp;&amp; grounded=1 &amp;&amp; OTG=false &amp;&amp; hitstun&lt;=0)
 {
-dashdirection=0
-dashcheck=0
+hsp=0
+global.p1super--;
 global.roundEnd=1
 hit=0
 attacking=3
@@ -1034,18 +1077,18 @@ draw_sprite_ext(sprite_index,image_index,x+4,y  ,image_xscale,image_yscale,0,Out
 draw_sprite_ext(sprite_index,image_index,x-4,y  ,image_xscale,image_yscale,0,OutlineCol,1)
 //Outline Code//
 draw_self()
-if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=10 &amp;&amp; hit=0)
+if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=15 &amp;&amp; hit=0)
 {
 if(!instance_exists(ftb))global.roundEnd=0
 }
 
-if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=12 &amp;&amp; hit=0)
+if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=17 &amp;&amp; hit=0)
 {
 hit=1
 instance_create(x+10*image_xscale,y,obj_alansuper1)
 }
 
-if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=18)
+if(sprite_index=spr_alan_specsuper1 &amp;&amp; image_index&gt;=23)
 {
 attacking=0
 global.super=0

@@ -30,6 +30,10 @@
 global.gamepadSlot=4
 p1win=0
 p2win=0
+global.p1maxsuper=1
+global.p1super=global.p1maxsuper
+global.p2maxsuper=1
+global.p2super=global.p2maxsuper
 cardpick=false
 setPicker=0//Picks one of the four sets in the deck
 cardPicker=0//Picks card in individual set
@@ -140,44 +144,6 @@ if(instance_exists(obj_alta)) {instance_destroy(obj_alta);instance_create(x+300,
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///level up moves for testing
-if(keyboard_check_pressed(ord("T")))
-{
-p1.FBlv++
-p1.RDlv++
-
-p2.FBlv++
-p2.RDlv++
-}
-
-if(keyboard_check_pressed(ord("Y")))
-{
-p1.FBlv--
-p1.RDlv--
-
-p2.FBlv--
-p2.RDlv--
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///HitStop
 if(hitStop=true)
 {
@@ -213,6 +179,7 @@ if(p1.mhp&lt;0)
 {p1.mhp=1}
 if(p2.mhp&lt;0)
 {p2.mhp=1}
+
 </string>
           </argument>
         </arguments>
@@ -295,6 +262,7 @@ if(p1.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
 instance_create(x,y,obj_winflash)
 p1.vsp=-6
 p1.image_index=4
+room_speed=35
 }
 
 
@@ -303,11 +271,11 @@ if(p2.hp&lt;=0 &amp;&amp; !instance_exists(obj_winflash))
 instance_create(x,y,obj_winflash)
 p2.vsp=-6
 p2.image_index=4
+room_speed=35
 }
 
 if(global.roundEnd=0)
 {
-if(!(p1.hp&lt;=0 &amp;&amp; p2.hp&lt;=0))//if 
 if(p1.hp&lt;=0)
 {losername=global.p1char}
 
@@ -335,8 +303,9 @@ instance_create(x,y,obj_ko)
 }
 
 
-if(global.roundEnd=1 &amp;&amp; !instance_exists(obj_start))
+if(global.roundEnd=1 &amp;&amp; !instance_exists(obj_start) &amp;&amp; !instance_exists(restart_match))
 {
+if(p1.hp&lt;=0 &amp;&amp; p2.hp&lt;=0) instance_create(x,y,restart_match)
 if(p1.hp&lt;=0)
 {winnerName=global.p2char}
 
@@ -348,58 +317,60 @@ if(p2.hp&lt;=0)
 }
 if(timeEnd=1)
 {
-if(p1.hp&lt;=0)p2win++
-if(p2.hp&lt;=0)p1win++
+if(p1.hp&lt;=0 &amp;&amp; p2.hp&gt;0)p2win++
+if(p2.hp&lt;=0 &amp;&amp; p1.hp&gt;0)p1win++
 }
 if(timeEnd&gt;=40 &amp;&amp; timeEnd&lt;=100 &amp;&amp; !instance_exists(ftb))
 {
 instance_create(x,y,ftb)
+instance_create(x,y,obj_cardtop)
+instance_create(x,y,obj_picksign)
 room_speed=60
 ftb.image_alpha=(timeEnd/100)
 }
 
-if(timeEnd&gt;=80)
+if(timeEnd&gt;=140)
 {draw_set_color(c_white)
 if(global.pickturn=0 &amp;&amp; !instance_exists(obj_start) &amp;&amp; !instance_exists(restart_match)) //outline time kms
 {
+obj_picksign.image_index=0
+//draw_set_color(c_red);
+//draw_set_font(font1)
+//displaytext=losername+", Pick a Card!"
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+100,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+101,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+100,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+101,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+101,displaytext)
 
-draw_set_color(c_red);
-draw_set_font(font1)
-displaytext=losername+", Pick a Card!"
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+100,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+101,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+100,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+101,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+101,displaytext)
 
-
-draw_set_color(c_white);
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,displaytext)//actual one
+//draw_set_color(c_white);
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,displaytext)//actual one
 
 
 
 }
 if(global.pickturn=1 &amp;&amp; !instance_exists(obj_start) &amp;&amp; !instance_exists(restart_match))
 {
+obj_picksign.image_index=1
+//draw_set_color(c_green);
+//draw_set_font(font1)
+//displaytext=winnerName+", Pick a Card!"
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+100,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+101,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+100,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+101,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+99,displaytext)
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+101,displaytext)
 
-draw_set_color(c_green);
-draw_set_font(font1)
-displaytext=winnerName+", Pick a Card!"
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+100,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-159,view_yview[0]+view_hview[0]/2+101,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+100,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-161,view_yview[0]+view_hview[0]/2+101,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+99,displaytext)
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+101,displaytext)
 
-
-draw_set_color(c_white);
-draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,displaytext)//actual one
+//draw_set_color(c_white);
+//draw_text(view_xview[0]+view_wview[0]/2-160,view_yview[0]+view_hview[0]/2+100,displaytext)//actual one
 
 
 }
@@ -413,40 +384,50 @@ show_debug_message(cardPicker)
 ds_list_delete(deckbuffs,rancrap)
 ds_list_shuffle(deckbuffs)
 
-with (instance_create(view_xview[0]+150,view_yview[0]+150 ,card1))
+with (instance_create(view_xview[0]+320,view_yview[0]+432 ,card1))
 {
+xposit=view_xview[0]+105
 image_index=other.cardPicker
+PL=other.cardPicker
 }
 timeEnd++
 }
 
-if(timeEnd=65)
+if(timeEnd=90)
 {
 rancrap=irandom_range(0,ds_list_size(deckbuffs))
 cardPicker=ds_list_find_value(deckbuffs,rancrap)
 show_debug_message(cardPicker)
 ds_list_delete(deckbuffs,rancrap)
 ds_list_shuffle(deckbuffs)
-with (instance_create(view_xview[0]+320,view_yview[0]+150 ,card1))
+with (instance_create(view_xview[0]+320,view_yview[0]+432 ,card1))
 {
+xposit=view_xview[0]+310
 image_index=other.cardPicker
+PL=other.cardPicker
 }
-instance_create(view_xview[0]+320,view_yview[0]+150,obj_cardpicker)
+
 timeEnd++
 }
 
-if(timeEnd=70)
+if(timeEnd=120)
 {
 rancrap=irandom_range(0,ds_list_size(deckbuffs))
 cardPicker=ds_list_find_value(deckbuffs,rancrap)
 show_debug_message(cardPicker)
 ds_list_delete(deckbuffs,rancrap)
 ds_list_shuffle(deckbuffs)
-with (instance_create(view_xview[0]+500,view_yview[0]+150 ,card1))
+with (instance_create(view_xview[0]+320,view_yview[0]+432 ,card1))
 {
+xposit=view_xview[0]+515
 image_index=other.cardPicker
+PL=other.cardPicker
 }
 timeEnd++
+}
+if(timeEnd==190)
+{
+instance_create(view_xview[0]+310,view_yview[0]+150,obj_cardpicker)
 }
 </string>
           </argument>
@@ -477,6 +458,8 @@ p1.hp=p1.mhp
 p1.abi=p1.mabi
 p2.abi=p2.mabi
 p2.hp=p2.mhp
+global.p1super=global.p1maxsuper
+global.p2super=global.p2maxsuper
 p1.image_yscale=4
 p2.image_yscale=4
 p1.attacking=0
@@ -492,6 +475,8 @@ global.time=99
 timeEnd=0
 instance_destroy(obj_cardpicker)
 instance_destroy(card1)
+instance_destroy(obj_cardtop)
+instance_destroy(obj_picksign)
 }
 </string>
           </argument>
@@ -517,17 +502,17 @@ instance_destroy(card1)
 if(global.super=0) rad=180
 if(global.super=1 &amp;&amp; rad&gt;0)
 {rad-=4
-draw_set_color(c_blue)
+draw_set_color(c_white)
 draw_circle(p1.x,p1.y,rad,true)
 draw_circle(p1.x,p1.y,rad+1,true)
 draw_circle(p1.x,p1.y,rad-1,true)
-draw_set_color(c_red)
+draw_set_color(c_white)
 draw_circle(p1.x,p1.y,rad*3,true)
 draw_circle(p1.x,p1.y,(rad*3)+1,true)
 draw_circle(p1.x,p1.y,(rad*3)+2,true)
 draw_circle(p1.x,p1.y,(rad*3)-1,true)
 draw_circle(p1.x,p1.y,(rad*3)-2,true)
-draw_set_color(c_green)
+draw_set_color(c_white)
 draw_circle(p1.x,p1.y,rad*3,true)
 draw_circle(p1.x,p1.y,(rad*5)+1,true)
 draw_circle(p1.x,p1.y,(rad*5)+2,true)
@@ -545,17 +530,17 @@ if(rad&lt;=0) global.super=0
 if(global.super=0) rad=180
 if(global.super=2 &amp;&amp; rad&gt;0)
 {rad-=5
-draw_set_color(c_blue)
+draw_set_color(c_white)
 draw_circle(p2.x,p2.y,rad,true)
 draw_circle(p2.x,p2.y,rad+1,true)
 draw_circle(p2.x,p2.y,rad-1,true)
-draw_set_color(c_red)
+draw_set_color(c_white)
 draw_circle(p2.x,p2.y,rad*3,true)
 draw_circle(p2.x,p2.y,(rad*3)+1,true)
 draw_circle(p2.x,p2.y,(rad*3)+2,true)
 draw_circle(p2.x,p2.y,(rad*3)-1,true)
 draw_circle(p2.x,p2.y,(rad*3)-2,true)
-draw_set_color(c_green)
+draw_set_color(c_white)
 draw_circle(p2.x,p2.y,rad*3,true)
 draw_circle(p2.x,p2.y,(rad*5)+1,true)
 draw_circle(p2.x,p2.y,(rad*5)+2,true)
@@ -568,27 +553,6 @@ draw_circle(p2.x,p2.y,(rad*5)-4,true)
 
 
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_line(room_width-2,room_height,room_width+2,0)
 </string>
           </argument>
         </arguments>
@@ -677,6 +641,27 @@ p2.abi=999
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.roundEnd=0
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

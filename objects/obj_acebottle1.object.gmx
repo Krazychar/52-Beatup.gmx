@@ -77,13 +77,14 @@ image_angle-=20
             <kind>1</kind>
             <string>///collision
 
+
 if(place_meeting(x,y,ground))
 {
 instance_destroy()
 instance_create(x,y-5,obj_aceburn)
 }
 
-if(place_meeting(x,y,p2))
+if(place_meeting(x,y,p2) &amp;&amp; p2.OTG=false)
 {
 instance_destroy()
 instance_create(x,y-5,obj_aceexplosion)

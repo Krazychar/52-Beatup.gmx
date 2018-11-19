@@ -53,6 +53,31 @@ position=0
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///make sure it dies
+if(instance_exists(obj_start))
+{
+instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>if(instance_exists(card1))
 {
 
@@ -79,14 +104,14 @@ if(playerBuff=p1){left=keyboard_check_pressed(ord("A"));right=keyboard_check_pre
 if(playerBuff=p2){left=gamepad_button_check_pressed(global.gamepadSlot,gp_padl);right=gamepad_button_check_pressed(global.gamepadSlot,gp_padr);}
 
 //Move card hand
-if(left)
+if(left &amp;&amp; x&gt;view_xview[0]+300)
 {
-x-=200
+x-=300
 image_alpha=0
 }
-if(right)
+if(right &amp;&amp; x&lt;view_xview[0]+500)
 {
-x+=200
+x+=300
 image_alpha=0
 }
 if(!left &amp;&amp; !right)
@@ -94,31 +119,6 @@ if(!left &amp;&amp; !right)
 
 }
 
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///make sure it dies
-if(instance_exists(obj_start))
-{
-instance_destroy()
 }
 </string>
           </argument>

@@ -52,7 +52,9 @@ instance_create(x,y,obj_whiteflash)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string> 
+            <string> if(p1.OTG=false)
+
+{
 
 if(place_meeting(x,y,p1) &amp;&amp; hitt=0 &amp;&amp; p1.block=false)
 {
@@ -75,6 +77,8 @@ instance_create(p1.x,p1.y,obj_blockeffect)
 obj_blockeffect.image_xscale=p1.image_xscale
 instance_destroy()
 p1.hp-=3
+}
+
 }
 </string>
           </argument>
